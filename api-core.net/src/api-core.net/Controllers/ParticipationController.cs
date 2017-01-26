@@ -15,18 +15,21 @@ namespace api_core.net.Controllers
             this.participationDao = participationDao;
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Put([FromBody]Participation p)
+        [HttpPost]
+        public async Task<IActionResult> Post(string idQuiz, [FromBody]Participation p)
         {
+            p.Quiz.Id = new ObjectId(idQuiz);
             await participationDao.Create(p);
 
             return new OkResult();
         }
 
         [HttpPut("{idParticipation}")]
-        public async Task<IActionResult> Put(string id, [FromBody]Participation p)
+        public async Task<IActionResult> Put(string idQuiz, string idParticipation, [FromBody]Participation p)
         {
-            ObjectId idPart = new ObjectId(id);
+            p.Quiz.Id = new ObjectId(idQuiz);
+            ObjectId idPart = new ObjectId(idParticipation);
+            
             var part = participationDao.GetParticipation(idPart);
 
             if (part == null)
