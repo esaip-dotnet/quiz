@@ -29,22 +29,17 @@ var mongodb = require('mongodb');
 
 //We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
-    
-if(process.env.SERVERNAME)
-    serverName = process.env.SERVERNAME;
-else
-    serverName = "localhost";
-    
-if(process.env.PORTMONGODB)
-    portListener = process.env.PORTMONGODB;
-else
-    portListener = "27017";
-    
-if(process.env.BDDNAME)
-    bdd = process.env.BDDNAME;
-else
-    bdd = "quiz";
 
+serverName = "localhost";
+portListener = "27017";
+bdd = "quiz";
+  
+var serverName = process.env.SERVERNAME || serverName;
+var portListener = process.env.PORTMONGODB || portListener;
+var bdd = process.env.BDDNAME || bdd;
+
+    
+console.log(process.env.SERVERNAME)
 
 
 /*var serverName ="localhost";
