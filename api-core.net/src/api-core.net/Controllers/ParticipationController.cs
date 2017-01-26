@@ -22,7 +22,7 @@ namespace api_core.net.Controllers
             p.Quiz.Id = new ObjectId(idQuiz);
             await participationDao.Create(p);
 
-            return new OkResult();
+            return new CreatedResult($"/quiz/{idQuiz}/participation/{p.Id}", p);
         }
 
         [HttpPut("{idParticipation}")]
@@ -40,6 +40,17 @@ namespace api_core.net.Controllers
 
             await participationDao.Update(idPart, p);
             return new OkResult();
+        }
+
+        [HttpGet("{idParticipation}")]
+        public IActionResult GetId(string idParticipation)
+        {
+            var participation = participationDao.GetParticipation(new ObjectId(idParticipation));
+            if (participation == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(participation);
         }
     }
 }
