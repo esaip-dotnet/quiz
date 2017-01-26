@@ -138,6 +138,12 @@ MongoClient.connect(url, function (err, db) {
         });
 
         
+        app.get('/', function(req, res) {
+            res.status(200);
+            res.send("Ca marche sur ma machine !");
+        });
+
+        
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
