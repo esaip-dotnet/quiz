@@ -14,10 +14,6 @@ var path = require("path");
 
 app.use(express.static(__dirname + '/'));
 
-app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
-
 app.use(bodyParser.json()); // parse application/json
 app.use(bodyParser.urlencoded({
     extended: true
