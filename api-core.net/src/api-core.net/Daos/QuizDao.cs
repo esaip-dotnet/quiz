@@ -25,5 +25,13 @@ namespace api_core.net.Daos
         {
             await baseDao.db.GetCollection<Quiz>("Quiz").InsertOneAsync(quiz);
         }
+
+        public async Task Update(ObjectId id, Quiz quiz)
+        {
+            quiz.Id = id;
+
+            var filter = Builders<Quiz>.Filter.Eq(p => p.Id, id);
+            await baseDao.db.GetCollection<Quiz>("Quiz").ReplaceOneAsync(filter, quiz);
+        }
     }
 }

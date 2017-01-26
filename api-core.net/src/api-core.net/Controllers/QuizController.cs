@@ -49,7 +49,7 @@ namespace api_core.net.Controllers
         }
 
         [HttpPatch("{idQuiz}")]
-        public IActionResult Patch(string idQuiz, [FromBody]JsonPatchDocument<Quiz> patch)
+        public async Task<IActionResult> Patch(string idQuiz, [FromBody]JsonPatchDocument<Quiz> patch)
         {
             var quiz = quizDao.GetQuiz(new ObjectId(idQuiz));
             patch.ApplyTo(quiz, ModelState);
@@ -59,7 +59,7 @@ namespace api_core.net.Controllers
                 return new BadRequestObjectResult(ModelState);
             }
 
-            //TODO Update
+            await quizDao.Update(quiz.Id, quiz);
 
             return new ObjectResult(quiz);
         }
