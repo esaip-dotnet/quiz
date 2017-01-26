@@ -8,3 +8,4 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Support du mode PATCH dans la persistance d'un des référentiels, avec uniquement de l'insertion de données avec une date de valeur (5 pts)
 - Gestion argumentée des modifications de quiz concurrentes à des participations en cours (5 pts)
 - Benchmark de performances et consommation mémoire entre une concaténation simple en boucle et l'utilisation d'un StringBuilder (3 pts)
+- Création du fichier Swagger de description normalisée de l'API (4 pts)
