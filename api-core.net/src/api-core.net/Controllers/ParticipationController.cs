@@ -1,5 +1,6 @@
 ﻿using api_core.net.Daos;
 using api_core.net.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Threading.Tasks;
@@ -50,6 +51,22 @@ namespace api_core.net.Controllers
             {
                 return NotFound();
             }
+            return new ObjectResult(participation);
+        }
+
+        [HttpPatch("{idParticipation}")]
+        public async Task<IActionResult> Patch(string idParticipation, [FromBody]JsonPatchDocument<Participation> patch)
+        {
+            var participation = participationDao.GetParticipation(new ObjectId(idParticipation));
+            patch.ApplyTo(participation, ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            await participationDao.Update(participation.Id, participation);
+
             return new ObjectResult(participation);
         }
     }
