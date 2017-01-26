@@ -23,7 +23,6 @@ namespace api_core.net.Daos
 
         public async Task Create(Quiz quiz)
         {
-            quiz.QuizId = quiz.Id.ToString();
             await baseDao.db.GetCollection<Quiz>("Quiz").InsertOneAsync(quiz);
         }
     }

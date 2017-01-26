@@ -44,7 +44,7 @@ namespace api_core.net.Controllers
         {
             await quizDao.Create(quiz);
 
-            return new OkObjectResult(quiz);
+            return new CreatedResult("/quiz/"+quiz.Id, quiz);
         }
     }
 }
