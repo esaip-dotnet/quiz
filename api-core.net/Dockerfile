@@ -1,4 +1,4 @@
-FROM core.net-base
+FROM api-core.net-base
 ADD /src /app
 WORKDIR /app
 RUN ["dotnet", "restore"]
