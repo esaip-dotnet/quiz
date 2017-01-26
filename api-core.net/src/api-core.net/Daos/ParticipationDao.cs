@@ -1,9 +1,10 @@
-﻿using MongoDB.Bson;
+﻿using api_core.net.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using System;
 using System.Threading.Tasks;
 
-namespace api_core.net.Models
+namespace api_core.net.Daos
 {
     public class ParticipationDao
     {

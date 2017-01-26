@@ -1,6 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using api_core.net.Models;
+using System.Threading.Tasks;
 
-namespace api_core.net.Models
+namespace api_core.net.Daos
 {
     public class QuizDao
     {

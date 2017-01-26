@@ -1,7 +1,7 @@
 ﻿using MongoDB.Driver;
 using Microsoft.Extensions.Configuration;
 
-namespace api_core.net.Models
+namespace api_core.net.Daos
 {
     public class BaseDao
     {
