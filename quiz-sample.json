@@ -25,6 +25,31 @@
 					"correct" : false
 				}
 			]
+		},
+		{
+			"title" : "Quel est le drapeau utilisé pour le départ ?",
+			"answers" : [
+				{
+					"title" : "",
+					"picture" : "http://images.esaip.org/quiz-lib/damier.jpg",
+					"correct" : true
+				},
+				{
+					"title" : "",
+					"picture" : "http://images.esaip.org/quiz-lib/redflag.jpg",
+					"correct" : false
+				},
+				{
+					"title" : "",
+					"picture" : "http://images.esaip.org/quiz-lib/greenflag.jpg",
+					"correct" : false
+				},
+				{
+					"title" : "",
+					"picture" : "http://images.esaip.org/quiz-lib/yellowflag.jpg",
+					"correct" : false
+				}
+			]
 		}
 	]	
 }
