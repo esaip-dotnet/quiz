@@ -1,6 +1,8 @@
 ﻿using api_core.net.Daos;
 using api_core.net.Models;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace api_core.net.Controllers
@@ -13,6 +15,28 @@ namespace api_core.net.Controllers
         public QuizController(QuizDao quizDao)
         {
             this.quizDao = quizDao;
+        }
+
+        [HttpGet("{idQuiz}")]
+        public IActionResult GetId(string idQuiz)
+        {
+            var quiz = quizDao.GetQuiz(new ObjectId(idQuiz));
+            if (quiz == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(quiz);
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            IEnumerable<Quiz> listQuiz = quizDao.GetAllQuiz();
+            if (listQuiz == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(listQuiz);
         }
 
         [HttpPost]
