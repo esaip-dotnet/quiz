@@ -1,0 +1,30 @@
+{
+	"_id" : 1234,
+	"summary" : "Les drapeaux de Formule 1",
+	"description" : "Ce quiz testera votre connaissance visuelle des différents drapeaux utilisés sur un circuit de course",
+	"title" : "Drapeaux F1",
+	"questions" : [
+		{
+			"title" : "Quel est ce drapeau ?",
+			"picture" : "http://images.esaip.org/quiz-lib/damier.jpg",
+			"answers" : [
+				{
+					"title" : "C'est le drapeau de départ",
+					"correct" : false
+				},
+				{
+					"title" : "C'est le drapeau d'arrivée",
+					"correct" : true
+				},
+				{
+					"title" : "C'est le drapeau indiquant un arrêt de course",
+					"correct" : false
+				},
+				{
+					"title" : "C'est le drapeau indiquant un accident proche",
+					"correct" : false
+				}
+			]
+		}
+	]	
+}
