@@ -6,9 +6,9 @@
   "author"       : "",
   "license"      : "MIT",
   "repository"   : {
-    "type" : "git",
+    "type" : "git"
 
-  }
+  },
   "dependencies" : {
     "express"         : "~4.7.2",
     "body-parser"     : "~1.4.3",
