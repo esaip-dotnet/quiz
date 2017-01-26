@@ -1,5 +1,6 @@
 ﻿using api_core.net.Daos;
 using api_core.net.Models;
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 using System.Collections.Generic;
@@ -45,6 +46,22 @@ namespace api_core.net.Controllers
             await quizDao.Create(quiz);
 
             return new CreatedResult($"/quiz/{quiz.Id}", quiz);
+        }
+
+        [HttpPatch("{idQuiz}")]
+        public IActionResult Patch(string idQuiz, [FromBody]JsonPatchDocument<Quiz> patch)
+        {
+            var quiz = quizDao.GetQuiz(new ObjectId(idQuiz));
+            patch.ApplyTo(quiz, ModelState);
+
+            if (!ModelState.IsValid)
+            {
+                return new BadRequestObjectResult(ModelState);
+            }
+
+            //TODO Update
+
+            return new ObjectResult(quiz);
         }
     }
 }
