@@ -6,7 +6,6 @@ var bodyParser = require('body-parser');
 var listener = 8080;
 
 var server = http.createServer(app);
-var io = require("socket.io").listen(server);
 server.listen(listener);
 
 var path = require("path");
@@ -24,9 +23,6 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-
-
-
 /* MONGODB */
 
 var mongodb = require('mongodb');
@@ -35,9 +31,14 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL. This is where your mongodb server is running.
-var serverName ="localhost";
+var serverName = process.env.SERVERNAME;
+var portListener = process.env.PORTMONGODB;
+var bdd = process.env.BDD;
+    
+
+/*var serverName ="localhost";
 var portListener = "27017";
-var bdd = "quiz";
+var bdd = "quiz";*/
 
 var url = 'mongodb://'+serverName+':'+portListener+'/'+bdd;
 //var url = 'mongodb://localhost:27017/quiz';
