@@ -12,3 +12,8 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Gestion du "Try it out", avec support de CORS, dans le Swagger (5 pts)
 
 Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
+
+Date de livraison maximale de la première pull request (elles doivent être individuelles) : 17/02/2017
+Premiers retours sur le deuxième cours, à savoir les 20 et 21 février 2017
+Date de livraison maximale de la seconde pull request (ou de la première améliorée) : 28/02/2017
+Date de remise maximale des notes (à vérifier avec la scolarité) : 20/03/2017
