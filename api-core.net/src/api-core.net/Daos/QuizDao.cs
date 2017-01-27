@@ -2,6 +2,7 @@
 using MongoDB.Bson;
 using MongoDB.Driver;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace api_core.net.Daos
@@ -16,9 +17,22 @@ namespace api_core.net.Daos
             return baseDao.db.GetCollection<Quiz>("Quiz").Find(filter).First();
         }
 
-        public IEnumerable<Quiz> GetAllQuiz()
+        public IEnumerable<BaseQuiz> GetAllQuiz()
         {
-            return baseDao.db.GetCollection<Quiz>("Quiz").Find(_ => true).ToList();
+            var projection = Builders<Quiz>.Projection.Exclude("questions");
+
+            IEnumerable<Quiz> list = baseDao.db.GetCollection<Quiz>("Quiz").Find(_ => true).ToList();
+
+            IEnumerable<BaseQuiz> baseList = from quiz in list
+                                             select new BaseQuiz
+                                             {
+                                                 Id = quiz.Id,
+                                                 Summary = quiz.Summary,
+                                                 Description = quiz.Description,
+                                                 Title = quiz.Title
+                                             };
+
+            return baseList;
         }
 
         public async Task Create(Quiz quiz)
