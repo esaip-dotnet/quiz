@@ -1,4 +1,4 @@
-La notation sur le cours sera réalisée à partir des améliorations portées sur le projet final (tag `1.0` dans le repository), selon les critères ci-dessous. A noter que les étudiants devront créer un fork et proposer une merge request avec tous leurs commits.
+La notation sur le cours sera réalisée à partir des améliorations portées sur le projet final (tag `1.0` dans le repository), selon les critères ci-dessous. A noter que les étudiants devront créer un fork et proposer une pull request avec tous leurs commits.
 
 - Propreté des commits et de la merge request (2 pts)
 - Orthographe et grammaire correctes (2 pts)
