@@ -1,4 +1,6 @@
-﻿using api_core.net.Models;
+﻿using api_core.net.Daos;
+using api_core.net.Models;
+using api_core.net.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -24,6 +26,9 @@ namespace api_core.net
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
+            BaseDao.UrlMongo = Configuration["MongoDB:Url"];
+            BaseDao.PortMongo = Configuration["MongoDB:Port"];
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -35,7 +40,8 @@ namespace api_core.net
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddTransient<QuizDao>();
             services.AddTransient<ParticipationDao>();
-            services.AddMvc();
+            // Add JsonConverter for ObjectId
+            services.AddMvc().AddJsonOptions(opt => { opt.SerializerSettings.Converters.Add(new ObjectIdConverter()); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
