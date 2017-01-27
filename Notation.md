@@ -18,3 +18,11 @@ Date de livraison maximale de la première pull request (elles doivent être ind
 Premiers retours sur le deuxième cours, à savoir les 20 et 21 février 2017
 Date de livraison maximale de la seconde pull request (ou de la première améliorée) : 28/02/2017
 Date de remise maximale des notes (à vérifier avec la scolarité) : 20/03/2017
+
+Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 50% de la note) :
+- Kinect : 14/20
+- Leap : 16/20
+- WinPhone : 13/20
+- Client web : 18/20
+- API Core : 18/20
+- API Node : 15/20
