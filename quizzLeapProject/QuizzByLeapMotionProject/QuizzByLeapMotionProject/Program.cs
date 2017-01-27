@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Leap;
+using System.Net;
+using System.IO;
 
 namespace QuizzByLeapMotionProject
 {
@@ -111,11 +113,31 @@ namespace QuizzByLeapMotionProject
         /// TODO
         /// </summary>
         /// <param name="fichier">demande les données à envoyer (Format JSON ou XML, à appeler avec les fonctions generateXML et generateJSon</param>
-    /*    public void envoiInformation(String fichier)
+        public async Task envoiInformation()
         {
-            String url = "coreosjpg.cloudapp.net/votes";
-            SafeWriteLine("url = " + url + " xml " + fichier);
-        }*/
+            String url = "coreosjpg.cloudapp.net/quiz";
+
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = File.ReadAllText("test.json");
+
+                streamWriter.Write(json);
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
+
+
+
+            SafeWriteLine("url = " + url + " json " + fichier);
+        }
 
         /*************LEAP V2****************/
         public void AffichagePosition()
@@ -146,59 +168,63 @@ namespace QuizzByLeapMotionProject
                 if (position.x <0 && position.z <0)
                 {
                     SafeWriteLine("Vous choississez la réponse 1");
-                    if (bonneReponse !=1)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
-                    }
+                    //if (bonneReponse !=1)
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Mauvaise réponse");
+                    //}
+                    //else
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Bien joué !");
+                    //}
+                    envoiInformation();
 
                 }
                 else if (position.x < 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 3");
-                    if (bonneReponse != 3)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
-                    }
+                    //if (bonneReponse != 3)
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Mauvaise réponse");
+                    //}
+                    //else
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Bien joué !");
+                    //}
+                    envoiInformation();
                 }
                 else if (position.x > 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 2");
-                    if (bonneReponse != 2)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
-                    }
+                    //if (bonneReponse != 2)
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Mauvaise réponse");
+                    //}
+                    //else
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Bien joué !");
+                    //}
+                    envoiInformation();
                 }
                 else if (position.x > 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 4");
-                    if (bonneReponse != 4)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
-                    }
+                    //if (bonneReponse != 4)
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Mauvaise réponse");
+                    //}
+                    //else
+                    //{
+                    //    System.Threading.Thread.Sleep(2000);
+                    //    SafeWriteLine("Bien joué !");
+                    //}
+                    envoiInformation();
                 }
             }
             System.Threading.Thread.Sleep(3000);
