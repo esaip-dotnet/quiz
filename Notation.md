@@ -10,10 +10,22 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Benchmark de performances et consommation mémoire entre une concaténation simple en boucle et l'utilisation d'un StringBuilder (3 pts)
 - Création du fichier Swagger de description normalisée de l'API (4 pts)
 - Gestion du "Try it out", avec support de CORS, dans le Swagger (5 pts)
+- Faire le ménage dans tous les fichiers inutiles (bin / obj / Debug / node_modules / .suo / etc.) et mettre des .gitignore pour éviter qu'on ne puisse en rajouter (2 pts)
 
 Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
 
 Date de livraison maximale de la première pull request (elles doivent être individuelles) : 17/02/2017
+
 Premiers retours sur le deuxième cours, à savoir les 20 et 21 février 2017
+
 Date de livraison maximale de la seconde pull request (ou de la première améliorée) : 28/02/2017
+
 Date de remise maximale des notes (à vérifier avec la scolarité) : 20/03/2017
+
+Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 50% de la note) :
+- Kinect : 14/20
+- Leap : 16/20
+- WinPhone : 13/20
+- Client web : 18/20
+- API Core : 18/20
+- API Node : 15/20
