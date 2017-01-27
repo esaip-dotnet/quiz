@@ -1,4 +1,4 @@
-La notation sur le cours sera réalisée à partir des améliorations portées sur le projet final (tag `1.0` dans le repository), selon les critères ci-dessous. A noter que les étudiants devront créer une branche et proposer une merge request avec tous leurs commits.
+La notation sur le cours sera réalisée à partir des améliorations portées sur le projet final (tag `1.0` dans le repository), selon les critères ci-dessous. A noter que les étudiants devront créer un fork et proposer une pull request avec tous leurs commits.
 
 - Propreté des commits et de la merge request (2 pts)
 - Orthographe et grammaire correctes (2 pts)
@@ -9,3 +9,5 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Gestion argumentée des modifications de quiz concurrentes à des participations en cours (5 pts)
 - Benchmark de performances et consommation mémoire entre une concaténation simple en boucle et l'utilisation d'un StringBuilder (3 pts)
 - Création du fichier Swagger de description normalisée de l'API (4 pts)
+
+Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
