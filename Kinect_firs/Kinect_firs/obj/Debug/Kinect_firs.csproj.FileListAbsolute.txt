@@ -1,8 +1,0 @@
-F:\Visual\Kinect_firs\Kinect_firs\bin\Debug\Kinect_firs.exe.config
-F:\Visual\Kinect_firs\Kinect_firs\bin\Debug\Kinect_firs.exe
-F:\Visual\Kinect_firs\Kinect_firs\bin\Debug\Kinect_firs.pdb
-F:\Visual\Kinect_firs\Kinect_firs\bin\Debug\Microsoft.Kinect.dll
-F:\Visual\Kinect_firs\Kinect_firs\bin\Debug\Microsoft.Kinect.xml
-F:\Visual\Kinect_firs\Kinect_firs\obj\Debug\Kinect_firs.csprojResolveAssemblyReference.cache
-F:\Visual\Kinect_firs\Kinect_firs\obj\Debug\Kinect_firs.exe
-F:\Visual\Kinect_firs\Kinect_firs\obj\Debug\Kinect_firs.pdb

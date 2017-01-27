@@ -10,6 +10,7 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Benchmark de performances et consommation mémoire entre une concaténation simple en boucle et l'utilisation d'un StringBuilder (3 pts)
 - Création du fichier Swagger de description normalisée de l'API (4 pts)
 - Gestion du "Try it out", avec support de CORS, dans le Swagger (5 pts)
+- Faire le ménage dans tous les fichiers inutiles (bin / obj / Debug / node_modules / .suo / etc.) et mettre des .gitignore pour éviter qu'on ne puisse en rajouter (2 pts)
 
 Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
 
