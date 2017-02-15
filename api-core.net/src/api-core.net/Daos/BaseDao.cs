@@ -3,6 +3,17 @@ using Microsoft.Extensions.Configuration;
 
 namespace api_core.net.Daos
 {
+    /*
+     * Base Dao BaseDao (Singleton)
+     * 
+     * @attr _client : MongoClient
+     * @attr _db : IMongoDatabase
+     * @attr instance : BaseDao
+     * 
+     * @const UrlMongo : string
+     * @const PortMongo : string
+     * 
+     */
     public class BaseDao
     {
         private MongoClient _client { get; set; }
@@ -16,11 +27,22 @@ namespace api_core.net.Daos
 
         private static BaseDao instance;
 
+        /*
+         * Constructor BaseDao
+         * 
+         * @attr _client : MongoClient
+         * @attr _db : IMongoDatabase
+         * 
+         */
         private BaseDao() {
             _client = new MongoClient($"mongodb://{UrlMongo}:{PortMongo}");
             _db = _client.GetDatabase("QuizDB");
         }
 
+        /*
+         * Singleton Instance BaseDao
+         * 
+         */
         public static BaseDao Instance
         {
             get

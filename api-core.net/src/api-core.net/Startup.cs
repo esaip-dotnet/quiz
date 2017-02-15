@@ -27,6 +27,7 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
+            // Set MongoDB Url and Port in BaseDao from appsettings.json
             BaseDao.UrlMongo = Configuration["MongoDB:Url"];
             BaseDao.PortMongo = Configuration["MongoDB:Port"];
         }
@@ -40,7 +41,7 @@ namespace api_core.net
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddTransient<QuizDao>();
             services.AddTransient<ParticipationDao>();
-            // Add JsonConverter for ObjectId
+            // Add JsonConverter converting ObjectId into string
             services.AddMvc().AddJsonOptions(opt => { opt.SerializerSettings.Converters.Add(new ObjectIdConverter()); });
         }
 

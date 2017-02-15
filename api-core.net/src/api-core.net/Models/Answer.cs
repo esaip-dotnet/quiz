@@ -4,6 +4,15 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_core.net.Models
 {
+    /*
+     * Entity Answer
+     * 
+     * @attr Title : String
+     * @attr Correct : bool
+     * @attr Picture : String
+     * @attr CheckedByPlayer : bool
+     * 
+     */
     public class Answer
     {
         [BsonElement("title")]
