@@ -36,21 +36,21 @@ namespace api_core.net.Controllers
          * Create Participation using POST request
          * 
          * @param idQuiz : string
-         * @param p : Participation
+         * @param participation : Participation
          * @route /quiz/{idQuiz}/participation
          * 
          * @return CreatedResult
          * 
          */
         [HttpPost]
-        public async Task<IActionResult> CreateParticipation(string idQuiz, [FromBody]Participation p)
+        public async Task<IActionResult> CreateParticipation(string idQuiz, [FromBody]Participation participation)
         {
-            p.Quiz.Id = new ObjectId(idQuiz);
+            participation.Quiz.Id = new ObjectId(idQuiz);
             // Create Participation in DB
-            await participationDao.CreateParticipation(p);
+            await participationDao.CreateParticipation(participation);
 
             // Return Participation location and object
-            return new CreatedResult($"/quiz/{idQuiz}/participation/{p.Id}", p);
+            return new CreatedResult($"/quiz/{idQuiz}/participation/{participation.Id}", participation);
         }
 
         /*
@@ -60,16 +60,16 @@ namespace api_core.net.Controllers
          * 
          * @param idQuiz : string
          * @param idParticipation : string
-         * @param p : Participation
+         * @param participation : Participation
          * @route /quiz/{idQuiz}/participation/{idParticipation}
          * 
          * @return OkResult
          * 
          */
         [HttpPut("{idParticipation}")]
-        public async Task<IActionResult> UpdateParticipation(string idQuiz, string idParticipation, [FromBody]Participation p)
+        public async Task<IActionResult> UpdateParticipation(string idQuiz, string idParticipation, [FromBody]Participation participation)
         {
-            p.Quiz.Id = new ObjectId(idQuiz);
+            participation.Quiz.Id = new ObjectId(idQuiz);
             ObjectId idPart = new ObjectId(idParticipation);
             
             // Get Participation by Id from DB
@@ -78,10 +78,10 @@ namespace api_core.net.Controllers
             // If doesn't exist create participation otherwise update it
             if (part == null)
             {
-                await participationDao.CreateParticipation(p);
+                await participationDao.CreateParticipation(participation);
             } else
             {
-                await participationDao.ReplaceParticipation(idPart, p);
+                await participationDao.ReplaceParticipation(idPart, participation);
             }
 
             
