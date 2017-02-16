@@ -31,10 +31,10 @@ License
 
 MIT
 
-   [ce fichier Swagger]: <http://petstore.swagger.io/?url=https://github.com/FlorianTDK/quiz/blob/master/swagger.json/>
-   [Installation de l'API .Net Core]: <https://github.com/FlorianTDK/quiz/blob/master/api-core.net/install.md/>
-   [Installation de l'API node.js]: <https://github.com/FlorianTDK/quiz/blob/master/api-node.js/readme.md/>
-   [Installation du client Windows Phone]: <https://github.com/FlorianTDK/quiz/blob/master/WinPhone/install.md/>
-   [Installation du client Web]: <https://github.com/FlorianTDK/quiz/blob/master/web-client-core-asp.net/install.md/>
-   [Installation du client Kinect]: <https://github.com/FlorianTDK/quiz/blob/master/kinect-client/install.md/>
-   [Installation du client Leap Motion]: <https://github.com/FlorianTDK/quiz/blob/master/quizzLeapProject/install.md/>
+   [ce fichier Swagger]: <http://petstore.swagger.io/?url=https://github.com/FlorianTDK/quiz/blob/master/swagger.json>
+   [Installation de l'API .Net Core]: <https://github.com/FlorianTDK/quiz/blob/master/api-core.net/install.md>
+   [Installation de l'API node.js]: <https://github.com/FlorianTDK/quiz/blob/master/api-node.js/readme.md>
+   [Installation du client Windows Phone]: <https://github.com/FlorianTDK/quiz/blob/master/WinPhone/install.md>
+   [Installation du client Web]: <https://github.com/FlorianTDK/quiz/blob/master/web-client-core-asp.net/install.md>
+   [Installation du client Kinect]: <https://github.com/FlorianTDK/quiz/blob/master/kinect-client/install.md>
+   [Installation du client Leap Motion]: <https://github.com/FlorianTDK/quiz/blob/master/quizzLeapProject/install.md>
