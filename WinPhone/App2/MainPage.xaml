@@ -7,7 +7,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <Grid>
         <TextBox x:Name="Question" HorizontalAlignment="Left" Height="48" Margin="39,55,0,0" TextWrapping="Wrap" Text="Question : Intitulé de la question" 
                  VerticalAlignment="Top" Width="318" TextChanged="TextBox_TextChanged"/>

@@ -28,7 +28,6 @@ namespace App2
         public MainPage()
         {
             this.InitializeComponent();
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -37,7 +36,6 @@ namespace App2
         /// </summary>
         /// <param name="e">Données d’événement décrivant la manière dont l’utilisateur a accédé à cette page.
         /// Ce paramètre est généralement utilisé pour configurer la page.</param>
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: préparer la page pour affichage ici.
@@ -62,42 +60,31 @@ namespace App2
         private async void SubmitData()
         {
             try{
-                //String answer = reponse1.Name.ToString(); //checkbox pas du text
-                //string putData = "answer" + answer;
                 String json = "{\"_id\" : 1234567,\"idParticipant\" : \"mailto://jp.gouigoux@free.fr\",\"startTimestamp\" : \"2017-01-26T03:26:06+00:00\",\"score\" : 0.5,\"quiz\" : {\"_id\" : 1234,\"summary\" : \"Les drapeaux de Formule 1\",\"description\" : \"Ce quiz testera votre connaissance visuelle des différents drapeaux utilisés sur un circuit de course\",\"title\" : \"Drapeaux F1\",\"questions\" : [{\"title\" : \"Quel est ce drapeau ?\",\"picture\" : \"http://images.esaip.org/quiz-lib/damier.jpg\",\"answers\" : [{\"title\" : \"C'est le drapeau de départ\",\"correct\" : false,\"checkedByPlayer\" : true},{	\"title\" : \"C'est le drapeau d'arrivée\",\"correct\" : true,\"checkedByPlayer\" : false	},{\"title\" : \"C'est le drapeau indiquant un arrêt de course\",\"correct\" : false,\"checkedByPlayer\" : false},{\"title\" : \"C'est le drapeau indiquant un accident proche\",\"correct\" : false,\"checkedByPlayer\" : false}	]},{\"title\" : \"Quel est le drapeau utilisé pour le départ ?\",\"answers\" : [{	\"title\" : \"\",\"picture\" : \"http://images.esaip.org/quiz-lib/damier.jpg\",	\"correct\" : true,\"checkedByPlayer\" : true},{\"title\" : \"\",\"picture\" : \"http://images.esaip.org/quiz-lib/redflag.jpg\",\"correct\" : false,\"checkedByPlayer\" : false},{\"title\" : \"\",\"picture\" : \"http://images.esaip.org/quiz-lib/greenflag.jpg\",\"correct\" : false,\"checkedByPlayer\" : false},{\"title\" : \"\",\"picture\" : \"http://images.esaip.org/quiz-lib/yellowflag.jpg\",\"correct\" : false,\"checkedByPlayer\" : false}]}]}}";
                 String putData = json;
-                    //HTTP web request
+                //Requête HTTP
                 WebRequest request = WebRequest.Create("http://coreosjpg.cloudapp.net/quiz/1234/participation/1234567");
                 request.Method = "PUT";
                 request.ContentType = "text/json";
-                //request.ContentLength = data.Length;
-
-                //traitement de la requete
+                //Traitement de la requête
                 using (var stream = await request.GetRequestStreamAsync())
                 {
                     var datas = Encoding.UTF8.GetBytes(putData);
                     await stream.WriteAsync(datas, 0, datas.Length);
                 }
-                    // traitement de la réponse
+                 // Traitement de la réponse
             } 
-
             catch(Exception ex)
             {
-
             }
-
         }
-
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
-
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
 
         }
-
     }
-
 }
