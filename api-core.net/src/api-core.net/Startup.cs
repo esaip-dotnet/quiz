@@ -41,6 +41,8 @@ namespace api_core.net
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddTransient<QuizDao>();
             services.AddTransient<ParticipationDao>();
+            // Add CORS services
+            services.AddCors();
             // Add JsonConverter converting ObjectId into string
             services.AddMvc().AddJsonOptions(opt => { opt.SerializerSettings.Converters.Add(new ObjectIdConverter()); });
             // Register the Swagger generator, defining one or more Swagger documents
@@ -59,6 +61,10 @@ namespace api_core.net
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseApplicationInsightsExceptionTelemetry();
+
+            // Allow cross-origin requests from http://app.swaggerhub.com
+            app.UseCors(builder =>
+               builder.WithOrigins("http://app.swaggerhub.com"));
 
             app.UseMvc();
 
