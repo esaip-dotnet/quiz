@@ -13,6 +13,7 @@ Rien de plus simple, un quiz s'affiche à l'écran de votre appareil et il suffi
 
 ## Contrat de l'API
 Toutes les routes de l'API sont toutes décrites sur [ce fichier Swagger].
+(malheureusement, on ne peut pas passer à Swagger un json venant de GitHub, car les CORS ne sont pas activés sur Github, il faut dire [aller sur l'éditeur] et copier/coller le contenu du [fichier Swagger] pour visualiser.)
 
 ## Installation
 Pour installer Quiz, il faut d'abord installer une des deux API :
@@ -31,6 +32,8 @@ License
 
 MIT
 
+   [aller sur l'éditeur]: <http://editor.swagger.io>
+   [fichier Swagger]: <https://github.com/FlorianTDK/quiz/blob/master/swagger.json>
    [ce fichier Swagger]: <http://petstore.swagger.io/?url=https://github.com/FlorianTDK/quiz/blob/master/swagger.json>
    [Installation de l'API .Net Core]: <https://github.com/FlorianTDK/quiz/blob/master/api-core.net/install.md>
    [Installation de l'API node.js]: <https://github.com/FlorianTDK/quiz/blob/master/api-node.js/readme.md>
