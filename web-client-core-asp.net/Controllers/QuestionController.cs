@@ -15,22 +15,23 @@ namespace WebClientCore.Controllers
     public class QuestionController : Controller
     {
         Uri quizUri;
-        // GET: /<controller>/
         [HttpGet]
         public IActionResult Index([FromQuery]Uri quizUri)
         {
             this.quizUri = quizUri;
             return View();
         }
-
-        //Ajouter la question au quiz
+        /// <summary>
+        /// Ajouter la question au quiz
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Question/Validate")]
         public IActionResult Validate(Question question)
         {
             Patch patch = new Patch("add", "/questions", question);
             bool resultHttp = PasthJsonAsync(patch);
-
             if (resultHttp == false)
             {
                 return RedirectToAction("Index", "Question");
@@ -47,8 +48,12 @@ namespace WebClientCore.Controllers
                 }
             }
         }
-
-        //Envoyer la question avec la méthode Patch
+        /// <summary>
+        /// 
+        ///Envoyer la question avec la méthode Patch
+        /// </summary>
+        /// <param name="patch"></param>
+        /// <returns></returns>
         private bool PasthJsonAsync(Patch patch)
         {
             var client = new HttpClient();
