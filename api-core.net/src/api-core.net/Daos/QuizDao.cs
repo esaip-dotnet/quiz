@@ -10,19 +10,17 @@ namespace api_core.net.Daos
     public class QuizDao
     {
         private BaseDao baseDao = BaseDao.Instance;
-
+        //Récupérer Quiz
         public Quiz GetQuiz(ObjectId id)
         {
             var filter = Builders<Quiz>.Filter.Eq(q => q.Id, id);
             return baseDao.db.GetCollection<Quiz>("Quiz").Find(filter).First();
         }
-
+        //Récupérer tous les quiz
         public IEnumerable<BaseQuiz> GetAllQuiz()
         {
             var projection = Builders<Quiz>.Projection.Exclude("questions");
-
             IEnumerable<Quiz> list = baseDao.db.GetCollection<Quiz>("Quiz").Find(_ => true).ToList();
-
             IEnumerable<BaseQuiz> baseList = from quiz in list
                                              select new BaseQuiz
                                              {
@@ -34,16 +32,15 @@ namespace api_core.net.Daos
 
             return baseList;
         }
-
+        //Créer un quiz
         public async Task Create(Quiz quiz)
         {
             await baseDao.db.GetCollection<Quiz>("Quiz").InsertOneAsync(quiz);
         }
-
+        //Mettre à jour un quiz
         public async Task Update(ObjectId id, Quiz quiz)
         {
             quiz.Id = id;
-
             var filter = Builders<Quiz>.Filter.Eq(p => p.Id, id);
             await baseDao.db.GetCollection<Quiz>("Quiz").ReplaceOneAsync(filter, quiz);
         }

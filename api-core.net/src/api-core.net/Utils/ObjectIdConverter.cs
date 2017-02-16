@@ -13,7 +13,7 @@ namespace api_core.net.Utils
         {
             return objectType == typeof(ObjectId);
         }
-
+        //Lecture d'un fichier json
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             if (reader.TokenType != JsonToken.String)
@@ -22,7 +22,7 @@ namespace api_core.net.Utils
             var value = (string)reader.Value;
             return string.IsNullOrEmpty(value) ? ObjectId.Empty : new ObjectId(value);
         }
-
+        //Écriture dans un fichier Json
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             if (value is ObjectId)

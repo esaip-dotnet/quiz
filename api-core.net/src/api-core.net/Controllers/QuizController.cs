@@ -17,7 +17,7 @@ namespace api_core.net.Controllers
         {
             this.quizDao = quizDao;
         }
-
+        //Obtenir l'identifiant du Quiz
         [HttpGet("{idQuiz}")]
         public IActionResult GetId(string idQuiz)
         {
@@ -28,7 +28,7 @@ namespace api_core.net.Controllers
             }
             return new ObjectResult(quiz);
         }
-
+        //Obtenir tous les quizz
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -47,7 +47,7 @@ namespace api_core.net.Controllers
 
             return new CreatedResult($"/quiz/{quiz.Id}", quiz);
         }
-
+        //Mettre à jour l'identifiant de quiz
         [HttpPatch("{idQuiz}")]
         public async Task<IActionResult> Patch(string idQuiz, [FromBody]JsonPatchDocument<Quiz> patch)
         {

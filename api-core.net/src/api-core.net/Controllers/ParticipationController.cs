@@ -16,7 +16,7 @@ namespace api_core.net.Controllers
         {
             this.participationDao = participationDao;
         }
-
+        //Tâche pour envoyer idQuiz et participation
         [HttpPost]
         public async Task<IActionResult> Post(string idQuiz, [FromBody]Participation p)
         {
@@ -25,7 +25,7 @@ namespace api_core.net.Controllers
 
             return new CreatedResult($"/quiz/{idQuiz}/participation/{p.Id}", p);
         }
-
+        //Mise a jour des données d'une participation
         [HttpPut("{idParticipation}")]
         public async Task<IActionResult> Put(string idQuiz, string idParticipation, [FromBody]Participation p)
         {
@@ -42,7 +42,7 @@ namespace api_core.net.Controllers
             await participationDao.Update(idPart, p);
             return new OkResult();
         }
-
+        //Permet de récupérer l'Identifiant
         [HttpGet("{idParticipation}")]
         public IActionResult GetId(string idParticipation)
         {
@@ -55,6 +55,7 @@ namespace api_core.net.Controllers
         }
 
         [HttpPatch("{idParticipation}")]
+        //Mise à jour de l'identifiant participation
         public async Task<IActionResult> Patch(string idParticipation, [FromBody]JsonPatchDocument<Participation> patch)
         {
             var participation = participationDao.GetParticipation(new ObjectId(idParticipation));
