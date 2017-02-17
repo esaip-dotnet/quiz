@@ -124,13 +124,13 @@ MongoClient.connect(url, function (err, db) {
             //response.send(request.body); // echo the result back
         });
 
-        
+        // Page d'accueil
         app.get('/', function(req, res) {
             res.status(200);
             res.send("Ca marche sur ma machine !");
         });
 
-        
+        // Pour récupérer tout les quiz
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
@@ -138,7 +138,7 @@ MongoClient.connect(url, function (err, db) {
             res.json(myJson);
         });
 
-        
+        // Pour récupérer un quiz précis
         app.get('/quiz/:id', function(req, res) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
@@ -166,14 +166,19 @@ MongoClient.connect(url, function (err, db) {
             
         });
         
+        
+        // Pour modifier le summary d'un quiz
         app.patch('/quiz/:id', function (req, res){
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
-            var newAnswers      = req.params.newAnswer;
+            var newSummary      = req.params.newSummary;
             var objToFind     = { _id: new MongoObjectID(idToFind) };
-            db.collection("quiz").findOne(objToFind, function(error, result) {
+            db.collection("quiz").findOneAndUpdate(
+                objToFind, 
+                { $set: {summary:"gf"} }, // A améliorer (valeur en dur)
+                function(error, result) {
                 
-                // METHODE PATCH A TERMINER
+                    res.send(result);
                 
             });              
         });
