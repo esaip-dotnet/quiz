@@ -15,6 +15,7 @@ At the moment the API exposes four operations under the localhost/quiz url :
 * /quiz/{id} (PUT): edits a quiz and create the quiz if it doesn't exist
 * /json (POST): creates a quiz form
 
+---------------------------------------------------------
 Content
 ===============
 
@@ -51,3 +52,4 @@ Here is an example of the contents of the quiz object:
                 ]
 }
 
+-----------------------------------------------------------
