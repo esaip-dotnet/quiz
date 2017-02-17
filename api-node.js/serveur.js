@@ -129,20 +129,23 @@ MongoClient.connect(url, function (err, db) {
         });
 
         
+        // Controller permettant d'accéder à notre page d'accueil
         app.get('/', function(req, res) {
             res.status(200);
             res.send("Ca marche sur ma machine !");
         });
 
         
+        // Methode get permettant de récupérer tous les quiz 
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
             res.status(200);
             res.json(myJson);
         });
-
         
+        
+        // Methode permettant de récupérer un quiz précis grâce l'ID
         app.get('/quiz/:id', function(req, res) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
@@ -159,6 +162,7 @@ MongoClient.connect(url, function (err, db) {
             });
         });
         
+        // Methode permettant de modifier un quiz
         app.put('/quiz/:id', function(req, res) {
             
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
