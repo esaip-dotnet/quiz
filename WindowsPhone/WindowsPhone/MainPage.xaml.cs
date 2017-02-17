@@ -1,9 +1,13 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WebServiceExampleApp;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,7 +31,7 @@ namespace WindowsPhone
         public MainPage()
         {
             this.InitializeComponent();
-            this.LoadImage();
+           this.LoadImage();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -55,110 +59,43 @@ namespace WindowsPhone
             // Si vous utilisez le NavigationHelper fourni par certains modèles,
             // cet événement est géré automatiquement.
         }
-        /*
-        void GetAvatarImageCallback(IAsyncResult result)
+
+        /// <summary>
+        /// Tentative récupération des valeurs d'une api  (en json) 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void Valider_Click(object sender, RoutedEventArgs e)
         {
-            HttpWebRequest request = result.AsyncState as HttpWebRequest;
-            if (request != null)
+            try
             {
-                try
+                using (HttpClient client = new HttpClient())
                 {
-                    WebResponse response = request.EndGetResponse(result);
-                    image = imageFromStream(response.GetResponseStream());
-                }
-                catch (WebException e)
-                {
-                    gamerTag = "Gamertag not found.";
-                    return;
-                }
-            }
-        }
-        */
-        private void Valider_Click(object sender, RoutedEventArgs e)
-        {
-            /*String postUrl = "http://127.0.0.1";
-            HttpWebRequest httpWebRequest = WebRequest.Create(postUrl) as HttpWebRequest;
-            string avatarUri = "https://www.google.fr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiKrfLC8ZbSAhXC2hoKHfoUDDEQjRwIBw&url=http%3A%2F%2Fcafoc-auvergne2.net%2Fcampus%2Fcourse%2Findex.php%3Fcategoryid%3D8&psig=AFQjCNEX9CmAZDBBTz5PGrjmE0gpn5H5nw&ust=1487412505383571";
-            HttpWebRequest request =
-                (HttpWebRequest)HttpWebRequest.Create(avatarUri);
-                */
-            Uri myUri = new Uri("http://thecatapi.com/api/images/get?format=src&type=jpg", UriKind.Absolute);
-            BitmapImage bmi = new BitmapImage();
-            bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
-            bmi.UriSource = myUri;
-            image.Source = bmi;
-            /*
-            if (httpWebRequest == null)
-            {
-                throw new NullReferenceException("request is not a http request");
-            }
-            request.BeginGetResponse(GetAvatarImageCallback, request);
+                    client.BaseAddress = new Uri("http://api.openweathermap.org");
 
+                    var url = "data/2.5/forecast/daily?q={0}&mode=json&units=metric&cnt=7";
 
+                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+                    HttpResponseMessage response = await client.GetAsync(String.Format(url, UriKind.RelativeOrAbsolute));
+                if (response.IsSuccessStatusCode)
+                   {
+                        var data = response.Content.ReadAsStringAsync();
+                        var weatherdata = JsonConvert.DeserializeObject<WeatherObject>(data.Result.ToString());
+                        reponse1.DataContext = weatherdata.city.name.ToString();
+                        reponse2.DataContext = weatherdata.message.ToString();
+                        reponse3.DataContext = weatherdata.list[1].temp.ToString();
+                        reponse4.DataContext = weatherdata.list[1].humidity.ToString();
 
-            // Set up the request properties. 
-            httpWebRequest.Method = "POST";
-            httpWebRequest.ContentType = "text/json";
-            httpWebRequest.CookieContainer = new CookieContainer();
-            httpWebRequest.ContentLength = formData.Length;
-            httpWebRequest.BeginGetRequestStream((result) =>
-            {
-                try
-                {
-                    HttpWebRequest request = (HttpWebRequest)result.AsyncState;
-                    using (Stream requestStream = request.EndGetRequestStream(result))
-                    {
-                        requestStream.Write(formData, 0, formData.Length);
-                        requestStream.Close();
                     }
-                    request.BeginGetResponse(a =>
-                    {
-                        try
-                        {
-                            var response = request.EndGetResponse(a);
-                            var responseStream = response.GetResponseStream();
-                            using (var sr = new StreamReader(responseStream))
-                            {
-                                using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
-                                {
-                                    string responseString = streamReader.ReadToEnd();
-
-                                    if (!string.IsNullOrEmpty(responseString))
-                                    {
-                                        Dispatcher.BeginInvoke(() =>
-                                        {
-                                            MessageBox.Show("Your data is successfully submitted!");
-                                        });
-                                    }
-                                    else
-                                    {
-                                        Dispatcher.BeginInvoke(() => MessageBox.Show("Error in data submission!"));
-                                    }
-
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Dispatcher.BeginInvoke(() =>
-                            {
-                                MessageBox.Show("Error in data submission!");
-                            });
-                        }
-                    }, null);
                 }
-                catch (Exception)
-                {
-
-                    MessageBox.Show("Error in data submission!");
-                }
-            }, httpWebRequest);
-
-            isImageUpload = false;
+            }
+            catch (Exception ex)
+            {
+               
+            }
         }
-        */
-    }
+
     }
 }
 

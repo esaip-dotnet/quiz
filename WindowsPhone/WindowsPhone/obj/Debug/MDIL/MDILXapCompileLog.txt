@@ -10,3 +10,11 @@ MDIL image D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MDIL
 
 
 File D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\WindowsPhone.exe output D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MDIL\WindowsPhone.exe
+Processing file: D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\Newtonsoft.Json.dll
+File D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\Newtonsoft.Json.dll is not in the compile filter. Skipping.
+Processing file: D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Extensions.dll
+File D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Extensions.dll is not in the compile filter. Skipping.
+Processing file: D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Formatting.dll
+File D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Formatting.dll is not in the compile filter. Skipping.
+Processing file: D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Primitives.dll
+File D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MSIL\System.Net.Http.Primitives.dll is not in the compile filter. Skipping.
