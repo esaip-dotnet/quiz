@@ -19,6 +19,8 @@ Content
 ===============
 
 Here is an example of the contents of the quiz object:
+
+
 {
                 summary: "Drapeau",
                 description: "Quiz sur les drapeau",
