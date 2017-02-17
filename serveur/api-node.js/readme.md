@@ -1,4 +1,4 @@
-Pour utiliser le serveur Nodejs, il faut créer les variables d'environnements :
+Pour utiliser le serveur Nodejs, il faut crÃ©er les variables d'environnement :
 	- SERVERNAME
 	- PORTMONGODB
 	- BDD

@@ -1,18 +1,17 @@
 # API .NET Core
 
 ## Prérequis
-Pour installer l'API .Net Core, le seul prérequis est : 
-  - Une machine sous Linux avec [Docker] installé dessus.
+Pour installer l'API .Net Core, le seul prérequis est de posséder une machine sous Linux avec [Docker] d'installé dessus.
 
 ## Installation
 
 ### Docker
-Pour installer Docker, suivre les étapes d'installations sur le [site officiel].
+Pour installer Docker, suivre les étapes d'installation sur le [site officiel].
 
 ### Créer l'image Docker de l'API
-Pour créer l'image Docker de l'API, lancer cette commande dans le dossier coreapi :
+Pour créer l'image Docker de l'API, lancez cette commande dans le dossier coreapi :
 ```sh
-cd api-core.net 
+cd api-core.net
 docker build -t api-core.net .
 ```
 

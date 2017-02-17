@@ -24,36 +24,27 @@ app.use(bodyParser.urlencoded({
 
 var mongodb = require('mongodb');
 
-//We need to work with "MongoClient" interface in order to connect to a mongodb server.
+//Nous avons besoin de travailler avec l'interface "MongoClient" afin de nous connecter à un serveur mongodb
 var MongoClient = mongodb.MongoClient;
 
 serverName = "localhost";
 portListener = "27017";
 bdd = "quiz";
-  
+
 var serverName = process.env.SERVERNAME || serverName;
 var portListener = process.env.PORTMONGODB || portListener;
 var bdd = process.env.BDDNAME || bdd;
 
-    
-//console.log(process.env.SERVERNAME)
-
-
-/*var serverName ="localhost";
-var portListener = "27017";
-var bdd = "quiz";*/
-
 var url = 'mongodb://'+serverName+':'+portListener+'/'+bdd;
-//var url = 'mongodb://localhost:27017/quiz';
 
 MongoClient.connect(url, function (err, db) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
     } else {
-        //HURRAY!! We are connected. :)
+        //Ouiiii, on est connectés ! :)
         console.log('Connection established to', url);
-        
-        // Get the documents collection
+
+        //Récupérer la collection de documents
         var resultat = db.collection('quiz');
 
         //Notre tableau de quiz
@@ -72,18 +63,18 @@ MongoClient.connect(url, function (err, db) {
         app.post('/json', function (request, response) {
 
             // REMPLACER LES VALEURS EN DUR PAR CELLES EN PARAMETRES
-            
-            
+
+
             // On cree un nouveau quiz (test)
             var newQuiz = {
                 summary: "Drapeau",
                 description: "Quiz sur les drapeau",
                 title: "Drapeau",
                 questions: [
-                    { 
+                    {
                         title:"Quel est ce drapeaux ?"
                     }
-                    
+
                 ],
                 answers: [
                     {
@@ -104,37 +95,37 @@ MongoClient.connect(url, function (err, db) {
                     }
                 ]
             }
-            
-            
-            
-            
+
+
+
+
             // On ajoute le nouveau quiz dans la BDD
             resultat.insert(newQuiz, function (err, result) {
                 if (err) {
                     console.log(err);
                 } else {
                     console.log('Success !');
-                    
+
                     newQuiz._id = result.insertedIds.toString();
-                    
+
                     // On ajoute le nouveau quiz dans notre tableau
                     allQuiz.push(newQuiz);
                 }
                 //Close connection
                 //db.close();
             });
-                        
+
             //console.log(request.body.name); // your JSON
             //response.send(request.body); // echo the result back
         });
 
-        
+
         app.get('/', function(req, res) {
             res.status(200);
             res.send("Ca marche sur ma machine !");
         });
 
-        
+
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
@@ -142,7 +133,7 @@ MongoClient.connect(url, function (err, db) {
             res.json(myJson);
         });
 
-        
+
         app.get('/quiz/:id', function(req, res) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
@@ -152,34 +143,34 @@ MongoClient.connect(url, function (err, db) {
 
                 console.log(
                     "ID Quiz: "  + result._id.toString() + "\n" // 53dfe7bbfd06f94c156ee96e
-                );   
+                );
                 res.contentType('application/json');
                 res.status(200);
                 res.json(result);
             });
         });
-        
+
         app.put('/quiz/:id', function(req, res) {
-            
+
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
             var objToFind     = { _id: new MongoObjectID(idToFind) };
             db.collection("quiz").findOne(objToFind, function(error, result) {
                 // A Faire
             });
-            
+
         });
-        
+
         app.patch('/quiz/:id', function (req, res){
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
             var newAnswers      = req.params.newAnswer;
             var objToFind     = { _id: new MongoObjectID(idToFind) };
             db.collection("quiz").findOne(objToFind, function(error, result) {
-                
+
                 // METHODE PATCH A TERMINER
-                
-            });              
+
+            });
         });
 
 
