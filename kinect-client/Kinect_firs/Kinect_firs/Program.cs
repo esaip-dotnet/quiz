@@ -10,132 +10,117 @@ using System.Threading;
 
 namespace Kinect_firs
 {
+    //classe Principale contenant le main
     class Program
 
     {
-       // private static ColorFrameReader colorFrameReader;
+        //Capteur kinect
         private static KinectSensor kinectSensor;
         private static BodyFrameReader bodyFrameReader = null;
         private static Body[] bodies = null;
         private static CoordinateMapper coordinateMapper = null;
         private const float InferredZPositionClamp = 0.1f;
-       
-        // private static DrawingGroup drawingGroup;
-        //private static DrawingImage imageSource;
 
-        static void Main(string[] args)
-        {
+        // Fonction Main
+        static void Main(string[] args){
             
-            // one sensor is currently supported
+            // Attribution de la kinect à l'objet kinect sensor   
             kinectSensor = KinectSensor.GetDefault();
             coordinateMapper = kinectSensor.CoordinateMapper;
-            // open the sensor
+            // Ouvre le capteur
             kinectSensor.Open();
             
             bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
-           if (bodyFrameReader != null) {
-                
-                try
-                {
+            
+            if (bodyFrameReader != null) {
+                try{
                     bodyFrameReader.FrameArrived += Reader_FrameArrived;
-
                 }
-                catch(Exception e)
-                {
-                    
+                catch(Exception e){
                     Console.WriteLine(e);
                 }
-              
-            }
-            else
-            {
+            }else{
                 Console.WriteLine("BodyFrameReader is null");
             }
-
             Console.ReadLine();
         }
-        static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
-        {
-           bool dataReceived = false;
 
-           
-            using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame())
-            {
-                if (bodyFrame != null)
-                {
+        // Lecture du capteur
+        static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e){
+
+            // Test de réception de données
+            bool dataReceived = false;
+
+            using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame()){
+
+                if (bodyFrame != null){
                     if (bodies == null)
                        bodies = new Body[bodyFrame.BodyCount];
                        bodyFrame.GetAndRefreshBodyData(bodies);
                        dataReceived = true;
                 }
             }
-            if (dataReceived)
-            {
-                
-                //Console.ReadLine();
-                foreach (Body body in bodies)
-                {
-                     if (body.IsTracked)
-                    {
+
+            // Si des données sont reçus 
+            if (dataReceived){
+
+                // Pour chaques partie du corps
+                foreach (Body body in bodies){
+                    if (body.IsTracked){
                         
-                       
+                        // Définition des points tracker
                         IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
                         //Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
                         JointType HandLeft =(Microsoft.Kinect.JointType) 7;
                         JointType HandRight = (Microsoft.Kinect.JointType)11;
-                        JointType Head = (Microsoft.Kinect.JointType)3;
 
+                        // Pour chaques points du corps tracker
                         foreach (JointType jointType in joints.Keys)
                         {
+                            // Heure de tacking
+                            String hnow = DateTime.Now.ToString("mm:ss");
 
-                            String hnow=DateTime.Now.ToString("mm:ss");
+                            // Main gauche
                             CameraSpacePoint positionHL = joints[HandLeft].Position;
                             if (positionHL.Z < 0)
+                            {
                                 positionHL.Z = InferredZPositionClamp;
-
+                            }
+                            // Recherche des coordonées de la main gauche
                             DepthSpacePoint depthSpacePoint = coordinateMapper.MapCameraPointToDepthSpace(positionHL);
                             float LHandX = depthSpacePoint.X;
                             float LHandY = depthSpacePoint.Y;
                             Console.Clear();
                             Console.WriteLine("LHandX =" + LHandX + " " + "LHandY=" + LHandY);
 
+                            // Main droite
                             CameraSpacePoint positionHR = joints[HandRight].Position;
                             if (positionHR.Z < 0)
-                               positionHR.Z = InferredZPositionClamp;
-                            DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
-                            float RHand_X = depthSpacePoint.X;
-                             float RHand_Y = depthSpacePoint.Y;
-                                //Console.Clear();
-                                Console.WriteLine("RHand_X =" + RHand_X + " " + "RHand_Y=" + RHand_Y);
+                            {
+                                positionHR.Z = InferredZPositionClamp;
                             }
-                            CameraSpacePoint positionHead = joints[Head].Position;
-                            if (positionHead.Z < 0)
-                                positionHead.Z = InferredZPositionClamp;
 
-                            DepthSpacePoint depthSpacePointH = coordinateMapper.MapCameraPointToDepthSpace(positionHead);
-                            float Head_X = depthSpacePointH.X;
-                            float Head_Y = depthSpacePointH.Y;
-                           // Console.Clear();
-                            Console.WriteLine("Head_X =" + Head_X + " " + "Head_Y" + Head_Y);
-                        int milliseconds = 5000;
+                            // Recherche des coordonées de la main droite
+                            DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
+                            float RHand_X = depthSpacePoint2.X;
+                            float RHand_Y = depthSpacePoint2.Y;
+                            Console.WriteLine("RHand_X =" + RHand_X + " " + "RHand_Y=" + RHand_Y);
+                        }
+
+                        // Timer
+                        int milliseconds = 500;
                         Thread.Sleep(milliseconds);
 
 
-                    }
-                    else
-                    {
-                      //  Console.WriteLine("Body Not TRack");
-                       
+                    }else{
+                        Console.WriteLine("Body Not Track");         
                     }
                 }
 
+            }else{
+                Console.WriteLine("Data NOT Received");          
             }
-            else
-            {
-                Console.WriteLine("Data NOT Received");
-              
-            }
-            } 
+        } 
     }
 }
         
