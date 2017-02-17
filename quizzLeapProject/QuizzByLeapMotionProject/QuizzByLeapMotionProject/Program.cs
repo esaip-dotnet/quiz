@@ -14,17 +14,17 @@ namespace VoteByLeapMotionProject
 {
     class SampleListener : Listener
     {
-        //Valeurs déterminées pour créer les zones neutres du capteur
-        const int izoneNeutreNegative = -100;
-        const int izoneNeutrePositive = 100;
-
         private Object thisLock = new Object();
 
         private static int idQuiz = 1;
-        private static int iCompteurQuestion = 0;
-        private static String Question = "Quelle est la couleur du cheval blanc d'Henri IV";
-        private static String[] reponses = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
-        private int bonneReponse = 2;
+        private static int iCompteurQuestion = 1;
+                
+        private static String[] Question = new String[4] { "Quelle est la couleur du cheval blanc d'Henri IV ?", "Quelle est l'évolution du Pokémon M.Mime ?", "Est-ce que les nains dépensent car au supermarché les produits les moins sont tout en bas ?", "Peut-on faire de la confiture de coings dans une casserole ronde ?" };
+        private static String[] reponses1 = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
+        private static String[] reponses2 = new String[] { "Mme.Mime", "Grand-père.Mime", "Alakazam", "Il n'en a pas" };
+        private static String[] reponses3 = new String[] { "Oui", "Non", "Alerte discrimination", "Oui si c'est de la bière" };
+        private static String[] reponses4 = new String[] { "Oui", "Non", "Arrêtez les réponses stupides", "C'est dans les vieux pots qu'on fait la meilleure confiture" };
+        private static int[] itTabReponses = new int[] {2,4,3,3};
         private Quiz quiz;
 
         /// <summary>
@@ -32,8 +32,7 @@ namespace VoteByLeapMotionProject
         /// </summary>
         public void initSampleListener()
         {
-            AffichagePosition();
-
+            AffichageQuestion(1);
         }
         private void SafeWriteLine(String line)
         {
@@ -51,6 +50,7 @@ namespace VoteByLeapMotionProject
 
         public override void OnConnect(Controller controller)
         {
+    
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
@@ -66,35 +66,115 @@ namespace VoteByLeapMotionProject
         {
             SafeWriteLine("Exited\n");
         }
-
-
-                
+        
+        
+        
         /// <summary>
-        /// Cette fonction pour afficher la question en créant l'objet quiz correspondant.
+        /// Cette fonction est appellée à chaque affichage de question. Elle utilise le compteur de question
+        /// qui lui est passé en paramètre afin de pouvoir créer l'objet quiz correspondant
         /// Une pause de 1 seconde est effectuée entre chaque affichage de réponse
         /// </summary>
-        public void AffichagePosition()
+        /// <param name="iNumeroQuestion">Compteur de question</param>
+        public void AffichageQuestion(int iNumeroQuestion)
         {
-            quiz = new Quiz(idQuiz, Question, reponses);
-            SafeWriteLine("La question est: " + Question);
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 1: " + reponses.GetValue(0).ToString());
-            System.Threading.Thread.Sleep(1000);
-            SafeWriteLine("Réponse 2: " + reponses.GetValue(1).ToString());
-            System.Threading.Thread.Sleep(1000);
-            SafeWriteLine("Réponse 3: " + reponses.GetValue(2).ToString());
-            System.Threading.Thread.Sleep(1000);
-            SafeWriteLine("Réponse 4: " + reponses.GetValue(3).ToString());
-            System.Threading.Thread.Sleep(1000);
-            SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
-        }
 
+            if (iNumeroQuestion == 1)
+            {
+                //Le compteur est initialisé à 1 par défaut. Il faut donc soustraire 1
+                //pour récupérer la question correspondante dans le tableau de string
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses1);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses1.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses1.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses1.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses1.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+
+            if (iNumeroQuestion == 2)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses2);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses2.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses2.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses2.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses2.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+
+            }
+            if (iNumeroQuestion == 3)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses3);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses3.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses3.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses3.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses3.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+            if (iNumeroQuestion == 4)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses4);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses4.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses4.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses4.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses4.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+        }
+        
+
+        /// <summary>
+        /// Cette fonction est appellée lorsqu'une bonne réponse est donnée par l'utilisation
+        /// On incrémente d'abord le compteur puis on test si il est supérieur au nombre de question
+        /// Auquel cas on termine le programme. Sinon on rappelle l'affichage de question
+        /// </summary>
+        public void SwitchQuestion()
+        {
+            SafeWriteLine("Bien joué !");
+            iCompteurQuestion++;
+            if (iCompteurQuestion> Question.Length)
+            {
+                SafeWriteLine("Fin du quiz !\n Merci de votre participation.");
+                Environment.Exit(0);
+            }
+            else
+            {
+                AffichageQuestion(iCompteurQuestion); 
+            }
+        }
 
 
         /// <summary>
         /// Evènement lorsque le capteur de la leap détecte une main. 
         /// On créé les objets nécessaire pour détecter une main et sa position en vecteur
         /// Puis selon la position de la main(centre de la paume), nous détectons la réponse fournie par l'utilisation
+        /// On appelle SwitchQuestion() dès qu'une bonne réponse est donnée.
         /// </summary>
         /// <param name="Controller">L'objet controller pour la leap</param>
         public override void OnFrame(Controller controller)
@@ -106,12 +186,10 @@ namespace VoteByLeapMotionProject
             float timeVisible = hand.TimeVisible; 
             if (position.x != 0 && position.y != 0 && position.z !=0)
             {
-                //PENSER AU Y POUR PAS COLLER 1/3 ET 2/4   !!!!!!!!!!!
-                //if (position.x <0 && position.z <0)
-                if (position.x < izoneNeutreNegative && position.z < 0)
+                if (position.x < 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 1");
-                    if (bonneReponse !=1)
+                    if (itTabReponses[iCompteurQuestion-1] != 1)
                     {
                         System.Threading.Thread.Sleep(2000);
                         SafeWriteLine("Mauvaise réponse");
@@ -119,15 +197,14 @@ namespace VoteByLeapMotionProject
                     else
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
+                        SwitchQuestion();
                     }
 
                 }
-                //else if (position.x < 0 && position.z > 0)
-                else if (position.x < izoneNeutreNegative && position.z > 0)
+                else if (position.x < 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 3");
-                    if (bonneReponse != 3)
+                    if (itTabReponses[iCompteurQuestion-1] != 3)
                     {
                         System.Threading.Thread.Sleep(2000);
                         SafeWriteLine("Mauvaise réponse");
@@ -135,29 +212,28 @@ namespace VoteByLeapMotionProject
                     else
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
+                        SwitchQuestion();
                     }
                 }
-                //else if (position.x > 0 && position.z < 0)
-                else if (position.x > izoneNeutrePositive && position.z < 0)
+                else if (position.x > 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 2");
-                    if (bonneReponse != 2)
+                    if (itTabReponses[iCompteurQuestion-1] != 2)
                     {
                         System.Threading.Thread.Sleep(2000);
                         SafeWriteLine("Mauvaise réponse");
+                        SwitchQuestion();
                     }
                     else
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
+                        SwitchQuestion();
                     }
                 }
-                //else if (position.x > 0 && position.z > 0)
-                else if (position.x > izoneNeutrePositive && position.z > 0)
+                else if (position.x > 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 4");
-                    if (bonneReponse != 4)
+                    if (itTabReponses[iCompteurQuestion-1] != 4)
                     {
                         System.Threading.Thread.Sleep(2000);
                         SafeWriteLine("Mauvaise réponse");
@@ -165,7 +241,7 @@ namespace VoteByLeapMotionProject
                     else
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Bien joué !");
+                        SwitchQuestion();
                     }
                 }
             }
@@ -182,7 +258,6 @@ namespace VoteByLeapMotionProject
             {
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
-
                 controller.AddListener(listener);
                 Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
                 listener.initSampleListener();
@@ -191,4 +266,4 @@ namespace VoteByLeapMotionProject
             }
         }
     }
-}
+É}
