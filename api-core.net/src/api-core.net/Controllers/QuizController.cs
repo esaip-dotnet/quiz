@@ -32,7 +32,7 @@ namespace api_core.net.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<Quiz> listQuiz = quizDao.GetAllQuiz();
+            IEnumerable<BaseQuiz> listQuiz = quizDao.GetAllQuiz();
             if (listQuiz == null)
             {
                 return NotFound();

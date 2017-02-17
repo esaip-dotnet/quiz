@@ -2,6 +2,7 @@ var http = require('http');
 var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
+var jsonPatch = require('fast-json-patch');
 
 var listener = 8080;
 
@@ -35,7 +36,7 @@ var portListener = process.env.PORTMONGODB || portListener;
 var bdd = process.env.BDDNAME || bdd;
 
     
-console.log(process.env.SERVERNAME)
+//console.log(process.env.SERVERNAME)
 
 
 /*var serverName ="localhost";
@@ -70,8 +71,7 @@ MongoClient.connect(url, function (err, db) {
         // Pour creer un nouveau formulaire
         app.post('/json', function (request, response) {
 
-            //request.body.nom,
-            //request.body.nbQuestion,
+            // REMPLACER LES VALEURS EN DUR PAR CELLES EN PARAMETRES
             
             
             // On cree un nouveau quiz (test)
@@ -168,6 +168,18 @@ MongoClient.connect(url, function (err, db) {
                 // A Faire
             });
             
+        });
+        
+        app.patch('/quiz/:id', function (req, res){
+            var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
+            var idToFind      = req.params.id;                        // Identifiant dans l'URL
+            var newAnswers      = req.params.newAnswer;
+            var objToFind     = { _id: new MongoObjectID(idToFind) };
+            db.collection("quiz").findOne(objToFind, function(error, result) {
+                
+                // METHODE PATCH A TERMINER
+                
+            });              
         });
 
 
