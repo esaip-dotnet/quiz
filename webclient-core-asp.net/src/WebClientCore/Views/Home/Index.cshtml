@@ -1,0 +1,12 @@
+﻿@model WebClientCore.Models.Quiz
+
+@{
+    ViewData["Title"] = "Quiz - Home";
+}
+
+<form asp-controller="Home" asp-action="Validate" method="post">
+    Title:  <input asp-for="Title" /> <br />
+    Description: <input asp-for="Description" /><br />
+    Summary: <input asp-for="Summary" /><br />
+    <button type="submit">Validate</button>
+</form>
