@@ -70,15 +70,12 @@ MongoClient.connect(url, function (err, db) {
 
         // Pour creer un nouveau formulaire
         app.post('/json', function (request, response) {
-
-            // REMPLACER LES VALEURS EN DUR PAR CELLES EN PARAMETRES
-            
             
             // On cree un nouveau quiz (test)
             var newQuiz = {
-                summary: "Drapeau",
-                description: "Quiz sur les drapeau",
-                title: "Drapeau",
+                summary: request.body.summary,
+                description: request.body.description,
+                title: request.body.title,
                 questions: [
                     { 
                         title:"Quel est ce drapeaux ?"
@@ -105,9 +102,6 @@ MongoClient.connect(url, function (err, db) {
                 ]
             }
             
-            
-            
-            
             // On ajoute le nouveau quiz dans la BDD
             resultat.insert(newQuiz, function (err, result) {
                 if (err) {
@@ -123,6 +117,8 @@ MongoClient.connect(url, function (err, db) {
                 //Close connection
                 //db.close();
             });
+            
+            response.redirect('/');
                         
             //console.log(request.body.name); // your JSON
             //response.send(request.body); // echo the result back
