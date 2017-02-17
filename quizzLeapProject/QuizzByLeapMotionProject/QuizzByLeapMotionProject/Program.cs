@@ -1,38 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+/******************************************************************************\
+* Copyright (C) 2012-2014 Leap Motion, Inc. All rights reserved.               *
+* Leap Motion proprietary and confidential. Not for distribution.              *
+* Use subject to the terms of the Leap Motion SDK Agreement available at       *
+* https://developer.leapmotion.com/sdk_agreement, or another agreement         *
+* between Leap Motion and you, your company or other organization.             *
+\******************************************************************************/
+using System;
+using System.Threading;
 using Leap;
-using System.Net;
-using System.IO;
+using System.Collections.Generic;
 
-namespace QuizzByLeapMotionProject
+namespace VoteByLeapMotionProject
 {
-    {
     class SampleListener : Listener
     {
-        private Object thisLock = new Object();
-        private int compteur = 0;
-        private int DELAIS = 3;
-        private String messageAttente = ".";
+        //Valeurs déterminées pour créer les zones neutres du capteur
+        const int izoneNeutreNegative = -100;
+        const int izoneNeutrePositive = 100;
 
-        /************LEAP V2*******************/
+        private Object thisLock = new Object();
+
         private static int idQuiz = 1;
+        private static int iCompteurQuestion = 0;
         private static String Question = "Quelle est la couleur du cheval blanc d'Henri IV";
         private static String[] reponses = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
         private int bonneReponse = 2;
         private Quiz quiz;
-        /*************************************/
 
         /// <summary>
         /// Permet d'initialiser les éléments de base de l'élection.
         /// </summary>
         public void initSampleListener()
         {
-            /*****************LEAP V2**********************/
             AffichagePosition();
-            /**********************************************/
 
         }
         private void SafeWriteLine(String line)
@@ -51,7 +51,6 @@ namespace QuizzByLeapMotionProject
 
         public override void OnConnect(Controller controller)
         {
-          //  SafeWriteLine("Connected\n");
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
@@ -60,7 +59,6 @@ namespace QuizzByLeapMotionProject
 
         public override void OnDisconnect(Controller controller)
         {
-            //Note: not dispatched when running in a debugger.
             SafeWriteLine("Disconnected\n");
         }
 
@@ -69,93 +67,36 @@ namespace QuizzByLeapMotionProject
             SafeWriteLine("Exited\n");
         }
 
+
+                
         /// <summary>
-        /// Permet d'afficher les informations pour chaque nouveau vote.
+        /// Cette fonction pour afficher la question en créant l'objet quiz correspondant.
+        /// Une pause de 1 seconde est effectuée entre chaque affichage de réponse
         /// </summary>
-        /// <param name="election">Demande l'objet election afin d'afficher les informations des choix, etc...</param>
-
-
-        /// <summary>
-        /// TODO Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format JSON.
-        /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format JSON</returns>
-     /*   public String generateJSon(Election election)
-        {
-            String json = "{'id':'" + election.getNom() + "','votes':[";
-
-            for (int i = 0; i < election.getListeVote().Count; i++)
-            {
-                Vote vote = election.getListeVote()[i];
-                json += "{'choix':'" + vote.getChoixFait().getId() + "', 'prenom':'" + vote.getPrenom() + "'}";
-                //Pensez à ajouter les virgules en cas d'envoi de plusieurs lignes.
-            }
-            json += "]}";
-            return json;
-        }*/
-        /// <summary>
-        /// Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format XML.
-        /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format XML</returns>
-       /* public String generateXML(Election election)
-        {
-            String xml = "<Election id:\"" + election.getNom() + "\">";
-            foreach (Vote vote in election.getListeVote())
-            {
-                xml += "<Vote choix:\"" + vote.getChoixFait().getId() + "\" prenom:\"" + vote.getPrenom() + "\"/>";
-            }
-            xml += "</Election>";
-            return xml;
-        }*/
-        /// <summary>
-        /// Fonction permettant d'envoyer les informations vers le serveur
-        /// TODO
-        /// </summary>
-        /// <param name="fichier">demande les données à envoyer (Format JSON ou XML, à appeler avec les fonctions generateXML et generateJSon</param>
-        public async Task envoiInformation()
-        {
-            String url = "coreosjpg.cloudapp.net/quiz";
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = File.ReadAllText("test.json");
-
-                streamWriter.Write(json);
-            }
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
-
-
-
-            SafeWriteLine("url = " + url + " json " + fichier);
-        }
-
-        /*************LEAP V2****************/
         public void AffichagePosition()
         {
             quiz = new Quiz(idQuiz, Question, reponses);
             SafeWriteLine("La question est: " + Question);
-            System.Threading.Thread.Sleep(5000);
+            System.Threading.Thread.Sleep(2000);
             SafeWriteLine("Réponse 1: " + reponses.GetValue(0).ToString());
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             SafeWriteLine("Réponse 2: " + reponses.GetValue(1).ToString());
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             SafeWriteLine("Réponse 3: " + reponses.GetValue(2).ToString());
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             SafeWriteLine("Réponse 4: " + reponses.GetValue(3).ToString());
-            System.Threading.Thread.Sleep(2000);
+            System.Threading.Thread.Sleep(1000);
             SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
         }
 
+
+
+        /// <summary>
+        /// Evènement lorsque le capteur de la leap détecte une main. 
+        /// On créé les objets nécessaire pour détecter une main et sa position en vecteur
+        /// Puis selon la position de la main(centre de la paume), nous détectons la réponse fournie par l'utilisation
+        /// </summary>
+        /// <param name="Controller">L'objet controller pour la leap</param>
         public override void OnFrame(Controller controller)
         {
             Frame frame = controller.Frame();
@@ -165,66 +106,67 @@ namespace QuizzByLeapMotionProject
             float timeVisible = hand.TimeVisible; 
             if (position.x != 0 && position.y != 0 && position.z !=0)
             {
-                if (position.x <0 && position.z <0)
+                //PENSER AU Y POUR PAS COLLER 1/3 ET 2/4   !!!!!!!!!!!
+                //if (position.x <0 && position.z <0)
+                if (position.x < izoneNeutreNegative && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 1");
-                    //if (bonneReponse !=1)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (bonneReponse !=1)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Bien joué !");
+                    }
 
                 }
-                else if (position.x < 0 && position.z > 0)
+                //else if (position.x < 0 && position.z > 0)
+                else if (position.x < izoneNeutreNegative && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 3");
-                    //if (bonneReponse != 3)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (bonneReponse != 3)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Bien joué !");
+                    }
                 }
-                else if (position.x > 0 && position.z < 0)
+                //else if (position.x > 0 && position.z < 0)
+                else if (position.x > izoneNeutrePositive && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 2");
-                    //if (bonneReponse != 2)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (bonneReponse != 2)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Bien joué !");
+                    }
                 }
-                else if (position.x > 0 && position.z > 0)
+                //else if (position.x > 0 && position.z > 0)
+                else if (position.x > izoneNeutrePositive && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 4");
-                    //if (bonneReponse != 4)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (bonneReponse != 4)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Bien joué !");
+                    }
                 }
             }
             System.Threading.Thread.Sleep(3000);
@@ -238,11 +180,9 @@ namespace QuizzByLeapMotionProject
         {
             public static void Main()
             {
-                // Create a sample listener and controller
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
 
-                // Keep this process running until Enter is pressed
                 controller.AddListener(listener);
                 Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
                 listener.initSampleListener();
