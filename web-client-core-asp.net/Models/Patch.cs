@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebClientCore.Models
 {
+    //classe de correction methode PATCH ayant pour attribut un objet question 
     public class Patch
     {
         [JsonProperty("op")]

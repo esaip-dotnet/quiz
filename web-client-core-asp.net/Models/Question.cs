@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebClientCore.Models
 {
+    //classe Question ayant pour attribut une liste de réponse
     public class Question
     {
         [Required]

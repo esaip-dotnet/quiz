@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebClientCore.Models
 {
+    //classe Answer
     public class Answer
     {
         [Required]
