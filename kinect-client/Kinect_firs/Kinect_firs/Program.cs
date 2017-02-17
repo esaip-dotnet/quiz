@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,7 @@ namespace Kinect_firs
     class Program
 
     {
-       // private static ColorFrameReader colorFrameReader;
+       // private static ColorFrameReader colorFrameReader; 
         private static KinectSensor kinectSensor;
         private static BodyFrameReader bodyFrameReader = null;
         private static Body[] bodies = null;
@@ -54,6 +54,14 @@ namespace Kinect_firs
 
             Console.ReadLine();
         }
+                
+        /// <summary>
+        /// Cette fonction est appellée dès que l'on reçoit des frames depuis la kinnect
+        /// On commence d'abord par testé si l'on reçoit bien des frames.
+        /// Puis pour chaque partie du corps répertoriée, on calcul et affiche la position
+        /// </summary>
+        /// <param name=sender></param>
+        /// <param name=BodyFrameArrivedEventArgs>Réception de l'évènement</param>
         static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
            bool dataReceived = false;
@@ -138,15 +146,3 @@ namespace Kinect_firs
             } 
     }
 }
-        
-    
-
-
-
-
-
-
-
-
-
-
