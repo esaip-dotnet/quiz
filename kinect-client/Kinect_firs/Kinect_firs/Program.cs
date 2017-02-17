@@ -10,16 +10,24 @@ using System.Threading;
 
 namespace Kinect_firs
 {
-    //classe Principale contenant le main
+    // Classe Principale contenant le main
     class Program
 
     {
-        //Capteur kinect
+        // Capteur kinect
         private static KinectSensor kinectSensor;
         private static BodyFrameReader bodyFrameReader = null;
         private static Body[] bodies = null;
         private static CoordinateMapper coordinateMapper = null;
         private const float InferredZPositionClamp = 0.1f;
+
+        // Points du corps
+        static JointType HandRight;
+        static JointType MidSpine;
+        static float RHand_X;
+        static float RHand_Y;
+        static float MSpine_X;
+        static float MSpine_Y;
 
         // Fonction Main
         static void Main(string[] args){
@@ -43,6 +51,24 @@ namespace Kinect_firs
                 Console.WriteLine("BodyFrameReader is null");
             }
             Console.ReadLine();
+        }
+
+        // Verifier la zone de la main droite
+        static String checkZoneLH()
+        {
+            String zoneHand;
+            if (RHand_X < MSpine_X && RHand_Y < MSpine_Y)
+                zoneHand = "Zone 1";
+            else if (RHand_X > MSpine_X && RHand_Y < MSpine_Y)
+                zoneHand = "Zone 2";
+            else if (RHand_X < MSpine_X && RHand_Y > MSpine_Y)
+                zoneHand = "Zone 3";
+            else if (RHand_X > MSpine_X && RHand_Y > MSpine_Y)
+                zoneHand = "Zone 4";
+            else
+                zoneHand = "Hand not found";
+
+            return zoneHand;
         }
 
         // Lecture du capteur
@@ -70,9 +96,8 @@ namespace Kinect_firs
                         
                         // Définition des points tracker
                         IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
-                        //Dictionary<JointType, Point> jointPoints = new Dictionary<JointType, Point>();
-                        JointType HandLeft =(Microsoft.Kinect.JointType) 7;
-                        JointType HandRight = (Microsoft.Kinect.JointType)11;
+                        HandRight = (Microsoft.Kinect.JointType) 11;
+                        MidSpine = (Microsoft.Kinect.JointType) 1;
 
                         // Pour chaques points du corps tracker
                         foreach (JointType jointType in joints.Keys)
@@ -80,47 +105,43 @@ namespace Kinect_firs
                             // Heure de tacking
                             String hnow = DateTime.Now.ToString("mm:ss");
 
-                            // Main gauche
-                            CameraSpacePoint positionHL = joints[HandLeft].Position;
-                            if (positionHL.Z < 0)
-                            {
-                                positionHL.Z = InferredZPositionClamp;
-                            }
-                            // Recherche des coordonées de la main gauche
-                            DepthSpacePoint depthSpacePoint = coordinateMapper.MapCameraPointToDepthSpace(positionHL);
-                            float LHandX = depthSpacePoint.X;
-                            float LHandY = depthSpacePoint.Y;
-                            Console.Clear();
-                            Console.WriteLine("LHandX =" + LHandX + " " + "LHandY=" + LHandY);
-
                             // Main droite
                             CameraSpacePoint positionHR = joints[HandRight].Position;
                             if (positionHR.Z < 0)
                             {
                                 positionHR.Z = InferredZPositionClamp;
                             }
-
                             // Recherche des coordonées de la main droite
                             DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
-                            float RHand_X = depthSpacePoint2.X;
-                            float RHand_Y = depthSpacePoint2.Y;
-                            Console.WriteLine("RHand_X =" + RHand_X + " " + "RHand_Y=" + RHand_Y);
+                            RHand_X = depthSpacePoint2.X;
+                            RHand_Y = depthSpacePoint2.Y;
+
+                            // Milieu de la colonne
+                            CameraSpacePoint positionMS = joints[MidSpine].Position;
+                            if (positionMS.Z < 0)
+                            {
+                                positionMS.Z = InferredZPositionClamp;
+                            }
+                            // Recherche des coordonées du milieu de la colonne
+                            DepthSpacePoint depthSpacePoint3 = coordinateMapper.MapCameraPointToDepthSpace(positionMS);
+                            MSpine_X = depthSpacePoint3.X;
+                            MSpine_Y = depthSpacePoint3.Y;
+
+                            String zoneMain = checkZoneLH();
+                            Console.WriteLine(zoneMain);
                         }
 
                         // Timer
                         int milliseconds = 500;
                         Thread.Sleep(milliseconds);
-
-
-                    }else{
-                        Console.WriteLine("Body Not Track");         
+                        Console.Clear();
                     }
                 }
 
             }else{
                 Console.WriteLine("Data NOT Received");          
             }
-        } 
+        }
     }
 }
         
