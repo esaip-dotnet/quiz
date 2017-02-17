@@ -1,16 +1,16 @@
-# WebClient core asp.net
+ï»¿# WebClient core asp.net
 
 ## Introduction
 Cette partie du projet "Quiz", permet depuis une interface web :
   - L'ajout d'un quiz.
-  - L'ajout d'une question à ce quiz.
+  - L'ajout d'une question Ã  ce quiz.
   
-## Améliorations
-Différentes améliorations sont à apporter :
-  - Créer un menu permettant de choisir entre : création d'un quiz et participer.
+## AmÃ©liorations
+DiffÃ©rentes amÃ©liorations sont Ã  apporter :
+  - CrÃ©er un menu permettant de choisir entre : crÃ©ation d'un quiz et participer.
   - Interface de jeu
-  - L'ajout de plusieurs questions à un quiz, ainsi que plusieurs réponses à une question.
+  - L'ajout de plusieurs questions Ã  un quiz, ainsi que plusieurs rÃ©ponses Ã  une question.
   
 ## Installation
-Pour pouvoir implémenter le webclient sur Azure, il faut éxecuter le WebClientCore.sln, cela ouvrira Microsoft Visual Studio.
+Pour pouvoir implÃ©menter le webclient sur Azure, il faut Ã©xecuter le WebClientCore.sln, cela ouvrira Microsoft Visual Studio.
 Ensuite dans la zone de droite "Explorateur de solution", il faut faire un clique droit sur "src > WebClientCore", puis "Publier".
