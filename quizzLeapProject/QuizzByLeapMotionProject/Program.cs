@@ -9,32 +9,54 @@ using System.IO;
 
 namespace QuizzByLeapMotionProject
 {
-    {
     class SampleListener : Listener
     {
+
+        const int izoneNeutreNegative = -100;
+        const int izoneNeutrePositive = 100;
+
+        const int rayonZone = 150;
+
         private Object thisLock = new Object();
-        private int compteur = 0;
-        private int DELAIS = 3;
-        private String messageAttente = ".";
 
-        /************LEAP V2*******************/
-        private static int idQuiz = 1;
-        private static String Question = "Quelle est la couleur du cheval blanc d'Henri IV";
-        private static String[] reponses = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
-        private int bonneReponse = 2;
         private Quiz quiz;
-        /*************************************/
 
-        /// <summary>
-        /// Permet d'initialiser les éléments de base de l'élection.
-        /// </summary>
+        private static int idQuiz = 1;
+
+        private static int iCompteurQuestion = 0;
+
+        private static String[] Question = new String[4] { "Quelle est la couleur du cheval blanc d'Henri IV ?", "Quelle est l'évolution du Pokémon M.Mime ?", "Est-ce que les nains dépensent car au supermarché les produits les moins sont tout en bas ?", "Peut-on faire de la confiture de coings dans une casserole ronde ?" };
+
+        private static String[] reponses1 = new String[] { "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
+        private static String[] reponses2 = new String[] { "Mme.Mime", "Grand-père.Mime", "Alakazam", "Il n'en a pas" };
+        private static String[] reponses3 = new String[] { "Oui", "Non", "Alerte discrimination", "Oui si c'est de la bière" };
+        private static String[] reponses4 = new String[] { "Oui", "Non", "Arrêtez les réponses stupides", "C'est dans les vieux pots qu'on fait la meilleure confiture" };
+
+        private static int[] itTabReponses = new int[] { 2, 4, 3, 3 };
+
+        private static float[] centreRep1;
+        private static float[] centreRep2;
+        private static float[] centreRep3;
+        private static float[] centreRep4;
+
+        private static Boolean firstStart = true;
+
+        private static int firstStartNumRep = 0;
+
+        private static Boolean[] positionsSauvegardees = { false, false, false, false };
+
+
         public void initSampleListener()
         {
-            /*****************LEAP V2**********************/
-            AffichagePosition();
-            /**********************************************/
+            SelectionPosition();
 
+            if (positionsSauvegardees[0] && positionsSauvegardees[1] && positionsSauvegardees[2] && positionsSauvegardees[3])
+            {
+                AffichageQuestion(1);
+            }
         }
+
+
         private void SafeWriteLine(String line)
         {
             lock (thisLock)
@@ -43,211 +65,341 @@ namespace QuizzByLeapMotionProject
             }
         }
 
+
         public override void OnInit(Controller controller)
         {
             SafeWriteLine("Initialized\n");
-
         }
+
 
         public override void OnConnect(Controller controller)
         {
-          //  SafeWriteLine("Connected\n");
+            SafeWriteLine("Connected\n");
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SWIPE);
         }
 
+
         public override void OnDisconnect(Controller controller)
         {
-            //Note: not dispatched when running in a debugger.
             SafeWriteLine("Disconnected\n");
         }
+
 
         public override void OnExit(Controller controller)
         {
             SafeWriteLine("Exited\n");
         }
 
-        /// <summary>
-        /// Permet d'afficher les informations pour chaque nouveau vote.
-        /// </summary>
-        /// <param name="election">Demande l'objet election afin d'afficher les informations des choix, etc...</param>
 
-
-        /// <summary>
-        /// TODO Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format JSON.
-        /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format JSON</returns>
-     /*   public String generateJSon(Election election)
+        private void SelectionPosition()
         {
-            String json = "{'id':'" + election.getNom() + "','votes':[";
-
-            for (int i = 0; i < election.getListeVote().Count; i++)
-            {
-                Vote vote = election.getListeVote()[i];
-                json += "{'choix':'" + vote.getChoixFait().getId() + "', 'prenom':'" + vote.getPrenom() + "'}";
-                //Pensez à ajouter les virgules en cas d'envoi de plusieurs lignes.
-            }
-            json += "]}";
-            return json;
-        }*/
-        /// <summary>
-        /// Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format XML.
-        /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format XML</returns>
-       /* public String generateXML(Election election)
-        {
-            String xml = "<Election id:\"" + election.getNom() + "\">";
-            foreach (Vote vote in election.getListeVote())
-            {
-                xml += "<Vote choix:\"" + vote.getChoixFait().getId() + "\" prenom:\"" + vote.getPrenom() + "\"/>";
-            }
-            xml += "</Election>";
-            return xml;
-        }*/
-        /// <summary>
-        /// Fonction permettant d'envoyer les informations vers le serveur
-        /// TODO
-        /// </summary>
-        /// <param name="fichier">demande les données à envoyer (Format JSON ou XML, à appeler avec les fonctions generateXML et generateJSon</param>
-        public async Task envoiInformation()
-        {
-            String url = "coreosjpg.cloudapp.net/quiz";
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                string json = File.ReadAllText("test.json");
-
-                streamWriter.Write(json);
-            }
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
-
-
-
-            SafeWriteLine("url = " + url + " json " + fichier);
-        }
-
-        /*************LEAP V2****************/
-        public void AffichagePosition()
-        {
-            quiz = new Quiz(idQuiz, Question, reponses);
-            SafeWriteLine("La question est: " + Question);
+            SafeWriteLine("Préparez-vous à sélectionner vos zones de réponses");
             System.Threading.Thread.Sleep(5000);
-            SafeWriteLine("Réponse 1: " + reponses.GetValue(0).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 2: " + reponses.GetValue(1).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 3: " + reponses.GetValue(2).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 4: " + reponses.GetValue(3).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+
+
+            while (positionsSauvegardees[0] == false)
+            {
+                SafeWriteLine("Placez votre main au niveau de la réponse 1");
+                firstStartNumRep = 1;
+                System.Threading.Thread.Sleep(5000);
+            }
+
+
+            if (positionsSauvegardees[0] == true)
+            {
+
+                while (positionsSauvegardees[1] == false)
+                {
+                    SafeWriteLine("Placez votre main au niveau de la réponse 2");
+                    firstStartNumRep = 2;
+                    System.Threading.Thread.Sleep(5000);
+                }
+            }
+
+
+            if (positionsSauvegardees[1] == true)
+            {
+
+                while (positionsSauvegardees[2] == false)
+                {
+                    SafeWriteLine("Placez votre main au niveau de la réponse 3");
+                    firstStartNumRep = 3;
+                    System.Threading.Thread.Sleep(5000);
+                }
+            }
+
+
+            if (positionsSauvegardees[2] == true)
+            {
+
+                while (positionsSauvegardees[3] == false)
+                {
+                    SafeWriteLine("Placez votre main au niveau de la réponse 4");
+                    firstStartNumRep = 4;
+                    System.Threading.Thread.Sleep(5000);
+                }
+            }
+            firstStart = false;
         }
+
+
+        public void AffichageQuestion(int iNumeroQuestion)
+        {
+            if (iNumeroQuestion == 1)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses1);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses1.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses1.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses1.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses1.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+
+            if (iNumeroQuestion == 2)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses2);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses2.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses2.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses2.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses2.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+
+            }
+
+            if (iNumeroQuestion == 3)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses3);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses3.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses3.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses3.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses3.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+
+            if (iNumeroQuestion == 4)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses4);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses4.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses4.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses4.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses4.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+        }
+
+
+        public void SwitchQuestion()
+        {
+            iCompteurQuestion++;
+            if (iCompteurQuestion > Question.Length)
+            {
+                SafeWriteLine("Fin du quiz !\n Merci de votre participation.");
+                Environment.Exit(0);
+            }
+            else
+            {
+                AffichageQuestion(iCompteurQuestion);
+            }
+        }
+
+
+        public float calculDistance(float positionX1, float positionZ1, float positionX2, float positionZ2)
+        {
+            float distance = (float)(Math.Sqrt(((positionX1 - positionX2) * (positionX1 - positionX2)) + ((positionZ1 - positionZ2) * (positionZ1 - positionZ2))));
+
+            return distance;
+        }
+
 
         public override void OnFrame(Controller controller)
         {
             Frame frame = controller.Frame();
-
             Hand hand = frame.Hands.Rightmost;
             Vector position = hand.PalmPosition;
-            float timeVisible = hand.TimeVisible; 
-            if (position.x != 0 && position.y != 0 && position.z !=0)
-            {
-                if (position.x <0 && position.z <0)
-                {
-                    SafeWriteLine("Vous choississez la réponse 1");
-                    //if (bonneReponse !=1)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+            float timeVisible = hand.TimeVisible;
 
-                }
-                else if (position.x < 0 && position.z > 0)
+
+            if (firstStart == true)
+            {
+
+                if (position.x != 0 && position.y != 0 && position.z != 0)
                 {
-                    SafeWriteLine("Vous choississez la réponse 3");
-                    //if (bonneReponse != 3)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (firstStartNumRep == 1)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+
+                        centreRep1 = new float[] { position.x, position.y, position.z };
+                        positionsSauvegardees[0] = true;
+                        SafeWriteLine("Position 1 sauvegardée");
+
+                        //SafeWriteLine("x = " + centreRep1[0].ToString() + " et z = " + centreRep1[2].ToString());
+                    }
+                    if (firstStartNumRep == 2)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+
+                        float distRep1Rep2 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+
+
+                        if (distRep1Rep2 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else
+                        {
+
+                            centreRep2 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[1] = true;
+                            SafeWriteLine("Position 2 sauvegardée");
+
+                            //SafeWriteLine("x = " + centreRep2[0].ToString() + " et z = " + centreRep2[2].ToString());
+                        }
+                    }
+                    if (firstStartNumRep == 3)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+
+                        float distRep1Rep3 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+                        float distRep2Rep3 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
+
+
+                        if (distRep1Rep3 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else if (distRep2Rep3 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 2");
+                        }
+                        else
+                        {
+
+                            centreRep3 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[2] = true;
+                            SafeWriteLine("Position 3 sauvegardée");
+
+                            //SafeWriteLine("x = " + centreRep3[0].ToString() + " et z = " + centreRep3[2].ToString());
+                        }
+                    }
+                    if (firstStartNumRep == 4)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+
+                        float distRep1Rep4 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+                        float distRep2Rep4 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
+                        float distRep3Rep4 = calculDistance(position.x, position.z, centreRep3[0], centreRep3[2]);
+
+
+                        if (distRep1Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else if (distRep2Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 2");
+                        }
+                        else if (distRep3Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 3");
+                        }
+                        else
+                        {
+
+                            centreRep4 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[3] = true;
+                            SafeWriteLine("Position 4 sauvegardée");
+
+                            //SafeWriteLine("x = " + centreRep4[0].ToString() + " et z = " + centreRep4[2].ToString());
+                        }
+                    }
                 }
-                else if (position.x > 0 && position.z < 0)
+            }
+
+
+            else if (positionsSauvegardees[0] && positionsSauvegardees[1] && positionsSauvegardees[2] && positionsSauvegardees[3])
+            {
+                if (position.x != 0 && position.y != 0 && position.z != 0)
                 {
-                    SafeWriteLine("Vous choississez la réponse 2");
-                    //if (bonneReponse != 2)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
-                }
-                else if (position.x > 0 && position.z > 0)
-                {
-                    SafeWriteLine("Vous choississez la réponse 4");
-                    //if (bonneReponse != 4)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+
+                    float[] distRep = {calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]), 
+                                          calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]),
+                                          calculDistance(position.x, position.z, centreRep3[0], centreRep3[2]),
+                                          calculDistance(position.x, position.z, centreRep4[0], centreRep4[2])};
+
+
+                    for (int i = 0; i < 4; i++)
+                    {
+                        if (distRep[i] < rayonZone)
+                        {
+                            SafeWriteLine("Vous choississez la réponse " + (i + 1));
+
+
+                            if (itTabReponses[iCompteurQuestion] != (i + 1))
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                SafeWriteLine("Mauvaise réponse");
+                            }
+                            else
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                SafeWriteLine("Bien joué !");
+                                SwitchQuestion();
+                            }
+                        }
+                    }
                 }
             }
             System.Threading.Thread.Sleep(3000);
-
-
         }
-
-        /***********************************/
 
         class Sample
         {
             public static void Main()
             {
-                // Create a sample listener and controller
+
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
 
-                // Keep this process running until Enter is pressed
+
                 controller.AddListener(listener);
                 Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
                 listener.initSampleListener();
                 while (true) ;
-
             }
         }
     }
