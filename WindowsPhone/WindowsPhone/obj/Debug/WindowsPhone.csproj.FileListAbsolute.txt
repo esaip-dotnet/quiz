@@ -1,0 +1,64 @@
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\App.xbf
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\MainPage.xbf
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.xr.xml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.exe
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.pdb
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\resources.pri
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\AppxManifest.xml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.build.appxrecipe
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\App.g.i.cs
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\App.g.cs
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\MainPage.g.i.cs
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\MainPage.g.cs
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\XamlTypeInfo.g.cs
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\App.xaml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\App.xbf
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\XamlSaveStateFile.xml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\MainPage.xaml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\MainPage.xbf
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\WindowsPhone.exe
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\WindowsPhone.pdb
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\priconfig.xml
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\priconfig.xml.intermediate
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\layout.resfiles
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\layout.resfiles.intermediate
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\resources.resfiles
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\resources.resfiles.intermediate
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\pri.resfiles
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\pri.resfiles.intermediate
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\qualifiers.txt
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\qualifiers.txt.intermediate
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+c:\users\léna\documents\visual studio 2015\Projects\WindowsPhone\WindowsPhone\obj\Debug\ProjectArchitectures.txt
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\App.xbf
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\MainPage.xbf
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.xr.xml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.exe
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.pdb
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\resources.pri
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\AppxManifest.xml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\bin\Debug\WindowsPhone.build.appxrecipe
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\App.g.i.cs
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\App.g.cs
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MainPage.g.i.cs
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MainPage.g.cs
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\XamlTypeInfo.g.cs
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\App.xaml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MainPage.xaml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\App.xbf
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MainPage.xbf
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\XamlSaveStateFile.xml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\WindowsPhone.exe
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\WindowsPhone.pdb
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\priconfig.xml
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\priconfig.xml.intermediate
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\layout.resfiles
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\layout.resfiles.intermediate
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\resources.resfiles
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\resources.resfiles.intermediate
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\pri.resfiles
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\pri.resfiles.intermediate
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\qualifiers.txt
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\qualifiers.txt.intermediate
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\MultipleQualifiersPerDimensionFound.txt
+D:\Documents\Dotnet\New\quiz\WindowsPhone\WindowsPhone\obj\Debug\ProjectArchitectures.txt
