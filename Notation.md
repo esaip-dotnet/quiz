@@ -52,6 +52,6 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Bastien : 8/20
 - Florian : 14/20
 - Ludovic : 11/20
-- Lena : 6/20
+- Lena : 8/20
 - Tony : 4/20
 - Remi : 8/20
