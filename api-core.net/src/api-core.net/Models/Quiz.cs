@@ -4,6 +4,11 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_core.net.Models
 {
+    /**
+     * Modélisation d'un quiz complet :
+     * - Une base de quiz 
+     * - Une liste de questions
+     **/
     public class Quiz : BaseQuiz
     {
         [BsonElement("questions")]
