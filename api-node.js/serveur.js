@@ -4,6 +4,48 @@ var app = express();
 var bodyParser = require('body-parser');
 var jsonPatch = require('fast-json-patch');
 
+// Les dépendances utilisées pour la création du fichier Swagger
+var argv = require('minimist')(process.argv.slice(2));
+var swagger = require("swagger-node-express");
+var bodyParser = require( 'body-parser' );
+
+// Creation de la route menant à la documentation de l'API
+var subpath = express();
+app.use(bodyParser());
+app.use("/swagger_doc", subpath);
+swagger.setAppHandler(subpath);
+
+app.use(express.static('dist'));
+
+//On renseigne les informations de l'API
+
+swagger.setApiInfo({
+    title: "Node API for the quiz application",
+    description: " At the moment the API exposes four operations under the localhost/quiz url: an operation which returns all quiz, which returns a specified quiz thanks to the id, which edits a quiz and creates the quiz if if doesn't exist, which creates a quiz form"
+
+});
+// Ceci est l'interface utilisateur pour accéder à la documentation de l'API
+subpath.get('/', function (req, res) {
+    res.sendfile(__dirname + '/dist/index.html');
+});
+
+// Configuration du swagger
+wagger.configureSwaggerPaths('', 'api-docs', '');
+var domain = 'localhost';
+if(argv.domain !== undefined)
+    domain = argv.domain;
+else
+    console.log('No --domain=xxx specified, taking default hostname "localhost".');
+var applicationUrl = 'http://' + domain;
+swagger.configure(applicationUrl, '1.0.0');
+
+if (url && url.length > 1) {
+    url = decodeURIComponent(url[1]);
+} else {
+    <del>url = "http://petstore.swagger.io/v2/swagger.json";</del>
+    url = "/api-docs.json";
+}
+
 var listener = 8080;
 
 var server = http.createServer(app);
@@ -34,14 +76,6 @@ bdd = "quiz";
 var serverName = process.env.SERVERNAME || serverName;
 var portListener = process.env.PORTMONGODB || portListener;
 var bdd = process.env.BDDNAME || bdd;
-
-    
-//console.log(process.env.SERVERNAME)
-
-
-/*var serverName ="localhost";
-var portListener = "27017";
-var bdd = "quiz";*/
 
 var url = 'mongodb://'+serverName+':'+portListener+'/'+bdd;
 //var url = 'mongodb://localhost:27017/quiz';
@@ -129,20 +163,23 @@ MongoClient.connect(url, function (err, db) {
         });
 
         
+        // Controller permettant d'accéder à notre page d'accueil
         app.get('/', function(req, res) {
             res.status(200);
             res.send("Ca marche sur ma machine !");
         });
 
         
+        // Methode get permettant de récupérer tous les quiz 
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
             res.status(200);
             res.json(myJson);
         });
-
         
+        
+        // Methode permettant de récupérer un quiz précis grâce l'ID
         app.get('/quiz/:id', function(req, res) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
@@ -159,6 +196,7 @@ MongoClient.connect(url, function (err, db) {
             });
         });
         
+        // Methode permettant de modifier un quiz
         app.put('/quiz/:id', function(req, res) {
             
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID

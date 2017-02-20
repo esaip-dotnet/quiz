@@ -1,39 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿/******************************************************************************\
+* Copyright (C) 2012-2014 Leap Motion, Inc. All rights reserved.               *
+* Leap Motion proprietary and confidential. Not for distribution.              *
+* Use subject to the terms of the Leap Motion SDK Agreement available at       *
+* https://developer.leapmotion.com/sdk_agreement, or another agreement         *
+* between Leap Motion and you, your company or other organization.             *
+\******************************************************************************/
+using System;
+using System.Threading;
 using Leap;
-using System.Net;
-using System.IO;
+using System.Collections.Generic;
 
-namespace QuizzByLeapMotionProject
+namespace VoteByLeapMotionProject
 {
-    {
     class SampleListener : Listener
     {
         private Object thisLock = new Object();
-        private int compteur = 0;
-        private int DELAIS = 3;
-        private String messageAttente = ".";
 
-        /************LEAP V2*******************/
         private static int idQuiz = 1;
-        private static String Question = "Quelle est la couleur du cheval blanc d'Henri IV";
-        private static String[] reponses = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
-        private int bonneReponse = 2;
+        private static int iCompteurQuestion = 1;
+                
+        private static String[] Question = new String[4] { "Quelle est la couleur du cheval blanc d'Henri IV ?", "Quelle est l'évolution du Pokémon M.Mime ?", "Est-ce que les nains dépensent car au supermarché les produits les moins sont tout en bas ?", "Peut-on faire de la confiture de coings dans une casserole ronde ?" };
+        private static String[] reponses1 = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
+        private static String[] reponses2 = new String[] { "Mme.Mime", "Grand-père.Mime", "Alakazam", "Il n'en a pas" };
+        private static String[] reponses3 = new String[] { "Oui", "Non", "Alerte discrimination", "Oui si c'est de la bière" };
+        private static String[] reponses4 = new String[] { "Oui", "Non", "Arrêtez les réponses stupides", "C'est dans les vieux pots qu'on fait la meilleure confiture" };
+        private static int[] itTabReponses = new int[] {2,4,3,3};
         private Quiz quiz;
-        /*************************************/
 
         /// <summary>
         /// Permet d'initialiser les éléments de base de l'élection.
         /// </summary>
         public void initSampleListener()
         {
-            /*****************LEAP V2**********************/
-            AffichagePosition();
-            /**********************************************/
-
+            AffichageQuestion(1);
         }
         private void SafeWriteLine(String line)
         {
@@ -51,7 +50,7 @@ namespace QuizzByLeapMotionProject
 
         public override void OnConnect(Controller controller)
         {
-          //  SafeWriteLine("Connected\n");
+    
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
@@ -60,7 +59,6 @@ namespace QuizzByLeapMotionProject
 
         public override void OnDisconnect(Controller controller)
         {
-            //Note: not dispatched when running in a debugger.
             SafeWriteLine("Disconnected\n");
         }
 
@@ -68,94 +66,117 @@ namespace QuizzByLeapMotionProject
         {
             SafeWriteLine("Exited\n");
         }
-
+        
+        
+        
         /// <summary>
-        /// Permet d'afficher les informations pour chaque nouveau vote.
+        /// Cette fonction est appellée à chaque affichage de question. Elle utilise le compteur de question
+        /// qui lui est passé en paramètre afin de pouvoir créer l'objet quiz correspondant
+        /// Une pause de 1 seconde est effectuée entre chaque affichage de réponse
         /// </summary>
-        /// <param name="election">Demande l'objet election afin d'afficher les informations des choix, etc...</param>
-
-
-        /// <summary>
-        /// TODO Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format JSON.
-        /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format JSON</returns>
-     /*   public String generateJSon(Election election)
+        /// <param name="iNumeroQuestion">Compteur de question</param>
+        public void AffichageQuestion(int iNumeroQuestion)
         {
-            String json = "{'id':'" + election.getNom() + "','votes':[";
 
-            for (int i = 0; i < election.getListeVote().Count; i++)
+            if (iNumeroQuestion == 1)
             {
-                Vote vote = election.getListeVote()[i];
-                json += "{'choix':'" + vote.getChoixFait().getId() + "', 'prenom':'" + vote.getPrenom() + "'}";
-                //Pensez à ajouter les virgules en cas d'envoi de plusieurs lignes.
+                //Le compteur est initialisé à 1 par défaut. Il faut donc soustraire 1
+                //pour récupérer la question correspondante dans le tableau de string
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses1);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses1.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses1.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses1.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses1.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
             }
-            json += "]}";
-            return json;
-        }*/
+
+            if (iNumeroQuestion == 2)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses2);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses2.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses2.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses2.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses2.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+
+            }
+            if (iNumeroQuestion == 3)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses3);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses3.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses3.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses3.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses3.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+            if (iNumeroQuestion == 4)
+            {
+                quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses4);
+
+                SafeWriteLine("La question est: " + Question[iNumeroQuestion - 1]);
+                System.Threading.Thread.Sleep(2000);
+                SafeWriteLine("Réponse 1: " + reponses4.GetValue(0).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 2: " + reponses4.GetValue(1).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 3: " + reponses4.GetValue(2).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Réponse 4: " + reponses4.GetValue(3).ToString());
+                System.Threading.Thread.Sleep(1000);
+                SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
+            }
+        }
+        
+
         /// <summary>
-        /// Fonction permettant la transformation des objets liés à l'élection en chaine de caractère au format XML.
+        /// Cette fonction est appellée lorsqu'une bonne réponse est donnée par l'utilisation
+        /// On incrémente d'abord le compteur puis on test si il est supérieur au nombre de question
+        /// Auquel cas on termine le programme. Sinon on rappelle l'affichage de question
         /// </summary>
-        /// <param name="election"> Objet Election contenant les autres objets Vote et Choix</param>
-        /// <returns>Retourne la chaine de caractère au format XML</returns>
-       /* public String generateXML(Election election)
+        public void SwitchQuestion()
         {
-            String xml = "<Election id:\"" + election.getNom() + "\">";
-            foreach (Vote vote in election.getListeVote())
+            SafeWriteLine("Bien joué !");
+            iCompteurQuestion++;
+            if (iCompteurQuestion> Question.Length)
             {
-                xml += "<Vote choix:\"" + vote.getChoixFait().getId() + "\" prenom:\"" + vote.getPrenom() + "\"/>";
+                SafeWriteLine("Fin du quiz !\n Merci de votre participation.");
+                Environment.Exit(0);
             }
-            xml += "</Election>";
-            return xml;
-        }*/
-        /// <summary>
-        /// Fonction permettant d'envoyer les informations vers le serveur
-        /// TODO
-        /// </summary>
-        /// <param name="fichier">demande les données à envoyer (Format JSON ou XML, à appeler avec les fonctions generateXML et generateJSon</param>
-        public async Task envoiInformation()
-        {
-            String url = "coreosjpg.cloudapp.net/quiz";
-
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
-
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            else
             {
-                string json = File.ReadAllText("test.json");
-
-                streamWriter.Write(json);
+                AffichageQuestion(iCompteurQuestion); 
             }
-
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
-
-
-
-            SafeWriteLine("url = " + url + " json " + fichier);
         }
 
-        /*************LEAP V2****************/
-        public void AffichagePosition()
-        {
-            quiz = new Quiz(idQuiz, Question, reponses);
-            SafeWriteLine("La question est: " + Question);
-            System.Threading.Thread.Sleep(5000);
-            SafeWriteLine("Réponse 1: " + reponses.GetValue(0).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 2: " + reponses.GetValue(1).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 3: " + reponses.GetValue(2).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Réponse 4: " + reponses.GetValue(3).ToString());
-            System.Threading.Thread.Sleep(2000);
-            SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
-        }
 
+        /// <summary>
+        /// Evènement lorsque le capteur de la leap détecte une main. 
+        /// On créé les objets nécessaire pour détecter une main et sa position en vecteur
+        /// Puis selon la position de la main(centre de la paume), nous détectons la réponse fournie par l'utilisation
+        /// On appelle SwitchQuestion() dès qu'une bonne réponse est donnée.
+        /// </summary>
+        /// <param name="Controller">L'objet controller pour la leap</param>
         public override void OnFrame(Controller controller)
         {
             Frame frame = controller.Frame();
@@ -165,66 +186,63 @@ namespace QuizzByLeapMotionProject
             float timeVisible = hand.TimeVisible; 
             if (position.x != 0 && position.y != 0 && position.z !=0)
             {
-                if (position.x <0 && position.z <0)
+                if (position.x < 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 1");
-                    //if (bonneReponse !=1)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (itTabReponses[iCompteurQuestion-1] != 1)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SwitchQuestion();
+                    }
 
                 }
                 else if (position.x < 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 3");
-                    //if (bonneReponse != 3)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (itTabReponses[iCompteurQuestion-1] != 3)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SwitchQuestion();
+                    }
                 }
                 else if (position.x > 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 2");
-                    //if (bonneReponse != 2)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (itTabReponses[iCompteurQuestion-1] != 2)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                        SwitchQuestion();
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SwitchQuestion();
+                    }
                 }
                 else if (position.x > 0 && position.z > 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 4");
-                    //if (bonneReponse != 4)
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Mauvaise réponse");
-                    //}
-                    //else
-                    //{
-                    //    System.Threading.Thread.Sleep(2000);
-                    //    SafeWriteLine("Bien joué !");
-                    //}
-                    envoiInformation();
+                    if (itTabReponses[iCompteurQuestion-1] != 4)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SafeWriteLine("Mauvaise réponse");
+                    }
+                    else
+                    {
+                        System.Threading.Thread.Sleep(2000);
+                        SwitchQuestion();
+                    }
                 }
             }
             System.Threading.Thread.Sleep(3000);
@@ -238,11 +256,8 @@ namespace QuizzByLeapMotionProject
         {
             public static void Main()
             {
-                // Create a sample listener and controller
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
-
-                // Keep this process running until Enter is pressed
                 controller.AddListener(listener);
                 Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
                 listener.initSampleListener();
@@ -251,4 +266,4 @@ namespace QuizzByLeapMotionProject
             }
         }
     }
-}
+É}

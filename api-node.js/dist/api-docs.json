@@ -1,0 +1,26 @@
+{
+    "swagger": "2.0",
+    
+    "info": {
+    "version": "1.0.0",
+    "title": "Node API for the quiz application",
+    "description": "",
+  },
+"basePath": "/",    
+"tags" : [
+    {"name": "Tag1", 
+    "description": "API for something"
+    }
+],    
+"schemes": [
+    "https"
+  ]    
+    
+    
+    
+    
+    
+    
+    
+    
+}
