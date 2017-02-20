@@ -44,7 +44,7 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Julien : 6/20
 - François (Compte Elanne) : 10/20
 - Jonathan : 6/20
-- Alexandre Lorre : 5/20
+- Alexandre Lorre : 7/20
 - Alexandre Hacquard : 8/20
 - Aristide : 5/20
 - Allan : 5/20
