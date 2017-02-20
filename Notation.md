@@ -24,9 +24,9 @@ Date de livraison maximale de la seconde pull request (ou de la première améli
 Date de remise maximale des notes (à vérifier avec la scolarité) : 20/03/2017
 
 Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 50% de la note) :
-- Kinect : 14/20
-- Leap : 16/20
-- WinPhone : 13/20
-- Client web : 18/20
-- API Core : 18/20
-- API Node : 15/20
+- Kinect : 14/20 (Lena + François)
+- Leap : 16/20 (Bastien + Ludovic)
+- WinPhone : 13/20 (Alexandre Hacquart + Aristide)
+- Client web : 18/20 (Tony + Remi)
+- API Core : 18/20 (Jean + Florian + Alexandre Lorre)
+- API Node : 15/20 (Johnathan + Alan + Julien)
