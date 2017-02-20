@@ -51,7 +51,7 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Jean : 15/20 (chore suite premier commit déjà notée)
 - Bastien : 8/20
 - Florian : 14/20
-- Ludovic : 10/20
+- Ludovic : 11/20
 - Lena : 6/20
 - Tony : 4/20
 - Remi : 8/20
