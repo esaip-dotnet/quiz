@@ -1,1 +1,1 @@
-F:\Users\arry_\Documents\Visual Studio 2013\Projects\App2\App2\App2.csproj;neutral
+F:\Users\arry_\Documents\GitHub\aristidehuchet\quiz\WinPhone\App2\Interface_WinPhone.csproj;neutral

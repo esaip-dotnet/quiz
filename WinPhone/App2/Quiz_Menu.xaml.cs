@@ -15,16 +15,16 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace App2
+namespace ESAIP_Quiz
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     /// </summary>
-    public sealed partial class BlankPage1 : Page
+    public sealed partial class Quiz_Menu : Page
     {
-        public BlankPage1()
+        public Quiz_Menu()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
 
         /// <summary>
