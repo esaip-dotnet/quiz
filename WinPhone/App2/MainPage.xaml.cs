@@ -27,49 +27,5 @@ namespace ESAIP_Quiz
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            SubmitData();
-        }
-
-        private async void SubmitData()
-        {
-            //Récupération du dossier local
-            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
-            if (local != null)
-            {
-                //Récupération du dossier DataFolder
-                var dataFolder = await local.GetFolderAsync("DataFolder"); 
-            
-                try{
-                        //Récupération du fichier json
-                        var src = await local.OpenStreamForReadAsync("Participation.json");
-                        //Lecture des données
-                        using (StreamReader json = new StreamReader(src))
-                        {
-                            String putData=json.ReadToEnd();
-
-                            //HTTP web request
-                            WebRequest request = WebRequest.Create("http://coreosjpg.cloudapp.net/quiz/1234/participation/1234567");
-                            request.Method = "PUT";
-                            request.ContentType = "text/json";
-
-                            //Traitement de la requête 
-                            using (var stream = await request.GetRequestStreamAsync())
-                            {
-                                //Conversion du fichier json 
-                                var datas = Encoding.UTF8.GetBytes(putData);
-                                //Ecriture 
-                                await stream.WriteAsync(datas, 0, datas.Length);    
-                            }
-                        }
-                     }
-                catch(Exception e) 
-                {
-                    return;
-                }
-            }
-        }
     }
 }

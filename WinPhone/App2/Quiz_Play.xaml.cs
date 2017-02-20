@@ -16,76 +16,61 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-
-// Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
+using Windows.Storage;
 
 namespace ESAIP_Quiz
 {
-    /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
-    /// </summary>
     public sealed partial class Quiz_Play : Page
     {
         public Quiz_Play()
         {
             this.InitializeComponent();
-        }
-
-        /// <summary>
-        /// Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
-        /// </summary>
-        /// <param name="e">Données d'événement décrivant la manière dont l'utilisateur a accédé à cette page.
-        /// Ce paramètre est généralement utilisé pour configurer la page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-
-        }
-
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
+            this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SubmitData();
-
-
         }
 
         private async void SubmitData()
         {
-            try
+            //Récupération du dossier local
+            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
+            if (local != null)
             {
-                //String answer = reponse1.Name.ToString(); //checkbox pas du text
-                //string putData = "answer" + answer;
-                System.IO.Stream src = System.Windows.Application.GetResourceStream(new Uri("Participation.json", UriKind.Relative)).Stream;
-                using (StreamReader json = new StreamReader(src))
+                //Récupération du dossier DataFolder
+                var dataFolder = await local.GetFolderAsync("DataFolder");
+
+                try
                 {
-                    String putData = json.ReadToEnd();
-
-                    //HTTP web request
-                    WebRequest request = WebRequest.Create("http://coreosjpg.cloudapp.net/quiz/1234/participation/1234567");
-                    request.Method = "PUT";
-                    request.ContentType = "text/json";
-                    //request.ContentLength = data.Length;
-
-                    //traitement de la requete
-                    using (var stream = await request.GetRequestStreamAsync())
+                    //Récupération du fichier json
+                    var src = await local.OpenStreamForReadAsync("Participation.json");
+                    //Lecture des données
+                    using (StreamReader json = new StreamReader(src))
                     {
-                        var datas = Encoding.UTF8.GetBytes(putData);
-                        await stream.WriteAsync(datas, 0, datas.Length);
+                        String putData = json.ReadToEnd();
 
+                        //HTTP web request
+                        WebRequest request = WebRequest.Create("http://coreosjpg.cloudapp.net/quiz/1234/participation/1234567");
+                        request.Method = "PUT";
+                        request.ContentType = "text/json";
 
+                        //Traitement de la requête 
+                        using (var stream = await request.GetRequestStreamAsync())
+                        {
+                            //Conversion du fichier json 
+                            var datas = Encoding.UTF8.GetBytes(putData);
+                            //Ecriture 
+                            await stream.WriteAsync(datas, 0, datas.Length);
+                        }
                     }
                 }
-
-                //String json = StreamReader.(@"C:\Users\alexandre\Desktop\ESAIP_Quiz\ESAIP_Quiz\Participation.json");
-
+                catch (Exception e)
+                {
+                    return;
+                }
             }
-            catch (Exception ex) { }
-
         }
     }
 }
