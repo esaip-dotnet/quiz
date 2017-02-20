@@ -13,6 +13,15 @@ La notation sur le cours sera réalisée à partir des améliorations portées s
 - Faire le ménage dans tous les fichiers inutiles (bin / obj / Debug / node_modules / .suo / etc.) et mettre des .gitignore pour éviter qu'on ne puisse en rajouter (2 pts)
 - Intégrer le code de l'application citée dans https://www.codeproject.com/Articles/860024/Quiz-Application-in-AngularJs (5 pts)
 
+Fonctionnalités supplémentaires possibles pour la deuxième vague de pull requests :
+
+- Etalonnage de la position de la main par rapport à l'immobilité de la main pendant une durée (3 pts)
+- Paramétrage des rayons pour les cercles de détection Leap (1 pt)
+- Paramétrage de la détection de confusion possible entre deux zones d'étalonnage Leap (2 pts)
+- Mise en place d'un round robin par HAProxy dans le Docker Compose (4 pts)
+- GUI dans le web client pour créer un quiz et paramétrer de nouvelles questions (5 pts)
+- Mise en place d'une solution de scoring (4 pts)
+
 Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
 
 Date de livraison maximale de la première pull request (elles doivent être individuelles) : 17/02/2017
