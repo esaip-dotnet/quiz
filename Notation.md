@@ -47,7 +47,7 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Alexandre Lorre : 7/20
 - Alexandre Hacquard : 8/20
 - Aristide : 5/20
-- Allan : 5/20
+- Allan : 6/20
 - Jean : 14/20
 - Bastien : 8/20
 - Florian : 14/20
