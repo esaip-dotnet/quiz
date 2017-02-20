@@ -10,7 +10,6 @@ namespace WebClientCore.Extensions
     public static class HttpClientEx
     {
         public const string MimeJson = "application/json";
-
         public static Task<HttpResponseMessage> PatchAsync(this HttpClient client, string requestUri, HttpContent content)
         {
             HttpRequestMessage request = new HttpRequestMessage
@@ -19,7 +18,6 @@ namespace WebClientCore.Extensions
                 RequestUri = new Uri(client.BaseAddress + requestUri),
                 Content = content,
             };
-
             return client.SendAsync(request);
         }
 

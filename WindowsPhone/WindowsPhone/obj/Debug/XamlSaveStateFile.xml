@@ -1,0 +1,9 @@
+<XamlCompilerSaveState>
+  <ReferenceAssemblyList>
+    <LocalAssembly PathName="c:\users\léna\documents\visual studio 2015\projects\windowsphone\windowsphone\obj\debug\intermediatexaml\windowsphone.exe" HashGuid="28286cd5-bd2c-d134-f30e-8b92f601b59a" />
+    <ReferenceAssembly PathName="d:\documents\dotnet\new\quiz\windowsphone\packages\newtonsoft.json.6.0.4\lib\portable-net45+wp80+win8+wpa81\newtonsoft.json.dll" HashGuid="02b12ba6-881e-6b8a-1687-5b2ee1851a11" />
+    <ReferenceAssembly PathName="d:\documents\dotnet\new\quiz\windowsphone\packages\microsoft.net.http.2.2.29\lib\wpa81\system.net.http.extensions.dll" HashGuid="794366f8-cc6d-f0fa-3d07-33b45136e193" />
+    <ReferenceAssembly PathName="d:\documents\dotnet\new\quiz\windowsphone\packages\microsoft.aspnet.webapi.client.5.2.3\lib\portable-wp8+netcore45+net45+wp81+wpa81\system.net.http.formatting.dll" HashGuid="2be584ba-1a95-71f0-a34d-ef121720ead4" />
+    <ReferenceAssembly PathName="d:\documents\dotnet\new\quiz\windowsphone\packages\microsoft.net.http.2.2.29\lib\wpa81\system.net.http.primitives.dll" HashGuid="7b71418d-e056-7613-c839-85fb8f6472a6" />
+  </ReferenceAssemblyList>
+</XamlCompilerSaveState>

@@ -21,14 +21,16 @@ namespace WebClientCore.Controllers
         {
             return View();
         }
-
-        //Ajouter le quiz
+        /// <summary>
+        /// Ajout d'un quiz
+        /// </summary>
+        /// <param name="quiz"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("Home/Validate")]
         public IActionResult Validate(Quiz quiz)
         {
             Uri resultHttp = GetResponseUri(quiz);
-
             if (resultHttp == null) {
                 return RedirectToAction("Index", "Home");
             }
@@ -40,8 +42,11 @@ namespace WebClientCore.Controllers
                 }
             }
         }
-
-        //Récupérer la réponse de la méthode POST du quiz
+        /// <summary>
+        /// //Récupérer la réponse de la méthode POST du quiz
+        /// </summary>
+        /// <param name="quiz"></param>
+        /// <returns></returns>
         private Uri GetResponseUri(Quiz quiz)
         {
             var client = new HttpClient();

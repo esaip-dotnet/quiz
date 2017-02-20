@@ -1,1 +1,1 @@
-F:\Users\arry_\Documents\Visual Studio 2013\Projects\App2\App2\App2.csproj;neutral
+D:\Documents\Dotnet\New\quiz\WinPhone\App2\App2.csproj;neutral

@@ -35,6 +35,11 @@ namespace QuizzByLeapMotionProject
             /**********************************************/
 
         }
+
+        /// <summary>
+        /// Permet d'enregistrer la question
+        /// </summary>
+        /// <param name="line"></param>
         private void SafeWriteLine(String line)
         {
             lock (thisLock)
@@ -43,15 +48,22 @@ namespace QuizzByLeapMotionProject
             }
         }
 
+        /// <summary>
+        /// Initialisation
+        /// </summary>
+        /// <param name="controller"></param>
         public override void OnInit(Controller controller)
         {
             SafeWriteLine("Initialized\n");
 
         }
 
+        /// <summary>
+        /// Gestion des différents gestes
+        /// </summary>
+        /// <param name="controller"></param>
         public override void OnConnect(Controller controller)
         {
-          //  SafeWriteLine("Connected\n");
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
@@ -60,7 +72,6 @@ namespace QuizzByLeapMotionProject
 
         public override void OnDisconnect(Controller controller)
         {
-            //Note: not dispatched when running in a debugger.
             SafeWriteLine("Disconnected\n");
         }
 
@@ -140,6 +151,10 @@ namespace QuizzByLeapMotionProject
         }
 
         /*************LEAP V2****************/
+
+        /// <summary>
+        /// Permet d'Afficher les réponses en fonction de la position de la main
+        /// </summary>
         public void AffichagePosition()
         {
             quiz = new Quiz(idQuiz, Question, reponses);
@@ -155,11 +170,14 @@ namespace QuizzByLeapMotionProject
             System.Threading.Thread.Sleep(2000);
             SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
         }
-
+        
+        /// <summary>
+        /// Obtention coordonées des mains puis attribution de la réponse en fonction la position
+        /// </summary>
+        /// <param name="controller"></param>
         public override void OnFrame(Controller controller)
         {
             Frame frame = controller.Frame();
-
             Hand hand = frame.Hands.Rightmost;
             Vector position = hand.PalmPosition;
             float timeVisible = hand.TimeVisible; 
@@ -228,10 +246,7 @@ namespace QuizzByLeapMotionProject
                 }
             }
             System.Threading.Thread.Sleep(3000);
-
-
         }
-
         /***********************************/
 
         class Sample
@@ -241,8 +256,6 @@ namespace QuizzByLeapMotionProject
                 // Create a sample listener and controller
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
-
-                // Keep this process running until Enter is pressed
                 controller.AddListener(listener);
                 Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
                 listener.initSampleListener();
