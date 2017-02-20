@@ -84,39 +84,33 @@ namespace Kinect_firs
 
                         /*Recuperation des fonctions de detection des parties du corps humain dans la librairies Kinect*/
                         IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
-
-                        /*Recuperation des Elements Main Gauche, Main Gauche et Tete*/
+              
                         JointType HandLeft = (Microsoft.Kinect.JointType)7;
                         JointType HandRight = (Microsoft.Kinect.JointType)11;
                         JointType Head = (Microsoft.Kinect.JointType)3;
 
                         foreach (JointType jointType in joints.Keys)
                         {
-                            /*Creation d'une fonction de Pause (Break) */
-                            String hnow = DateTime.Now.ToString("mm:ss");
 
-                            /*Tentative de Detection de la Main gauche */
+                            String hnow = DateTime.Now.ToString("mm:ss");
                             CameraSpacePoint positionHL = joints[HandLeft].Position;
                             if (positionHL.Z < 0)
                                 positionHL.Z = InferredZPositionClamp;
 
-                            /*Recuperation des Coordonnées X,Y de la main gauche*/
                             DepthSpacePoint depthSpacePoint = coordinateMapper.MapCameraPointToDepthSpace(positionHL);
                             float LHandX = depthSpacePoint.X;
                             float LHandY = depthSpacePoint.Y;
                             Console.Clear();
                             Console.WriteLine("LHandX =" + LHandX + " " + "LHandY=" + LHandY);
 
-                            /*Tentative de Detection de la Main Droite  */
                             CameraSpacePoint positionHR = joints[HandRight].Position;
                             if (positionHR.Z < 0)
                                 positionHR.Z = InferredZPositionClamp;
 
-                            /*Recuperation des Coordonnées X,Y de la main Droite*/
                             DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
                             float RHand_X = depthSpacePoint.X;
                             float RHand_Y = depthSpacePoint.Y;
-                      
+                            //Console.Clear();
                             Console.WriteLine("RHand_X =" + RHand_X + " " + "RHand_Y=" + RHand_Y);
                         }
                         /*Recherche de la Position de la tete*/
