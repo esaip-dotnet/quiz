@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Windows;
-using System.Text;
-using System.Threading.Tasks;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -15,61 +12,48 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
-using Windows.Storage;
 
-namespace App2
+namespace ESAIP_Quiz
 {
+
     public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
+            this.LoadImage();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        void LoadImage()
         {
-            SubmitData();
+            Uri myUri = new Uri("http://thecatapi.com/api/images/get?format=src&type=jpg", UriKind.Absolute);
+            BitmapImage bmi = new BitmapImage();
+            bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bmi.UriSource = myUri;
+            image.Source = bmi;
         }
 
-        private async void SubmitData()
+        /// Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Récupération du dossier local
-            StorageFolder local = Windows.Storage.ApplicationData.Current.LocalFolder;
-            if (local != null)
-            {
-                //Récupération du dossier DataFolder
-                var dataFolder = await local.GetFolderAsync("DataFolder"); 
-            
-                try{
-                        //Récupération du fichier json
-                        var src = await local.OpenStreamForReadAsync("Participation.json");
-                        //Lecture des données
-                        using (StreamReader json = new StreamReader(src))
-                        {
-                            String putData=json.ReadToEnd();
+            // TODO: préparer la page pour affichage ici.
+        }
 
-                            //HTTP web request
-                            WebRequest request = WebRequest.Create("http://coreosjpg.cloudapp.net/quiz/1234/participation/1234567");
-                            request.Method = "PUT";
-                            request.ContentType = "text/json";
+        private void Valider_Click(object sender, RoutedEventArgs e)
+        {
+            Uri myUri = new Uri("http://thecatapi.com/api/images/get?format=src&type=jpg", UriKind.Absolute);
+            BitmapImage bmi = new BitmapImage();
+            bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+            bmi.UriSource = myUri;
+            image.Source = bmi;
+        }
 
-                            //Traitement de la requête 
-                            using (var stream = await request.GetRequestStreamAsync())
-                            {
-                                //Conversion du fichier json 
-                                var datas = Encoding.UTF8.GetBytes(putData);
-                                //Ecriture 
-                                await stream.WriteAsync(datas, 0, datas.Length);    
-                            }
-                        }
-                     }
-                catch(Exception e) 
-                {
-                    return;
-                }
-            }
+        private void Question_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
