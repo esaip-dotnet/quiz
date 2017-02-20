@@ -5,6 +5,15 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_core.net.Models
 {
+    /**
+     * Entity Participation
+     * 
+     * @attr Id : ObjectId
+     * @attr StartTimestamp : DateTime
+     * @attr IdParticipant : String
+     * @attr Score : Double
+     * @attr Quiz : Quiz
+     **/
     public class Participation
     {
         public ObjectId Id { get; set; }

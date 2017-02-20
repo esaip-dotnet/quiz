@@ -1,11 +1,11 @@
 ﻿using api_core.net.Daos;
-using api_core.net.Models;
 using api_core.net.Utils;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace api_core.net
 {
@@ -27,6 +27,7 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
+            // Set MongoDB Url and Port in BaseDao from appsettings.json
             BaseDao.UrlMongo = Configuration["MongoDB:Url"];
             BaseDao.PortMongo = Configuration["MongoDB:Port"];
         }
@@ -40,8 +41,15 @@ namespace api_core.net
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddTransient<QuizDao>();
             services.AddTransient<ParticipationDao>();
-            // Add JsonConverter for ObjectId
+            // Add CORS services
+            services.AddCors();
+            // Add JsonConverter converting ObjectId into string
             services.AddMvc().AddJsonOptions(opt => { opt.SerializerSettings.Converters.Add(new ObjectIdConverter()); });
+            // Register the Swagger generator, defining one or more Swagger documents
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("1.0.0", new Info { Title = "Quiz Core.Net API", Version = "1.0.0" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline
@@ -54,7 +62,20 @@ namespace api_core.net
 
             app.UseApplicationInsightsExceptionTelemetry();
 
+            // Allow cross-origin requests from http://app.swaggerhub.com
+            app.UseCors(builder =>
+               builder.WithOrigins("http://app.swaggerhub.com"));
+
             app.UseMvc();
+
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
+            app.UseSwaggerUi(c =>
+            {
+                c.SwaggerEndpoint("/swagger/1.0.0/swagger.json", "Quiz Core.Net API");
+            });
         }
     }
 }

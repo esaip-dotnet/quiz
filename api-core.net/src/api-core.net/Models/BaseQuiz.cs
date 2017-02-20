@@ -4,6 +4,14 @@ using System;
 
 namespace api_core.net.Models
 {
+    /**
+     * Base Entity BaseQuiz
+     * 
+     * @attr Id : ObjectId
+     * @attr Summary : String
+     * @attr Description : String
+     * @attr Title : String
+     **/
     public class BaseQuiz
     {
         public ObjectId Id { get; set; }
