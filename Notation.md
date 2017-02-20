@@ -30,3 +30,10 @@ Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 5
 - Client web : 18/20 (Tony + Remi)
 - API Core : 18/20 (Jean + Florian + Alexandre Lorre)
 - API Node : 15/20 (Johnathan + Alan + Julien)
+
+Points pour les explications et questions :
+- Florian et Jean : +2
+- Remi et Toni : +2
+- Allan et François partagent donc : +1
+- Bastien et Ludovic : +1 (pour l'anniversaire)
+- Aristide : +2
