@@ -33,7 +33,9 @@ Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 5
 
 Points pour les explications et questions :
 - Florian et Jean : +2
-- Remi et Toni : +2
+- Toni : +2
+- Rémi : +3
 - Allan et François partagent donc : +1
 - Bastien et Ludovic : +1 (pour l'anniversaire)
 - Aristide : +2
+- Alexandre Acquart : +1
