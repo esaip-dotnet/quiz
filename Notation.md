@@ -42,13 +42,13 @@ Points pour les explications et questions :
 
 Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Julien : 6/20
-- François (Compte Elanne) : 10/20
+- François : 10/20 (Compte Github "Elanne")
 - Jonathan : 6/20
 - Alexandre Lorre : 7/20
 - Alexandre Hacquard : 8/20
 - Aristide : 5/20
 - Allan : 6/20
-- Jean : 14/20
+- Jean : 15/20 (chore suite premier commit déjà notée)
 - Bastien : 8/20
 - Florian : 14/20
 - Ludovic : 10/20
