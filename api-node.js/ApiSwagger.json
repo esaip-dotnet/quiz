@@ -1,0 +1,22 @@
+swagger: '2.0'
+info:
+  title: Uber API
+  description: API Node pour le quiz
+  version: "1.0.0"
+
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /products:
+    get:
+      summary: Product Types
+      description: Permet de faire appel aux ressources quiz et participation
+      parameters:
+       
+      tags:
+        - Ressources
+      
+          schema:
