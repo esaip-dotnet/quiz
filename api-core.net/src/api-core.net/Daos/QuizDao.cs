@@ -7,26 +7,21 @@ using System.Threading.Tasks;
 
 namespace api_core.net.Daos
 {
-    /*
+    /**
      * Dao QuizDao
-     * 
      * @attr baseDao : BaseDao
-     * 
-     */
+     **/
     public class QuizDao
     {
         private BaseDao baseDao = BaseDao.Instance;
 
-        /*
+        /**
          * Function GetQuizById
-         * 
          * Find Quiz by Id in Quiz collection
          * 
          * @param id : ObjectId
-         * 
          * @return Quiz
-         * 
-         */
+         **/
         public Quiz GetQuizById(ObjectId id)
         {
             // Filter Quiz by Id
@@ -35,14 +30,12 @@ namespace api_core.net.Daos
             return baseDao.db.GetCollection<Quiz>("Quiz").Find(filter).First();
         }
 
-        /*
+        /**
          * Function GetAllQuiz
-         * 
          * Find all Quiz in Quiz collection
          * 
          * @return IEnumerable<BaseQuiz>
-         * 
-         */
+         **/
         public IEnumerable<BaseQuiz> GetAllQuiz()
         {
             // Get all Quiz from DB
@@ -61,33 +54,27 @@ namespace api_core.net.Daos
             return baseList;
         }
 
-        /*
+        /**
          * Function CreateQuiz
-         * 
          * Insert one Quiz async in Quiz collection
          * 
          * @param quiz : Quiz
-         * 
          * @async Task
-         * 
-         */
+         **/
         public async Task CreateQuiz(Quiz quiz)
         {
             // Insert Quiz in DB async
             await baseDao.db.GetCollection<Quiz>("Quiz").InsertOneAsync(quiz);
         }
 
-        /*
+        /**
          * Function UpdateQuiz
-         * 
          * Replace one Quiz async in Quiz collection
          *
          * @param id : ObjectId
          * @param quiz : Quiz
-         * 
          * @async Task
-         * 
-         */
+         **/
         public async Task UpdateQuiz(ObjectId id, Quiz quiz)
         {
             quiz.Id = id;

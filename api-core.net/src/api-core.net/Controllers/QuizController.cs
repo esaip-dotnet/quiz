@@ -8,40 +8,35 @@ using System.Threading.Tasks;
 
 namespace api_core.net.Controllers
 {
-    /* 
+    /**
      * Controller QuizController
      * 
      * @attr quizDao : QuizDao
      * @route /quiz
-     * 
-     */
+     **/
     [Route("quiz")]
     public class QuizController : Controller
     {
         QuizDao quizDao;
 
-        /* 
+        /**
          * Constructor QuizController
          * 
          * @param quizDao : QuizDao
-         * 
-         */
+         **/
         public QuizController(QuizDao quizDao)
         {
             this.quizDao = quizDao;
         }
 
-        /*
+        /**
          * Function GetQuizById
-         * 
          * Get Quiz by Id using GET request
          * 
          * @param idQuiz : string
          * @route /quiz/{idQuiz}
-         * 
          * @return ObjectResult
-         * 
-         */
+         **/
         [HttpGet("{idQuiz}")]
         public IActionResult GetQuizById(string idQuiz)
         {
@@ -54,16 +49,13 @@ namespace api_core.net.Controllers
             return new ObjectResult(quiz);
         }
 
-        /*
+        /**
          * Function GetAllQuiz
-         * 
          * Get all Quiz using GET request
          * 
          * @route /quiz
-         * 
          * @return ObjectResult
-         * 
-         */
+         **/
         [HttpGet]
         public IActionResult GetAllQuiz()
         {
@@ -76,17 +68,14 @@ namespace api_core.net.Controllers
             return new ObjectResult(listQuiz);
         }
 
-        /*
+        /**
          * Function CreateQuiz
-         * 
          * Create Quiz using POST request
          * 
          * @param quiz : Quiz
          * @route /quiz
-         * 
          * @return CreatedResult
-         * 
-         */
+         **/
         [HttpPost]
         public async Task<IActionResult> CreateQuiz([FromBody]Quiz quiz)
         {
@@ -97,18 +86,15 @@ namespace api_core.net.Controllers
             return new CreatedResult($"/quiz/{quiz.Id}", quiz);
         }
 
-        /*
+        /**
          * Function PatchQuiz
-         * 
          * Patch Quiz using PATCH request
          * 
          * @param idQuiz : string
          * @param patch : JsonPatchDocument<Quiz>
          * @route /quiz/{idQuiz}
-         * 
          * @return ObjectResult
-         * 
-         */
+         **/
         [HttpPatch("{idQuiz}")]
         public async Task<IActionResult> PatchQuiz(string idQuiz, [FromBody]JsonPatchDocument<Quiz> patch)
         {

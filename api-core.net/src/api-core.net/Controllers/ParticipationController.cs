@@ -7,41 +7,36 @@ using System.Threading.Tasks;
 
 namespace api_core.net.Controllers
 {
-    /* 
+    /**
      * Controller ParticipationController
      * 
      * @attr participationDao : ParticipationDao
      * @route /quiz/{idQuiz}/participation
-     * 
-     */
+     **/
     [Route("quiz/{idQuiz}/participation")]
     public class ParticipationController : Controller
     {
         ParticipationDao participationDao;
 
-        /* 
+        /**
          * Constructor ParticipationController
          * 
-         * @param participationDao : ParticipationDao
-         * 
-         */
+         * @param participationDao : ParticipationDao*
+         **/
         public ParticipationController(ParticipationDao participationDao)
         {
             this.participationDao = participationDao;
         }
 
-        /*
+        /**
          * Function CreateParticipation
-         * 
          * Create Participation using POST request
          * 
          * @param idQuiz : string
          * @param participation : Participation
          * @route /quiz/{idQuiz}/participation
-         * 
          * @return CreatedResult
-         * 
-         */
+         **/
         [HttpPost]
         public async Task<IActionResult> CreateParticipation(string idQuiz, [FromBody]Participation participation)
         {
@@ -53,19 +48,16 @@ namespace api_core.net.Controllers
             return new CreatedResult($"/quiz/{idQuiz}/participation/{participation.Id}", participation);
         }
 
-        /*
+        /**
          * Function UpdateParticipation
-         * 
          * Update Participation if exists otherwise create it using PUT request
          * 
          * @param idQuiz : string
          * @param idParticipation : string
          * @param participation : Participation
          * @route /quiz/{idQuiz}/participation/{idParticipation}
-         * 
          * @return OkResult
-         * 
-         */
+         **/
         [HttpPut("{idParticipation}")]
         public async Task<IActionResult> UpdateParticipation(string idQuiz, string idParticipation, [FromBody]Participation participation)
         {
@@ -88,17 +80,14 @@ namespace api_core.net.Controllers
             return new OkResult();
         }
 
-        /*
+        /**
          * Function GetParticipationById
-         * 
          * Get Participation by Id using GET request
          * 
          * @param idParticipation : string
          * @route /quiz/{idQuiz}/participation/{idParticipation}
-         * 
          * @return ObjectResult
-         * 
-         */
+         **/
         [HttpGet("{idParticipation}")]
         public IActionResult GetParticipationById(string idParticipation)
         {
@@ -111,18 +100,15 @@ namespace api_core.net.Controllers
             return new ObjectResult(participation);
         }
 
-        /*
+        /**
          * Function PatchParticipation
-         * 
          * Patch Quiz using PATCH request
          * 
          * @param idParticipation : string
          * @param patch : JsonPatchDocument<Participation>
          * @route /quiz/{idQuiz}/participation/{idParticipation}
-         * 
          * @return ObjectResult
-         * 
-         */
+         **/
         [HttpPatch("{idParticipation}")]
         public async Task<IActionResult> PatchParticipation(string idParticipation, [FromBody]JsonPatchDocument<Participation> patch)
         {

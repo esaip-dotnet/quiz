@@ -5,14 +5,13 @@ using System.Collections.Generic;
 
 namespace api_core.net.Models
 {
-    /*
+    /**
      * Entity Question
      * 
      * @attr Title : String
      * @attr Picture : String
      * @attr Answers : IEnumerable<Answer>
-     * 
-     */
+     **/
     public class Question
     {
         [BsonElement("title")]
