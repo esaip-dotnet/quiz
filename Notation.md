@@ -33,7 +33,7 @@ Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 5
 
 Points pour les explications et questions :
 - Florian et Jean : +2
-- Toni : +2
+- Tony : +2
 - Rémi : +3
 - Allan et François partagent donc : +1
 - Bastien et Ludovic : +1 (pour l'anniversaire)
@@ -53,5 +53,5 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Florian : 14/20
 - Ludovic : 10/20
 - Lena : 6/20
-- Toni : 4/20
+- Tony : 4/20
 - Remi : 8/20
