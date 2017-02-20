@@ -9,13 +9,18 @@ namespace WebClientCore.Models
 {
     public class Question
     {
+        //Nécessaire
+        //Avec la propriété json : title
         [Required]
         [JsonProperty("title")]
         public string Title { get; set; }
+        //Avec la propriété json : picture
         [JsonProperty("picture")]
         public string Picture { get; set; }
+        //Nécessaire
+        //Avec la propriété json : answers
         [Required]
-        [JsonProperty("title")]
+        [JsonProperty("answers")]
         public List<Answer> Answers { get; set; }
     }
 }
