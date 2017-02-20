@@ -4,6 +4,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_core.net.Models
 {
+    /**
+     * Modélisation d'une réponse :
+     * - Un titre (texte de la réponse)
+     * - Un booléen indiquant si la réponse est une bonne réponse
+     * - Une image, si la réponse est en image 
+     * - Un booléen indiquant si cette réponse à été choisie par le joueur
+     **/
     public class Answer
     {
         [BsonElement("title")]

@@ -4,6 +4,13 @@ using System;
 
 namespace api_core.net.Models
 {
+    /**
+     * Modélisation de la base d'un quiz :
+     * - Un id unique
+     * - Un résumé court
+     * - Une description
+     * - Un titre
+     **/
     public class BaseQuiz
     {
         public ObjectId Id { get; set; }

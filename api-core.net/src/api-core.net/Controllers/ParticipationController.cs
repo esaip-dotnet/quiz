@@ -7,9 +7,16 @@ using System.Threading.Tasks;
 
 namespace api_core.net.Controllers
 {
+    /**
+     * Controller de la classe Participation
+     * La route de base du controller est :
+     * quiz/{idQuiz}/participation
+     * idQuiz, représente l'id du quiz auquel la participation se rapporte
+     **/
     [Route("quiz/{idQuiz}/participation")]
     public class ParticipationController : Controller
     {
+        // Le DAO nécessaire au traitement des données
         ParticipationDao participationDao;
 
         public ParticipationController(ParticipationDao participationDao)
@@ -17,6 +24,13 @@ namespace api_core.net.Controllers
             this.participationDao = participationDao;
         }
 
+        /**
+         * Route POST
+         * Créé un objet Participation et l'URL de cette dernière
+         * HTTP Code : 201
+         * 
+         * @param p un objet Participation
+         **/
         [HttpPost]
         public async Task<IActionResult> Post(string idQuiz, [FromBody]Participation p)
         {
@@ -26,6 +40,13 @@ namespace api_core.net.Controllers
             return new CreatedResult($"/quiz/{idQuiz}/participation/{p.Id}", p);
         }
 
+        /**
+         * Route PUT
+         * Edite un objet Participation et renvoie sur la page de cette dernière
+         * HTTP Code : 200
+         * 
+         * @param p un objet Participation
+         **/
         [HttpPut("{idParticipation}")]
         public async Task<IActionResult> Put(string idQuiz, string idParticipation, [FromBody]Participation p)
         {
@@ -43,6 +64,14 @@ namespace api_core.net.Controllers
             return new OkResult();
         }
 
+        /**
+         * Route GET
+         * Renvoie un objet Participation 
+         * HTTP Code : 200
+         * 
+         * @param idParticipation id de la participation
+         * @return un objet Participation
+         **/
         [HttpGet("{idParticipation}")]
         public IActionResult GetId(string idParticipation)
         {
@@ -54,6 +83,14 @@ namespace api_core.net.Controllers
             return new ObjectResult(participation);
         }
 
+        /**
+         * Route PATCH
+         * PATCH un objet participation
+         * HTTP Code : 200
+         * 
+         * @param idParticipation id de la participation
+         * @param patch l'objet participation sous forme de JSONPatchDocument
+         **/
         [HttpPatch("{idParticipation}")]
         public async Task<IActionResult> Patch(string idParticipation, [FromBody]JsonPatchDocument<Participation> patch)
         {

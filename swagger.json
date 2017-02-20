@@ -1,0 +1,331 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Core .Net API",
+        "description": "API Core .Net du Quiz",
+        "version": "1.0.0"
+    },
+    "host": "coreosjpg.cloudapp.net",
+    "schemes": [
+        "http"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/quiz": {
+            "get": {
+                "summary": "Récupérer tous les quiz",
+                "description": "Retourne les informations principales sur tous les quiz de la base : titre, description, résumé et l'id.",
+                "tags": [
+                    "Quiz"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Une liste de quiz",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Quiz"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Quiz",
+                "description": "Retourne les informations sur un quiz précis.",
+                "tags": [
+                    "Quiz"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un objet quiz",
+                        "schema": {
+                            "$ref": "#/definitions/Quiz"
+                        }
+                    }
+                }
+            }
+        },
+        "/quiz/{idQuiz}": {
+            "get": {
+                "summary": "Récupérer un quiz",
+                "description": "Récupérer toutes les informations d'un quiz à partir de son identifiant.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "tags": [
+                    "Quiz/Id"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un objet de type Quiz",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Quiz"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Éditer un quiz",
+                "description": "Édite un quiz à partir de son identifiant par la méthode PATCH.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "tags": [
+                    "Quiz/Id"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message de réponse",
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/quiz/{idQuiz}/participation/": {
+            "post": {
+                "summary": "Ajouter une participation à un quiz",
+                "description": "Ajouter une participation à un quiz à partir de son identifiant.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "tags": [
+                    "Quiz/Id/Participation"
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Un objet Paricipation et l'URL de celle-ci (dans headers > Location)",
+                        "schema": {
+                            "$ref": "#/definitions/Participation"
+                        }
+                    }
+                }
+            }
+        },
+        "/quiz/{idQuiz}/participation/{idParticipant}": {
+            "get": {
+                "summary": "Récupérer une participation",
+                "description": "Récupérer toutes les informations d'une participation à partir de son identifiant.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                    {
+                        "name": "idParticipant",
+                        "in": "path",
+                        "description": "Identifiant de la participation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                ],
+                "tags": [
+                    "Quiz/Id/Participation/Id"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un objet Paricipation",
+                        "schema": {
+                            "$ref": "#/definitions/Participation"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Mise à jour d'une participation",
+                "description": "Mise à jour d'une participation à partir de son identifiant.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                    {
+                        "name": "idParticipant",
+                        "in": "path",
+                        "description": "Identifiant de la participation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                ],
+                "tags": [
+                    "Quiz/Id/Participation/Id"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Un objet Paricipation",
+                        "schema": {
+                            "$ref": "#/definitions/Participation"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Édite une participation",
+                "description": "Édite une participation à partir de son identifiant par la méthode PATCH.",
+                "parameters": [
+                    {
+                        "name": "idQuiz",
+                        "in": "path",
+                        "description": "Identifiant du quiz.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                    {
+                        "name": "idParticipant",
+                        "in": "path",
+                        "description": "Identifiant de la participation.",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }, 
+                ],
+                "tags": [
+                    "Quiz/Id/Participation/Id"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Message de réponse",
+                        "schema": {
+                            "type": "string",
+                            "format": "string"
+                        }
+                    }
+                }
+            }
+        },
+    },
+    "definitions": {
+        "Quiz": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Identifiant unique représentant un quiz."
+                },
+                "title": {
+                    "type": "string",
+                    "description": "Titre du quiz."
+                },
+                "summary": {
+                    "type": "string",
+                    "description": "Résumé rapide du quiz."
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description du quiz."
+                },
+                "questions": {
+                    "type": "array",
+                    "description": "Liste de toutes les questions du quiz.",
+				          	"items": {
+                        "$ref": "#/definitions/Questions"
+                    }
+                }
+            }
+        },
+        "Participation": {
+            "type": "object",
+            "properties": {
+               "idParticipant": {
+                    "type": "string",
+                    "description": "Identifiant unique du participant (email)."
+                },
+                "startTimestamp": {
+                    "type": "string",
+                    "format": "dateTime",
+                    "description": "Date de la participation."
+                },
+                "score": {
+                    "type": "number",
+                    "format": "doube",
+                    "description": "Le score du joueur sur cette participation (entre 0 et 1)."
+                },
+                "quiz": {
+                    "$ref": "#/definitions/Quiz"
+                }
+            }
+        },
+        "Questions": {
+            "type": "object",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "Intitulé de la question."
+                },
+                "picture": {
+                    "type": "string",
+                    "description": "Image de la question."
+                },
+                "answers": {
+                    "type": "array",
+                    "description": "Liste de toutes les réponses à la question.",
+				          	"items": {
+                        "$ref": "#/definitions/Answers"
+                    }
+                }
+            }
+        },
+        "Answers": {
+            "type": "object",
+            "properties": {
+               "title": {
+                    "type": "string",
+                    "description": "Intitulé de la réponse."
+                },
+                "picture": {
+                    "type": "string",
+                    "description": "Image de la réponse."
+                },
+                "correct": {
+                    "type": "boolean",
+                    "description": "Indique si la réponse est une réponse correcte."
+                },
+                "checkedByPlayer": {
+                    "type": "boolean",
+                    "description": "Indique si le joueur a choisi cette réponse."
+                }
+            }
+        }
+    }
+}
