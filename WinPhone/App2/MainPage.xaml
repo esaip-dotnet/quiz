@@ -15,7 +15,7 @@
                 RenderTransformOrigin="0.5,0.5" Height="56.328" UseLayoutRounding="False" Width="312.136" d:LayoutRounding="Auto" 
                 Click="Button_Click">
         </Button>
-        <StackPanel x:Name="panel" Orientation="Vertical" Margin="0,108,0,145">
+        <StackPanel x:Name="panel" Orientation="Vertical" Margin="0,155,0,184">
             <RadioButton x:Name="reponse1" IsChecked="True" Content="Réponse 1"/>
             <RadioButton x:Name="reponse2" Content="Réponse 2"/>
             <RadioButton x:Name="reponse3" Content="Réponse 3"/>

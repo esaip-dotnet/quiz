@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App2", "App2\App2.csproj", "{22CBC233-9D66-47F8-B232-7E0CE4711E2F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interface_WinPhone", "App2\Interface_WinPhone.csproj", "{22CBC233-9D66-47F8-B232-7E0CE4711E2F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
