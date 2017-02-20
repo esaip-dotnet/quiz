@@ -26,7 +26,7 @@ Date de remise maximale des notes (à vérifier avec la scolarité) : 20/03/2017
 Première notation du travail en cours (après les 3 jours sur 5, soit 60% des 50% de la note) :
 - Kinect : 14/20 (Lena + François)
 - Leap : 16/20 (Bastien + Ludovic)
-- WinPhone : 13/20 (Alexandre Hacquart + Aristide)
+- WinPhone : 13/20 (Alexandre Hacquard + Aristide)
 - Client web : 18/20 (Tony + Remi)
 - API Core : 18/20 (Jean + Florian + Alexandre Lorre)
 - API Node : 15/20 (Johnathan + Alan + Julien)
@@ -38,4 +38,20 @@ Points pour les explications et questions :
 - Allan et François partagent donc : +1
 - Bastien et Ludovic : +1 (pour l'anniversaire)
 - Aristide : +2
-- Alexandre Acquart : +1
+- Alexandre Hacquard : +1
+
+Premiers points sur les pull requests (la seconde pull request cumulera) :
+- Julien : 6/20
+- François (Compte Elanne) : 10/20
+- Jonathan : 6/20
+- Alexandre Lorre : 5/20
+- Alexandre Hacquard : 8/20
+- Aristide : 5/20
+- Allan : 5/20
+- Jean : 14/20
+- Bastien : 8/20
+- Florian : 14/20
+- Ludovic : 10/20
+- Lena : 6/20
+- Toni : 4/20
+- Remi : 8/20
