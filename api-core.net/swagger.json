@@ -1,1 +1,282 @@
-{"swagger":"2.0","info":{"version":"1.0.0","title":"Quiz Core.Net API"},"basePath":"/api-core.net/1.0.0","paths":{"/quiz/{idQuiz}/participation":{"post":{"tags":["Participation"],"operationId":"QuizByIdQuizParticipationPost","consumes":["application/json","text/json","application/json-patch+json"],"parameters":[{"name":"idQuiz","in":"path","required":true,"type":"string"},{"name":"participation","in":"body","required":false,"schema":{"$ref":"#/definitions/Participation"}}],"responses":{"200":{"description":"Success"}}}},"/quiz/{idQuiz}/participation/{idParticipation}":{"get":{"tags":["Participation"],"operationId":"QuizByIdQuizParticipationByIdParticipationGet","parameters":[{"name":"idParticipation","in":"path","required":true,"type":"string"},{"name":"idQuiz","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"Success"}}},"put":{"tags":["Participation"],"operationId":"QuizByIdQuizParticipationByIdParticipationPut","consumes":["application/json","text/json","application/json-patch+json"],"parameters":[{"name":"idQuiz","in":"path","required":true,"type":"string"},{"name":"idParticipation","in":"path","required":true,"type":"string"},{"name":"participation","in":"body","required":false,"schema":{"$ref":"#/definitions/Participation"}}],"responses":{"200":{"description":"Success"}}},"patch":{"tags":["Participation"],"operationId":"QuizByIdQuizParticipationByIdParticipationPatch","consumes":["application/json","text/json","application/json-patch+json"],"parameters":[{"name":"idParticipation","in":"path","required":true,"type":"string"},{"name":"patch","in":"body","required":false,"schema":{"$ref":"#/definitions/JsonPatchDocument[Participation]"}},{"name":"idQuiz","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"Success"}}}},"/quiz/{idQuiz}":{"get":{"tags":["Quiz"],"operationId":"QuizByIdQuizGet","parameters":[{"name":"idQuiz","in":"path","required":true,"type":"string"}],"responses":{"200":{"description":"Success"}}},"patch":{"tags":["Quiz"],"operationId":"QuizByIdQuizPatch","consumes":["application/json","text/json","application/json-patch+json"],"parameters":[{"name":"idQuiz","in":"path","required":true,"type":"string"},{"name":"patch","in":"body","required":false,"schema":{"$ref":"#/definitions/JsonPatchDocument[Quiz]"}}],"responses":{"200":{"description":"Success"}}}},"/quiz":{"get":{"tags":["Quiz"],"operationId":"QuizGet","responses":{"200":{"description":"Success"}}},"post":{"tags":["Quiz"],"operationId":"QuizPost","consumes":["application/json","text/json","application/json-patch+json"],"parameters":[{"name":"quiz","in":"body","required":false,"schema":{"$ref":"#/definitions/Quiz"}}],"responses":{"200":{"description":"Success"}}}}},"definitions":{"Participation":{"type":"object","properties":{"id":{"$ref":"#/definitions/ObjectId"},"startTimestamp":{"format":"date-time","type":"string"},"idParticipant":{"type":"string"},"score":{"format":"double","type":"number"},"quiz":{"$ref":"#/definitions/Quiz"}}},"ObjectId":{"type":"object","properties":{"timestamp":{"format":"int32","type":"integer","readOnly":true},"machine":{"format":"int32","type":"integer","readOnly":true},"pid":{"format":"int32","type":"integer","readOnly":true},"increment":{"format":"int32","type":"integer","readOnly":true},"creationTime":{"format":"date-time","type":"string","readOnly":true}}},"Quiz":{"type":"object","properties":{"questions":{"type":"array","items":{"$ref":"#/definitions/Question"}},"id":{"$ref":"#/definitions/ObjectId"},"summary":{"type":"string"},"description":{"type":"string"},"title":{"type":"string"}}},"Question":{"type":"object","properties":{"title":{"type":"string"},"picture":{"type":"string"},"answers":{"type":"array","items":{"$ref":"#/definitions/Answer"}}}},"Answer":{"type":"object","properties":{"title":{"type":"string"},"correct":{"type":"boolean"},"picture":{"type":"string"},"checkedByPlayer":{"type":"boolean"}}},"JsonPatchDocument[Participation]":{"type":"object","properties":{"operations":{"type":"array","items":{"$ref":"#/definitions/Operation[Participation]"},"readOnly":true}}},"Operation[Participation]":{"type":"object","properties":{"value":{"type":"object"},"path":{"type":"string"},"op":{"type":"string"},"from":{"type":"string"}}},"JsonPatchDocument[Quiz]":{"type":"object","properties":{"operations":{"type":"array","items":{"$ref":"#/definitions/Operation[Quiz]"},"readOnly":true}}},"Operation[Quiz]":{"type":"object","properties":{"value":{"type":"object"},"path":{"type":"string"},"op":{"type":"string"},"from":{"type":"string"}}}},"host":"coreosjpg.cloudapp.net","schemes":["https","http"]}
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Quiz Core.Net API"
+  },
+  "basePath": "/api-core.net/1.0.0",
+  "paths": {
+    "/quiz/{idQuiz}/participation": {
+      "post": {
+        "tags": [ "Participation" ],
+        "operationId": "QuizByIdQuizParticipationPost",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "parameters": [
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participation",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Participation" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/quiz/{idQuiz}/participation/{idParticipation}": {
+      "get": {
+        "tags": [ "Participation" ],
+        "operationId": "QuizByIdQuizParticipationByIdParticipationGet",
+        "parameters": [
+          {
+            "name": "idParticipation",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "put": {
+        "tags": [ "Participation" ],
+        "operationId": "QuizByIdQuizParticipationByIdParticipationPut",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "parameters": [
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "idParticipation",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "participation",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Participation" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "patch": {
+        "tags": [ "Participation" ],
+        "operationId": "QuizByIdQuizParticipationByIdParticipationPatch",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "parameters": [
+          {
+            "name": "idParticipation",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/JsonPatchDocument[Participation]" }
+          },
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/quiz/{idQuiz}": {
+      "get": {
+        "tags": [ "Quiz" ],
+        "operationId": "QuizByIdQuizGet",
+        "parameters": [
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      },
+      "patch": {
+        "tags": [ "Quiz" ],
+        "operationId": "QuizByIdQuizPatch",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "parameters": [
+          {
+            "name": "idQuiz",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "patch",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/JsonPatchDocument[Quiz]" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    },
+    "/quiz": {
+      "get": {
+        "tags": [ "Quiz" ],
+        "operationId": "QuizGet",
+        "responses": { "200": { "description": "Success" } }
+      },
+      "post": {
+        "tags": [ "Quiz" ],
+        "operationId": "QuizPost",
+        "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
+        "parameters": [
+          {
+            "name": "quiz",
+            "in": "body",
+            "required": false,
+            "schema": { "$ref": "#/definitions/Quiz" }
+          }
+        ],
+        "responses": { "200": { "description": "Success" } }
+      }
+    }
+  },
+  "definitions": {
+    "Participation": {
+      "type": "object",
+      "properties": {
+        "id": { "$ref": "#/definitions/ObjectId" },
+        "startTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "idParticipant": { "type": "string" },
+        "score": {
+          "format": "double",
+          "type": "number"
+        },
+        "quiz": { "$ref": "#/definitions/Quiz" }
+      }
+    },
+    "ObjectId": {
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "machine": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "pid": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "increment": {
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "creationTime": {
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Quiz": {
+      "type": "object",
+      "properties": {
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Question" }
+        },
+        "id": { "$ref": "#/definitions/ObjectId" },
+        "summary": { "type": "string" },
+        "description": { "type": "string" },
+        "title": { "type": "string" }
+      }
+    },
+    "Question": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "picture": { "type": "string" },
+        "answers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Answer" }
+        }
+      }
+    },
+    "Answer": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "correct": { "type": "boolean" },
+        "picture": { "type": "string" },
+        "checkedByPlayer": { "type": "boolean" }
+      }
+    },
+    "JsonPatchDocument[Participation]": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Operation[Participation]" },
+          "readOnly": true
+        }
+      }
+    },
+    "Operation[Participation]": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "object" },
+        "path": { "type": "string" },
+        "op": { "type": "string" },
+        "from": { "type": "string" }
+      }
+    },
+    "JsonPatchDocument[Quiz]": {
+      "type": "object",
+      "properties": {
+        "operations": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Operation[Quiz]" },
+          "readOnly": true
+        }
+      }
+    },
+    "Operation[Quiz]": {
+      "type": "object",
+      "properties": {
+        "value": { "type": "object" },
+        "path": { "type": "string" },
+        "op": { "type": "string" },
+        "from": { "type": "string" }
+      }
+    }
+  },
+  "host": "coreosjpg.cloudapp.net",
+  "schemes": [ "https", "http" ]
+}
