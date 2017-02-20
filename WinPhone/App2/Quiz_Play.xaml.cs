@@ -20,7 +20,7 @@ using Windows.UI.Xaml.Navigation;
 
 // Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
 
-namespace App2
+namespace ESAIP_Quiz
 {
     /// <summary>
     /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
@@ -81,7 +81,7 @@ namespace App2
                     }
                 }
 
-                //String json = StreamReader.(@"C:\Users\alexandre\Desktop\App2\App2\Participation.json");
+                //String json = StreamReader.(@"C:\Users\alexandre\Desktop\ESAIP_Quiz\ESAIP_Quiz\Participation.json");
 
             }
             catch (Exception ex) { }

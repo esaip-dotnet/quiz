@@ -7,8 +7,8 @@
     <ProjectGuid>{22CBC233-9D66-47F8-B232-7E0CE4711E2F}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>App2</RootNamespace>
-    <AssemblyName>App2</AssemblyName>
+    <RootNamespace>ESAIP_Quiz</RootNamespace>
+    <AssemblyName>ESAIP_Quiz</AssemblyName>
     <DefaultLanguage>fr-FR</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>

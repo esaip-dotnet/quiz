@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
 
-namespace App2
+namespace ESAIP_Quiz
 {
     public sealed partial class MainPage : Page
     {
