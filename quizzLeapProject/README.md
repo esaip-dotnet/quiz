@@ -61,7 +61,7 @@ Pour utiliser notre projet il vous faudra au préalable télécharger et install
 Attention : Pour intégrer votre SDK il faudra renseigner le chemin où se trouve celui-ci.
 Pour cela il vous faudra ajouter une variable d’environnement système « LEAP_SDK » pointant sur votre SDK.
 
-![variable_environnement](https://github.com/Ludovic-Andiveau/quiz/tree/master/quizzLeapProject/img/variable_environnement.png "Ajout variable environnement.")
+![variable_environnement](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/variable_environnement.png "Ajout variable environnement.")
 
 Puis cliquez sur l’onglet PROJET, dans la liste déroulante sélectionnez « Propriétés de NomDuProjet ». Ensuite dans « Evénements de build » ajouté la ligne ci-dessous :
 
