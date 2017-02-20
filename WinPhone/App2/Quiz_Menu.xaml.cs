@@ -24,7 +24,7 @@ namespace ESAIP_Quiz
     {
         public Quiz_Menu()
         {
-            this.InitializeComponent();
+            //this.InitializeComponent();
         }
 
         /// <summary>
