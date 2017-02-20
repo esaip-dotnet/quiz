@@ -9,7 +9,7 @@ Ce projet remplit différentes fonctionnalités :
 
 Résultat obtenu :
 
-![final_result](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/final_result.png "Interface finale via terminal")
+![final_result](https://github.com/esaip-dotnet/quiz/blob/master/quizzLeapProject/img/final_result.png "Interface finale via terminal")
 
 
 # 2. Auteurs et copyright
@@ -23,11 +23,11 @@ Les auteurs de ce projet sont : CIVEL Bastien et ANDIVEAU Ludovic. Ce sont tous 
 * [ANDIVEAU Ludovic](https://github.com/Ludovic-Andiveau/) - Github de Ludovic.
 
 
-Vous trouverez aussi la liste de tous les [contributeurs](https://github.com/Ludovic-Andiveau/quiz/graphs/contributors) qui ont participé au projet.
+Vous trouverez aussi la liste de tous les [contributeurs](https://github.com/esaip-dotnet/quiz/graphs/contributors) qui ont participé au projet.
 
 ### Copyright
 
-Voir la [LICENCE](https://github.com/Ludovic-Andiveau/quiz/blob/master/LICENSE).
+Voir la [LICENCE](https://github.com/esaip-dotnet/quiz/blob/master/LICENSE).
 
 # 3. Etat du projet
 
@@ -40,7 +40,7 @@ Le projet pour l’instant est encore « brut », il n’est pas totalement dyna
 
 LEAP MOTION
 
-![leap_motion](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/leap_motion.jpg "Leap motion connecté au pc.")
+![leap_motion](https://github.com/esaip-dotnet/quiz/blob/master/quizzLeapProject/img/leap_motion.jpg "Leap motion connecté au pc.")
 
 La LEAP motion nous a été prêtée par notre intervenant et il nous a été possible de l’utiliser à l’extérieur de l’enceinte de l’ESAIP, nous permettant de continuer notre projet chez nous.
 
@@ -61,7 +61,7 @@ Pour utiliser notre projet il vous faudra au préalable télécharger et install
 Attention : Pour intégrer votre SDK il faudra renseigner le chemin où se trouve celui-ci.
 Pour cela il vous faudra ajouter une variable d’environnement système « LEAP_SDK » pointant sur votre SDK.
 
-![variable_environnement](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/variable_environnement.png "Ajout variable environnement.")
+![variable_environnement](https://github.com/esaip-dotnet/quiz/blob/master/quizzLeapProject/img/variable_environnement.png "Ajout variable environnement.")
 
 Puis cliquez sur l’onglet PROJET, dans la liste déroulante sélectionnez « Propriétés de NomDuProjet ». Ensuite dans « Evénements de build » ajouté la ligne ci-dessous :
 
@@ -69,17 +69,17 @@ Puis cliquez sur l’onglet PROJET, dans la liste déroulante sélectionnez « P
 xcopy /yr "C:\LeapMotionSDK\lib\x64\Leap.dll" "$(TargePath)"xcopy /yr "C:\LeapMotionSDK\lib\x64\LeapCSharp.dll" "$(TargetPath)"
 ```
 
-![prorietes_projet](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/proprietes_projet.png "Modification propriétés du projet.")
+![prorietes_projet](https://github.com/esaip-dotnet/quiz/blob/master/quizzLeapProject/img/proprietes_projet.png "Modification propriétés du projet.")
 
 ## Utilisation
 
 Pour répondre à la question une fois le programme lancé, il suffit à l’utilisateur de placer sa main dans une des zones de réponse. 
 
-![schema_zones](https://github.com/Ludovic-Andiveau/quiz/blob/master/quizzLeapProject/img/schema_zones.JPG "Schema des zones de réponses.")
+![schema_zones](https://github.com/esaip-dotnet/quiz/blob/master/quizzLeapProject/img/schema_zones.JPG "Schema des zones de réponses.")
 
 # 5. License
 
-Ce projet est sous la license MIT - voir le fichier [LICENSE.md](https://github.com/Ludovic-Andiveau/quiz/blob/master/LICENSE) pour plus de détails.
+Ce projet est sous la license MIT - voir le fichier [LICENSE.md](https://github.com/esaip-dotnet/quiz/blob/master/LICENSE) pour plus de détails.
 
 # 6. Contribution, améliorations possibles
 
