@@ -3,12 +3,12 @@ services:
     web-core:
         build: web-client-core-asp.net
         ports:
-        - "80:80"
+        - "80:5004"
         image: "esaipnet/web-client-core-asp:1.0"
     api-core:
         build: api-core.net
         ports:
-        - "81:80"
+        - "81:5004"
         image: "esaipnet/api-core.net:1.0"
     api-node:
         build: api-node.js
