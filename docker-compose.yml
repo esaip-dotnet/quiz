@@ -17,3 +17,5 @@ services:
         image: "esaipnet/api-node.js:1.0"
     db-mongo:
         image: "mongo:3.0.3"
+        ports:
+        - "27017:27017"
