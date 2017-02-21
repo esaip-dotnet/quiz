@@ -64,3 +64,5 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Lena : 8/20
 - Tony : 4/20
 - Remi : 8/20
+
+Note de groupe pour la deuxième partie du cours (donc 40% de la moitié de la note) : 14/20
