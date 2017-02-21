@@ -169,10 +169,21 @@ MongoClient.connect(url, function (err, db) {
 
         // Methode get permettant de récupérer tous les quiz 
         app.get('/quiz', function(req, res) {
+            /*console.log(allQuiz);
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
             res.status(200);
-            res.json(myJson);
+            res.json(myJson);*/
+            
+            //On recupère les quiz en bdd et on les ajoute a notre tableau.
+            resultat.find({}).toArray(function (error, results) {
+                if (error) throw error;
+
+                results.forEach(function(i, obj) {
+                    console.log(i);
+                    res.status(200);
+                });
+            });
         });
 
         // Methode permettant de récupérer un quiz précis grâce l'ID
