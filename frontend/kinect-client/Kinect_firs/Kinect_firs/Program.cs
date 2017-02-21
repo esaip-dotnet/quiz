@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-/*Importation des Librairies Kinect / Microsoft*/
+// Importation des Librairies Kinect et Microsoft
 using Microsoft.Kinect;
 using System.Threading;
 
@@ -13,14 +13,14 @@ namespace Kinect_firs
     class Program
 
     {
-        /*Recuperation des Fonctions Kinect*/
+        // Récupération des fonctions Kinect
         private static KinectSensor kinectSensor;
         private static BodyFrameReader bodyFrameReader = null;
         private static Body[] bodies = null;
         private static CoordinateMapper coordinateMapper = null;
         private const float InferredZPositionClamp = 0.1f;
-		
-		// Points du corps
+
+        // Points du corps
         static JointType HandRight;
         static JointType MidSpine;
         static float RHand_X;
@@ -30,36 +30,36 @@ namespace Kinect_firs
 
         static void Main(string[] args)
         {
-            /*Lancement du premier Capteur*/
+            // Lancement du premier Capteur
             kinectSensor = KinectSensor.GetDefault();
             coordinateMapper = kinectSensor.CoordinateMapper;
-            /*Ouverture du premier capteur*/
+            // Ouverture du premier capteur
             kinectSensor.Open();
 
-            /*Lancement de la recherche d'un corps*/
+            // Lancement de la recherche d'un corps
             bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
             if (bodyFrameReader != null)
             {
-                /*Tentative d'acces*/
+                // Tentative d'accès
                 try
                 {
                     bodyFrameReader.FrameArrived += Reader_FrameArrived;
                 }
-                /*Verification d'une exception dans la recherche*/
+                // Vérification d'une exception dans la recherche
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                 }
             }
-            /*En cas de recherche infructueuse > on arrete */
+            // En cas de recherche infructueuse, on arrête
             else
             {
                 Console.WriteLine("BodyFrameReader is null");
             }
             Console.ReadLine();
         }
-		
-		// Verifier la zone de la main droite
+
+        // Vérification la zone de la main droite
         static String checkZoneRH()
         {
             String zoneHand;
@@ -73,14 +73,14 @@ namespace Kinect_firs
                 zoneHand = "Zone 4";
             else
                 zoneHand = "Hand not found";
- 
+
             return zoneHand;
         }
 
-		// Lecture du capteur
+        // Lecture du capteur
         static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
         {
-			// Test de réception de données
+          // Test de réception de données
             bool dataReceived = false;
 
             using (BodyFrame bodyFrame = e.FrameReference.AcquireFrame())
@@ -93,39 +93,39 @@ namespace Kinect_firs
                     dataReceived = true;
                 }
             }
-			// Si des données sont reçus
+            // Si des données sont reçues
             if (dataReceived)
             {
-                // Pour chaques partie du corps
+                // Pour chaque partie du corps
                 foreach (Body body in bodies)
                 {
                     if (body.IsTracked)
                     {
-                        /*Recuperation des fonctions de detection des parties du corps humain dans la librairies Kinect*/
+                        // Récupération des fonctions de détection des parties du corps humain dans la librairie Kinect
                         IReadOnlyDictionary<JointType, Joint> joints = body.Joints;
 
-                        /*Recuperation des Elements Main Gauche, Main Gauche et Tete*/
+                        // Récupération des élements Main Gauche, Main Gauche et Tete
                         JointType HandRight = (Microsoft.Kinect.JointType)11;
                         JointType Head = (Microsoft.Kinect.JointType)3;
 
-						// Pour chaques points du corps tracker
+                        // Pour chaque points du corps tracker
                         foreach (JointType jointType in joints.Keys)
                         {
                             // Heure de tacking
                             String hnow = DateTime.Now.ToString("mm:ss");
 
-                            /*Tentative de Detection de la Main Droite  */
+                            // Tentative de détection de la Main Droite
                             CameraSpacePoint positionHR = joints[HandRight].Position;
                             if (positionHR.Z < 0)
-							{
-                                positionHR.Z = InferredZPositionClamp;
-							}
+                            {
+                              positionHR.Z = InferredZPositionClamp;
+                            }
 
-                            /*Recuperation des Coordonnées X,Y de la main Droite*/
+                            // Récuperation des coordonnées X,Y de la main droite
                             DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
                             RHand_X = depthSpacePoint2.X;
-                          RHand_Y = depthSpacePoint2.Y;
-                      
+                            RHand_Y = depthSpacePoint2.Y;
+
                             // Milieu de la colonne
                             CameraSpacePoint positionMS = joints[MidSpine].Position;
                             if (positionMS.Z < 0)
@@ -139,12 +139,12 @@ namespace Kinect_firs
                             String zoneMain = checkZoneRH();
                             Console.WriteLine(zoneMain);
                         }
-						
-                        /*Pause pour laisser le temps au systeme d'afficher la donnée*/
+
+                        // Pause pour laisser le temps au système d'afficher la donnée
                         int milliseconds = 500;
                         Thread.Sleep(milliseconds);
                     }
-                    /*Annonce qu'aucun corps n'a été trouvé*/
+                    // Annonce qu'aucun corps n'a été trouvé
                     else
                     {
                         Console.WriteLine("Body Not TRack");
@@ -152,7 +152,7 @@ namespace Kinect_firs
                 }
             }
 
-            /*Confirmation Ecrite qu'aucune donnée n'ait été recu*/
+            // Confirmation écrite qu'aucune donnée n'a été recue
             else
             {
                 Console.WriteLine("Data NOT Received");
