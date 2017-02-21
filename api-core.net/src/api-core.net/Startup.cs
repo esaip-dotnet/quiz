@@ -27,8 +27,8 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            BaseDao.UrlMongo = Configuration["MongoDB:Url"];
-            BaseDao.PortMongo = Configuration["MongoDB:Port"];
+            BaseDao.UrlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
+            BaseDao.DatabaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -36,6 +36,17 @@ namespace api_core.net
         // This method gets called by the runtime. Use this method to add services to the container
         public void ConfigureServices(IServiceCollection services)
         {
+            // Enable CORS 
+            services.AddCors(options =>
+            {
+                // Add the right domains
+                options.AddPolicy("Swagger",
+                    builder => builder.WithOrigins("http://swagger.io")
+                    .AllowAnyHeader());
+                options.AddPolicy("SwaggerEditor",
+                    builder => builder.WithOrigins("http://editor.swagger.io")
+                    .AllowAnyHeader());
+            });
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
             services.AddTransient<QuizDao>();
@@ -49,6 +60,12 @@ namespace api_core.net
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+
+
+            // Add swagger domain to CORS   
+            app.UseCors("Swagger");
+            app.UseCors("SwaggerEditor");
+
 
             app.UseApplicationInsightsRequestTelemetry();
 
