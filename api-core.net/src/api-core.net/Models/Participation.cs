@@ -5,6 +5,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace api_core.net.Models
 {
+    /**
+   * Modélisation d'une participation :
+   * - Un id Unique
+   * - Une date 
+   * - Un identifiant du participant (son email)
+   * - Le quiz auquel il a répondu
+   **/
     public class Participation
     {
         public ObjectId Id { get; set; }

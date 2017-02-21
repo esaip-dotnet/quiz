@@ -27,8 +27,8 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            BaseDao.UrlMongo = Configuration["MongoDB:Url"];
-            BaseDao.PortMongo = Configuration["MongoDB:Port"];
+            BaseDao.UrlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
+            BaseDao.DatabaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
         }
 
         public IConfigurationRoot Configuration { get; }
