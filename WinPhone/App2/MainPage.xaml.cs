@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -52,6 +52,11 @@ namespace ESAIP_Quiz
             bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
             bmi.UriSource = myUri;
             image.Source = bmi;
+        }
+
+        private void Suivant_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Quiz_Play));
         }
     }
 }
