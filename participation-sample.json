@@ -1,0 +1,69 @@
+{
+	"_id" : 1234567,
+	"idParticipant" : "mailto://jp.gouigoux@free.fr",
+	"startTimestamp" : "2017-01-26T03:26:06+00:00",
+	"score" : 0.5,
+	"quiz" : {
+		"_id" : 1234,
+		"summary" : "Les drapeaux de Formule 1",
+		"description" : "Ce quiz testera votre connaissance visuelle des différents drapeaux utilisés sur un circuit de course",
+		"title" : "Drapeaux F1",
+		"questions" : [
+			{
+				"title" : "Quel est ce drapeau ?",
+				"picture" : "http://images.esaip.org/quiz-lib/damier.jpg",
+				"answers" : [
+					{
+						"title" : "C'est le drapeau de départ",
+						"correct" : false,
+						"checkedByPlayer" : true
+					},
+					{
+						"title" : "C'est le drapeau d'arrivée",
+						"correct" : true,
+						"checkedByPlayer" : false
+					},
+					{
+						"title" : "C'est le drapeau indiquant un arrêt de course",
+						"correct" : false,
+						"checkedByPlayer" : false
+					},
+					{
+						"title" : "C'est le drapeau indiquant un accident proche",
+						"correct" : false,
+						"checkedByPlayer" : false
+					}
+				]
+			},
+			{
+				"title" : "Quel est le drapeau utilisé pour le départ ?",
+				"answers" : [
+					{
+						"title" : "",
+						"picture" : "http://images.esaip.org/quiz-lib/damier.jpg",
+						"correct" : true,
+						"checkedByPlayer" : true
+					},
+					{
+						"title" : "",
+						"picture" : "http://images.esaip.org/quiz-lib/redflag.jpg",
+						"correct" : false,
+						"checkedByPlayer" : false
+					},
+					{
+						"title" : "",
+						"picture" : "http://images.esaip.org/quiz-lib/greenflag.jpg",
+						"correct" : false,
+						"checkedByPlayer" : false
+					},
+					{
+						"title" : "",
+						"picture" : "http://images.esaip.org/quiz-lib/yellowflag.jpg",
+						"correct" : false,
+						"checkedByPlayer" : false
+					}
+				]
+			}
+		]	
+	}		
+}
