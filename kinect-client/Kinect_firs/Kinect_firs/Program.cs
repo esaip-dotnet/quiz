@@ -124,7 +124,7 @@ namespace Kinect_firs
                             /*Recuperation des Coordonnées X,Y de la main Droite*/
                             DepthSpacePoint depthSpacePoint2 = coordinateMapper.MapCameraPointToDepthSpace(positionHR);
                             RHand_X = depthSpacePoint2.X;
- +                         RHand_Y = depthSpacePoint2.Y;
+                          RHand_Y = depthSpacePoint2.Y;
                       
                             // Milieu de la colonne
                             CameraSpacePoint positionMS = joints[MidSpine].Position;
