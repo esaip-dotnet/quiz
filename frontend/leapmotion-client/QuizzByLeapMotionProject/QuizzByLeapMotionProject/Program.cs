@@ -14,11 +14,12 @@ namespace VoteByLeapMotionProject
 {
     class SampleListener : Listener
     {
+      // Création et initialisation des variables, comprenant les questions/réponses
         private Object thisLock = new Object();
 
         private static int idQuiz = 1;
         private static int iCompteurQuestion = 1;
-                
+
         private static String[] Question = new String[4] { "Quelle est la couleur du cheval blanc d'Henri IV ?", "Quelle est l'évolution du Pokémon M.Mime ?", "Est-ce que les nains dépensent car au supermarché les produits les moins sont tout en bas ?", "Peut-on faire de la confiture de coings dans une casserole ronde ?" };
         private static String[] reponses1 = new String[]{ "Noir", "Blanc", "La réponse D", "Obi-wan kenobi" };
         private static String[] reponses2 = new String[] { "Mme.Mime", "Grand-père.Mime", "Alakazam", "Il n'en a pas" };
@@ -27,9 +28,7 @@ namespace VoteByLeapMotionProject
         private static int[] itTabReponses = new int[] {2,4,3,3};
         private Quiz quiz;
 
-        /// <summary>
-        /// Permet d'initialiser les éléments de base de l'élection.
-        /// </summary>
+        // Permet d'initialiser les éléments de base de l'élection.
         public void initSampleListener()
         {
             AffichageQuestion(1);
@@ -44,13 +43,13 @@ namespace VoteByLeapMotionProject
 
         public override void OnInit(Controller controller)
         {
+          // Lors de l'initilisation, on log
             SafeWriteLine("Initialized\n");
-
         }
 
         public override void OnConnect(Controller controller)
         {
-    
+          // Lors de la connexion, on commence à controller les mouvements
             controller.EnableGesture(Gesture.GestureType.TYPE_CIRCLE);
             controller.EnableGesture(Gesture.GestureType.TYPE_KEY_TAP);
             controller.EnableGesture(Gesture.GestureType.TYPE_SCREEN_TAP);
@@ -59,16 +58,16 @@ namespace VoteByLeapMotionProject
 
         public override void OnDisconnect(Controller controller)
         {
+          // Lors de la déconnection, on log
             SafeWriteLine("Disconnected\n");
         }
 
         public override void OnExit(Controller controller)
         {
+          // Lors de la fermeture, on log
             SafeWriteLine("Exited\n");
         }
-        
-        
-        
+
         /// <summary>
         /// Cette fonction est appellée à chaque affichage de question. Elle utilise le compteur de question
         /// qui lui est passé en paramètre afin de pouvoir créer l'objet quiz correspondant
@@ -77,7 +76,8 @@ namespace VoteByLeapMotionProject
         /// <param name="iNumeroQuestion">Compteur de question</param>
         public void AffichageQuestion(int iNumeroQuestion)
         {
-
+          // On récupère et affiche les questions en fonction de leur numéro
+          // On récupère et affiche les réponses qui leur sont affiliées
             if (iNumeroQuestion == 1)
             {
                 //Le compteur est initialisé à 1 par défaut. Il faut donc soustraire 1
@@ -96,7 +96,6 @@ namespace VoteByLeapMotionProject
                 System.Threading.Thread.Sleep(1000);
                 SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
             }
-
             if (iNumeroQuestion == 2)
             {
                 quiz = new Quiz(idQuiz, Question[iNumeroQuestion - 1], reponses2);
@@ -112,7 +111,6 @@ namespace VoteByLeapMotionProject
                 SafeWriteLine("Réponse 4: " + reponses2.GetValue(3).ToString());
                 System.Threading.Thread.Sleep(1000);
                 SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
-
             }
             if (iNumeroQuestion == 3)
             {
@@ -147,7 +145,6 @@ namespace VoteByLeapMotionProject
                 SafeWriteLine("Sélectionnez votre réponse en positionnant votre main !");
             }
         }
-        
 
         /// <summary>
         /// Cette fonction est appellée lorsqu'une bonne réponse est donnée par l'utilisation
@@ -156,22 +153,24 @@ namespace VoteByLeapMotionProject
         /// </summary>
         public void SwitchQuestion()
         {
+          // Lors d'une bonne réponse, on switch la question et on affiche bien joué
             SafeWriteLine("Bien joué !");
             iCompteurQuestion++;
             if (iCompteurQuestion> Question.Length)
             {
+              // S'il s'agissait de la dernière question, on indique la fin
                 SafeWriteLine("Fin du quiz !\n Merci de votre participation.");
                 Environment.Exit(0);
             }
             else
             {
-                AffichageQuestion(iCompteurQuestion); 
+              // Sinon on retourne dans l'AffichageQuestion
+                AffichageQuestion(iCompteurQuestion);
             }
         }
 
-
         /// <summary>
-        /// Evènement lorsque le capteur de la leap détecte une main. 
+        /// Evènement lorsque le capteur de la leap détecte une main.
         /// On créé les objets nécessaire pour détecter une main et sa position en vecteur
         /// Puis selon la position de la main(centre de la paume), nous détectons la réponse fournie par l'utilisation
         /// On appelle SwitchQuestion() dès qu'une bonne réponse est donnée.
@@ -183,9 +182,10 @@ namespace VoteByLeapMotionProject
 
             Hand hand = frame.Hands.Rightmost;
             Vector position = hand.PalmPosition;
-            float timeVisible = hand.TimeVisible; 
+            float timeVisible = hand.TimeVisible;
             if (position.x != 0 && position.y != 0 && position.z !=0)
             {
+              // Tests de la position de la main
                 if (position.x < 0 && position.z < 0)
                 {
                     SafeWriteLine("Vous choississez la réponse 1");
@@ -245,13 +245,11 @@ namespace VoteByLeapMotionProject
                     }
                 }
             }
+            // On limite les vérifications toutes les 3000ms
             System.Threading.Thread.Sleep(3000);
-
-
         }
 
         /***********************************/
-
         class Sample
         {
             public static void Main()
@@ -259,10 +257,9 @@ namespace VoteByLeapMotionProject
                 SampleListener listener = new SampleListener();
                 Controller controller = new Controller();
                 controller.AddListener(listener);
-                Console.WriteLine("Appuyez sur la touche échape pour quitter: \n");
+                Console.WriteLine("Appuyez sur la touche 'échap' pour quitter: \n");
                 listener.initSampleListener();
                 while (true) ;
-
             }
         }
     }
