@@ -1,4 +1,8 @@
-FROM esaipnet/api-node.js-base
+FROM esaipnet/api-node.js-base:1.0
+
+ENV MONGO_URL_PORT localhost:27017
+ENV MONGO_DATABASE quiz
+
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
 RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
