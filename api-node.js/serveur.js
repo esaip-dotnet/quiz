@@ -91,7 +91,7 @@ MongoClient.connect(url, function (err, db) {
         console.log('Connection established to', url);
         
         // Get the documents collection
-        var resultat = db.collection('quiz');
+        var resultat = db.collection('Quiz');
 
         //Notre tableau de quiz
         var allQuiz = new Array();
