@@ -1,4 +1,9 @@
-#Installation d'un windows phone
+#Installation d'un Windows Phone
+
+##Prérequis
+
+- Avoir un Windows Phone 8, version 8 ou supérieure
+- Avoir un Visual Studio (pour l'instant...)
 
 ##Via Visual Studio
 
@@ -8,7 +13,7 @@ Déployez l'application sur votre appareil
 
 TADAM ! Vous pouvez désormais vous instruire tout en vous amusant.
 
-##Via Windows Store
+##Via Windows Store (à venir)
 
 Malheureusement notre application n'est pas encore disponible sur cette plateforme :( !
 
