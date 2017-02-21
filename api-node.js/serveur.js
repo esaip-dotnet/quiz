@@ -46,7 +46,7 @@ if (url && url.length > 1) {
     url = "/api-docs.json";
 }
 */
-var listener = 82;
+var listener = 80;
 
 var server = http.createServer(app);
 server.listen(listener);
@@ -71,6 +71,9 @@ var MongoClient = mongodb.MongoClient;
 
 var serverUrl = process.env.MONGO_URL_PORT;
 var bdd = process.env.MONGO_DATABASE;
+
+console.log(serverUrl);
+console.log(bdd);
 
 //test local
 //var serverUrl = "13.95.14.230:27017";
