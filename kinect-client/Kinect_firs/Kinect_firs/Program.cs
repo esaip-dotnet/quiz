@@ -1,10 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-/*Importation des Librairies Kinect / Microsoft*/
 
+/*Importation des Librairies Kinect / Microsoft*/
 using Microsoft.Kinect;
 using System.Threading;
 
@@ -60,6 +60,7 @@ namespace Kinect_firs
         }
 		
 		// Verifier la zone de la main droite
+        static String checkZoneRH()
         {
             String zoneHand;
             if (RHand_X < MSpine_X && RHand_Y < MSpine_Y)
@@ -135,6 +136,7 @@ namespace Kinect_firs
                             DepthSpacePoint depthSpacePoint3 = coordinateMapper.MapCameraPointToDepthSpace(positionMS);
                             MSpine_X = depthSpacePoint3.X;
                             MSpine_Y = depthSpacePoint3.Y;
+                            String zoneMain = checkZoneRH();
                             Console.WriteLine(zoneMain);
                         }
 						
