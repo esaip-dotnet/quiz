@@ -1,0 +1,19 @@
+version: '2'
+services:
+    web-core:
+		build: web-client-core-asp.net
+		ports:
+        - "80:80"
+        image: "esaipnet/web-client-core-asp:1.0"
+	api-core:
+		build: api-core.net
+		ports:
+        - "80:81"
+        image: "esaipnet/api-core.net:1.0"
+	api-node:
+		build: api-node.js
+		ports:
+        - "80:82"
+        image: "esaipnet/api-node.js:1.0"
+    db-mongo:
+        image: "mongo:3.0.3"
