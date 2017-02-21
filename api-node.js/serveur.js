@@ -1,4 +1,3 @@
-//Initialiation du serveur
 var http = require('http');
 var express = require("express");
 var app = express();
@@ -25,7 +24,7 @@ app.use(bodyParser.urlencoded({
 
 var mongodb = require('mongodb');
 
-//Mise en place du MongoClient pour se connecter au serveur
+//We need to work with "MongoClient" interface in order to connect to a mongodb server.
 var MongoClient = mongodb.MongoClient;
 
 serverName = "localhost";
@@ -47,8 +46,6 @@ var bdd = "quiz";*/
 var url = 'mongodb://'+serverName+':'+portListener+'/'+bdd;
 //var url = 'mongodb://localhost:27017/quiz';
 
-
-//Test de la connection au serveur via le client 
 MongoClient.connect(url, function (err, db) {
     if (err) {
         console.log('Unable to connect to the mongoDB server. Error:', err);
@@ -131,13 +128,13 @@ MongoClient.connect(url, function (err, db) {
             //response.send(request.body); // echo the result back
         });
 
-        // On va pouvoir controller ici l'acces à l'application
+        
         app.get('/', function(req, res) {
             res.status(200);
             res.send("Ca marche sur ma machine !");
         });
 
-        // Cette methode va nous permettre de récupérer les quiz en utilisant la méthode get
+        
         app.get('/quiz', function(req, res) {
             var myJson = JSON.stringify(allQuiz); // Convertir Array en objet JSON
             res.contentType('application/json');
@@ -146,7 +143,6 @@ MongoClient.connect(url, function (err, db) {
         });
 
         
-		// Afin de pouvoir sélectionner un quiz nous allons utiliser l'id du quiz
         app.get('/quiz/:id', function(req, res) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
@@ -163,7 +159,6 @@ MongoClient.connect(url, function (err, db) {
             });
         });
         
-		// La méthode put va nous permettre d'effectuer une modification d'un quiz, que l'on recuperera de nouveau grace à l'id
         app.put('/quiz/:id', function(req, res) {
             
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
@@ -175,7 +170,6 @@ MongoClient.connect(url, function (err, db) {
             
         });
         
-		// La méthode patch va nous permettre de modifier l'attribut d'une ressource
         app.patch('/quiz/:id', function (req, res){
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
