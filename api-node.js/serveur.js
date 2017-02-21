@@ -179,6 +179,7 @@ MongoClient.connect(url, function (err, db) {
             resultat.find({}).toArray(function (error, results) {
                 if (error) throw error;
 
+                console.log(results);
                 results.forEach(function(i, obj) {
                     console.log(i);
                     res.status(200);
