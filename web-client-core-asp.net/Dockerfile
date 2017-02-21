@@ -1,4 +1,4 @@
-FROM esaipnet/api-core.net-base
+FROM esaipnet/api-core.net-base:1.0
 ADD . /app
 WORKDIR /app
 RUN ["dotnet", "restore"]
