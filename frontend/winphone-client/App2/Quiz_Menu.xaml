@@ -9,6 +9,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+      <!-- Liste des choix -->
         <StackPanel HorizontalAlignment="Left" Height="320" Margin="53,150,0,0" VerticalAlignment="Top" Width="320">
             <RadioButton Content="quiz 1" HorizontalAlignment="Left" Height="60" Margin="28,0,0,0" Width="120"/>
             <RadioButton Content="quiz 2" HorizontalAlignment="Left" Height="60" Margin="28,0,0,0" Width="120"/>
@@ -16,7 +17,9 @@
             <RadioButton Content="quiz 4" HorizontalAlignment="Left" Height="60" Margin="28,0,0,0" Width="120"/>
             <RadioButton Content="quiz 5" HorizontalAlignment="Left" Height="60" Margin="28,0,0,0" Width="120"/>
         </StackPanel>
+        <!-- Bouton de validation du choix -->
         <Button Content="Valider" HorizontalAlignment="Left" Height="23" Margin="53,536,0,0" VerticalAlignment="Top" Width="299"/>
+        <!-- TextBox pour le titre de la page -->
         <TextBox HorizontalAlignment="Left" Height="53" Margin="53,29,0,0" TextWrapping="Wrap" Text="Choisissez votre quiz !!!!!!" VerticalAlignment="Top" Width="299"/>
     </Grid>
 </Page>

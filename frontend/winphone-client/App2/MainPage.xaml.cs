@@ -15,17 +15,14 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// Pour en savoir plus sur le modèle d'élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkId=391641
-
 namespace ESAIP_Quiz
 {
-    /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
-    /// </summary>
+    // Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     public sealed partial class MainPage : Page
     {
         public MainPage()
         {
+          // Initialisation des fonctionalités de l'application
             this.InitializeComponent();
             this.LoadImage();
             this.NavigationCacheMode = NavigationCacheMode.Required;
@@ -33,6 +30,7 @@ namespace ESAIP_Quiz
 
         void LoadImage()
         {
+          // API pour afficher l'image, avec construction de l'URI
             Uri myUri = new Uri("http://thecatapi.com/api/images/get?format=src&type=jpg", UriKind.Absolute);
             BitmapImage bmi = new BitmapImage();
             bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -47,6 +45,8 @@ namespace ESAIP_Quiz
 
         private void Valider_Click(object sender, RoutedEventArgs e)
         {
+          // Lorsque l'on appuye sur le bouton Valider...
+          // API pour afficher l'image, avec construction de l'URI
             Uri myUri = new Uri("http://thecatapi.com/api/images/get?format=src&type=jpg", UriKind.Absolute);
             BitmapImage bmi = new BitmapImage();
             bmi.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
@@ -56,6 +56,8 @@ namespace ESAIP_Quiz
 
         private void Suivant_Click(object sender, RoutedEventArgs e)
         {
+          // Lorsque l'on appuye sur le bouton "Page Suivante"
+          // On change de page, vers Quiz_Play
             Frame.Navigate(typeof(Quiz_Play));
         }
     }

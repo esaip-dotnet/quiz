@@ -9,12 +9,15 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBox x:Name="Question" HorizontalAlignment="Left" Height="48" Margin="39,55,0,0" TextWrapping="Wrap" Text="Question : Intitulé de la question" 
+      <!-- TextBox pour titre -->
+        <TextBox x:Name="Question" HorizontalAlignment="Left" Height="48" Margin="39,55,0,0" TextWrapping="Wrap" Text="Question : Intitulé de la question"
                  VerticalAlignment="Top" Width="318" />
-        <Button x:Name="Valider" Content="Valider" HorizontalAlignment="Left" Margin="38.856,485.822,0,0" VerticalAlignment="Top" 
-                RenderTransformOrigin="0.5,0.5" Height="56.328" UseLayoutRounding="False" Width="312.136" d:LayoutRounding="Auto" 
+                 <!-- Bouton de validation du choix -->
+        <Button x:Name="Valider" Content="Valider" HorizontalAlignment="Left" Margin="38.856,485.822,0,0" VerticalAlignment="Top"
+                RenderTransformOrigin="0.5,0.5" Height="56.328" UseLayoutRounding="False" Width="312.136" d:LayoutRounding="Auto"
                 Click="Button_Click">
         </Button>
+        <!-- Liste de choix -->
         <StackPanel x:Name="panel" Orientation="Vertical" Margin="0,155,0,184">
             <RadioButton x:Name="reponse1" IsChecked="True" Content="Réponse 1"/>
             <RadioButton x:Name="reponse2" Content="Réponse 2"/>

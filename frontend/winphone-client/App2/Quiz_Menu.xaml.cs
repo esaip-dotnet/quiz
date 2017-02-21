@@ -13,13 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Pour en savoir plus sur le modèle d’élément Page vierge, consultez la page http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace ESAIP_Quiz
 {
-    /// <summary>
-    /// Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
-    /// </summary>
+    // Une page vide peut être utilisée seule ou constituer une page de destination au sein d'un frame.
     public sealed partial class Quiz_Menu : Page
     {
         public Quiz_Menu()
@@ -27,11 +23,7 @@ namespace ESAIP_Quiz
             //this.InitializeComponent();
         }
 
-        /// <summary>
-        /// Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
-        /// </summary>
-        /// <param name="e">Données d'événement décrivant la manière dont l'utilisateur a accédé à cette page.
-        /// Ce paramètre est généralement utilisé pour configurer la page.</param>
+        // Invoqué lorsque cette page est sur le point d'être affichée dans un frame.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
         }

@@ -9,15 +9,19 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+      <!-- TextBox d'affichage du titre -->
         <TextBox x:Name="Question" HorizontalAlignment="Left" Height="48" Margin="39,55,0,0" TextWrapping="Wrap" Text="Question : Intitulé de la question"
                  VerticalAlignment="Top" Width="318" />
+                 <!-- Bouton de changement d'image -->
         <Button x:Name="Valider" Content="Valider" HorizontalAlignment="Left" Margin="39,426,0,0" VerticalAlignment="Top"
                 RenderTransformOrigin="0.5,0.5" Height="56.328" Width="312"
                 Click="Valider_Click"/>
+                <!-- Bouton de changement de page -->
         <Button x:Name="PageSuivate" Content="Page Suivante" HorizontalAlignment="Left" Margin="38.856,485.822,0,0" VerticalAlignment="Top"
                 RenderTransformOrigin="0.5,0.5" Height="56.328" UseLayoutRounding="False" Width="312.136" d:LayoutRounding="Auto"
                 Click="Suivant_Click">
         </Button>
+        <!-- Zone d'affichage de l'image -->
         <Image x:Name="image" Height="84" Margin="148,268,144,288"/>
     </Grid>
 </Page>
