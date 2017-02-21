@@ -1,17 +1,18 @@
 {
-  "name"         : "quiz",
-  "version"      : "0.0.1",
-  "description"  : " Application quiz",
-  "main"         : "serveur.js",
-  "author"       : "",
-  "license"      : "MIT",
-  "repository"   : {
-    "type" : "git"
-
+  "name": "quiz",
+  "version": "0.0.1",
+  "description": " Application quiz",
+  "main": "serveur.js",
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git"
   },
-  "dependencies" : {
-    "express"         : "~4.7.2",
-    "body-parser"     : "~1.4.3",
-    "method-override" : "~2.1.1"
+  "dependencies": {
+    "body-parser": "~1.4.3",
+    "express": "^4.14.1",
+    "fast-json-patch": "^1.1.6",
+    "method-override": "~2.1.1",
+    "mongodb": "^2.2.24"
   }
 }
