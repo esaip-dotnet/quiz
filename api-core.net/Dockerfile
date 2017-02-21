@@ -6,5 +6,5 @@ ENV MONGO_DATABASE quiz
 ADD /src /app
 WORKDIR /app/api-core.net
 RUN ["dotnet", "restore"]
-EXPOSE 80
+EXPOSE 5004
 ENTRYPOINT ["dotnet", "run"]
