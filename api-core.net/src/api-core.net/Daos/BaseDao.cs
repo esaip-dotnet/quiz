@@ -18,13 +18,13 @@ namespace api_core.net.Daos
         // Ces paramètres sont attribués au lancement de l'application avec la valeur les représentants 
         // dans le fichier appsetting.json
         public static string UrlMongo { get; set; }
-        public static string PortMongo { get; set; }
+        public static string DatabaseMongo { get; set; }
         // Le paramètre renvoyé pour acceder à la base de "l'exterieur"
         private static BaseDao instance;
 
         private BaseDao() {
-            _client = new MongoClient($"mongodb://{UrlMongo}:{PortMongo}");
-            _db = _client.GetDatabase("QuizDB");
+            _client = new MongoClient($"mongodb://{UrlMongo}");
+            _db = _client.GetDatabase(DatabaseMongo);
         }
         // Fonctionnement du singleton
         public static BaseDao Instance
