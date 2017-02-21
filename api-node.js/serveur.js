@@ -3,7 +3,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require('body-parser');
 var jsonPatch = require('fast-json-patch');
-
+/*
 // Les dépendances utilisées pour la création du fichier Swagger
 var argv = require('minimist')(process.argv.slice(2));
 var swagger = require("swagger-node-express");
@@ -45,8 +45,8 @@ if (url && url.length > 1) {
     <del>url = "http://petstore.swagger.io/v2/swagger.json";</del>
     url = "/api-docs.json";
 }
-
-var listener = 8080;
+*/
+var listener = 82;
 
 var server = http.createServer(app);
 server.listen(listener);
@@ -69,16 +69,14 @@ var mongodb = require('mongodb');
 //Mise en place du MongoClient pour se connecter au serveur
 var MongoClient = mongodb.MongoClient;
 
-serverName = "localhost";
-portListener = "27017";
-bdd = "quiz";
-  
-var serverName = process.env.SERVERNAME || serverName;
-var portListener = process.env.PORTMONGODB || portListener;
-var bdd = process.env.BDDNAME || bdd;
+var serverUrl = process.env.MONGO_URL_PORT;
+var bdd = process.env.MONGO_DATABASE;
 
+//test local
+//var serverUrl = "13.95.14.230:27017";
+//var bdd = "quiz";
 
-var url = 'mongodb://'+serverName+':'+portListener+'/'+bdd;
+var url = 'mongodb://'+serverUrl+'/'+bdd;
 //var url = 'mongodb://localhost:27017/quiz';
 
 //Test de la connection au serveur via le client 
