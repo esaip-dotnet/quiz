@@ -1,7 +1,7 @@
 FROM esaipnet/api-node.js-base:1.0
 
-ENV URL_QUIZ http://13.95.14.230
-ENV URL_QUIZ_DB http://13.95.14.230:27017
+ENV MONGO_URL_PORT http://13.95.14.230:27017
+ENV MONGO_DATABASE quiz
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
