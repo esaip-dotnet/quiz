@@ -21,6 +21,9 @@ Fonctionnalités supplémentaires possibles pour la deuxième vague de pull requ
 - Mise en place d'un round robin par HAProxy dans le Docker Compose (4 pts)
 - GUI dans le web client pour créer un quiz et paramétrer de nouvelles questions (5 pts)
 - Mise en place d'une solution de scoring (4 pts)
+- Résoudre le problème de fonctionnement de l'API Core .NET (4 pts)
+- Finir de corriger les affectations de ports (4 pts)
+- Documenter le mécanisme d'intégration et ce que fait le docker-compose.yml avec un schéma (3 pts)
 
 Important : les critères de notation sur la propreté sont, d'une certaine manière obligatoires : si une fonctionnalité est livrée, mais sur une base pas propre, elle sera de fait moins bien notée.
 
