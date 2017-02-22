@@ -284,8 +284,42 @@ namespace VoteByLeapMotionProject
                     if (sLine != null)
                         Console.WriteLine("{0}:{1}", i, sLine);
                 }
+
                 /**************************************************************/
-                ////////////////////// FIN GESTION GET /////////////////////////
+                /////////////////       GESTION POST            ////////////////
+                /**************************************************************/
+
+                WebRequest request = WebRequest.Create("http://13.95.14.230:82/quiz");
+                request.Method = "POST";
+
+                // Créer le POST et le converti en byte array
+                string postData = "testDataLeap";
+                byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+                request.ContentType = "text/json";
+                request.ContentLength = byteArray.Length;
+                Stream dataStream = request.GetRequestStream();
+
+                // 0 correspond à l'index du flux de données (stream)
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
+
+                // Afficher réponse Status
+                WebResponse response = request.GetResponse();
+                Console.WriteLine(((HttpWebResponse)response).StatusDescription);
+
+                // Obtient le contenu du flux retourné par le serveur
+                dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string responseFromServer = reader.ReadToEnd();
+                Console.WriteLine(responseFromServer);
+
+                // On close les Streams
+                reader.Close();
+                dataStream.Close();
+                response.Close();
+
+                /**************************************************************/
+                ////////////////////// FIN GESTION GET et POST /////////////////
                 /**************************************************************/
 
                 SampleListener listener = new SampleListener();
