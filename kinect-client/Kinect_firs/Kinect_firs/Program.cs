@@ -66,13 +66,26 @@ namespace Kinect_firs
                 sJsonTotal+=sLine;                            
             }
             
+            //Appel à la fonction de Parser
             JsonToObject(sJsonTotal);
             
-            /*********** FIN DES GESTIONS GET ****************/
+             /**************************************************************/
+            /////////////////       GESTION GET            ///////////////// 
+            /**************************************************************/
             
             
-            /********* REQUETE POST****************************/
             
+            
+             /**************************************************************/
+            /////////////////       GESTION POST            ///////////////// 
+            /**************************************************************/
+                 
+            /// <summary>
+            /// Cette fonction permet d'appelle une requête POST à la BDD
+            /// Pour le moment, il faut récupérer l'ID du quiz via la méthode GET, mais ne pouvant tester, je le mets comme ça. 
+            /// Cette fonction est appellée lors de la réception d'une frame, et renvoie donc la zone de réponse dans laquelle elle se trouvve
+            /// </summary>
+            /// <param name="sZoneReponse">Numéro de la réponse donnée</param>
             protected  void PostRequest(String sZoneReponse)
             {
                 
@@ -99,9 +112,20 @@ namespace Kinect_firs
             dataStream.Close();
             response.Close();
             }
-            /**********FIN REQUETE POST************************/
+             /**************************************************************/
+            /////////////////       GESTION POST            ///////////////// 
             
-            /******************PARSER JSON GET*******************/
+            /**************************************************************/
+            
+             /**************************************************************/
+            /////////////////       GESTION PARSER            ///////////////// 
+            /**************************************************************/
+            /// <summary>
+            /// Cette fonction permet d'appelle de parser le Json que l'on reçoit et le transformer en un "object"
+            /// A partir de cet object on peut récupérer les questions et les réponses 
+            /// Les itérations des boucles proviennent du nombre de questions/réponses présentes dans le fichier quiz-sample disponible à la racine du projet.
+            /// </summary>
+            /// <param name="JsonData">Le JSON renvoyé par la requête GET</param>
             public static void JsonToObject(string JsonData)
             {
                 //Transformer le Json en un object
@@ -129,10 +153,10 @@ namespace Kinect_firs
             
             }
             
-            /************ FIN PARSER GET******************************/
-            
-            
-            
+             /**************************************************************/
+            /////////////////       GESTION GET            ///////////////// 
+            /**************************************************************/
+             
             
             //Lancement du premier Capteur
             kinectSensor = KinectSensor.GetDefault();
