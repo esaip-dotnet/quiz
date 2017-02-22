@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.IO;
+using System.Web.Script.Serialization;
+
 
 /*Importation des Librairies Kinect / Microsoft*/
 using Microsoft.Kinect;
@@ -14,12 +16,18 @@ namespace Kinect_firs
 {
     class Program
     {
-        /*Recuperation des Fonctions Kinect*/
+        //Recuperation des Fonctions Kinect
         private static KinectSensor kinectSensor;
         private static BodyFrameReader bodyFrameReader = null;
         private static Body[] bodies = null;
         private static CoordinateMapper coordinateMapper = null;
         private const float InferredZPositionClamp = 0.1f;
+        
+        
+        //Récupérer réponses et questions
+        private string[] sQuestion=;
+        private string[] sReponses;
+        private int indexBonneReponse;
         
         // Points du corps
         static JointType HandRight;
@@ -36,6 +44,7 @@ namespace Kinect_firs
             /**************************************************************/
             string sURL;
             sURL = "http://13.95.14.230:82/quiz";
+            JsonObject j;
 
             WebRequest wrGETURL;
             wrGETURL = WebRequest.Create(sURL);
@@ -46,17 +55,50 @@ namespace Kinect_firs
             StreamReader objReader = new StreamReader(objStream);
 
             string sLine = "";
-            int i = 0;
+            string sJsonTotal ="";
 
             while (sLine!=null)
             {
             i++;
             sLine = objReader.ReadLine();
             if (sLine!=null)
-            Console.WriteLine("{0}:{1}",i,sLine);
+           //Console.WriteLine("{0}:{1}",i,sLine);
+                sJsonTotal+=sLine;                            
             }
-        
+            
+            JsonToObject(sJsonTotal);
+            
             /*********** FIN DES GESTIONS GET ****************/
+            
+            
+                    
+            public static void JsonToObject(string JsonData)
+            {
+                //Transformer le Json en un object
+                JavaScriptSerializer jss = new JavaScriptSerializer();
+                var JsonObject = jss.Deserialize<dynamic>(JsonData);
+                
+                //Récupérer les questions
+                int j=0;
+                for (j=0; j<2;j++)
+                {
+                sQuestion[] = new string[];
+                sQuestion[j] = JsonObject.questions[j].["title"];
+                }
+                
+                //Récupérer les réponses
+                int i =0;
+                for (j=0;j<2;j++)
+                {
+                    for (i=0; i<3;i++)
+                    {
+                        sReponses[] = new string[];
+                        sReponses[i] = JsonObject.questions[j].answers[i].["title"];
+                   }                   
+                }
+            
+            }
+            
 
             //Lancement du premier Capteur
             kinectSensor = KinectSensor.GetDefault();
@@ -104,6 +146,8 @@ namespace Kinect_firs
 
             return zoneHand;
         }
+        
+    
 
         // Lecture du capteur
         static void Reader_FrameArrived(object sender, BodyFrameArrivedEventArgs e)
