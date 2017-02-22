@@ -71,7 +71,37 @@ namespace Kinect_firs
             /*********** FIN DES GESTIONS GET ****************/
             
             
-                    
+            /********* REQUETE POST****************************/
+            
+            protected  void PostRequest(String sZoneReponse)
+            {
+                
+            //IL FAUDRA ICI RENSEIGNER ID DU QUIZ (RECUP VIA GET REQUEST)
+            WebRequest request = WebRequest.Create("http://13.95.14.230:82/quiz/participation/");
+            request.Method = "POST";
+
+            // Créer le POST et le converti en byte array
+            string postData = sZoneReponse;
+            byte[] byteArray = Encoding.UTF8.GetBytes(postData);
+            request.ContentType = "text/json";
+            request.ContentLength = byteArray.Length;
+            Stream dataStream = request.GetRequestStream();
+
+            // 0 correspond à l'index du flux de données (stream)
+            dataStream.Write(byteArray, 0, byteArray.Length);
+            dataStream.Close();
+            
+            // Obtient le contenu du flux retourné par le serveur
+            dataStream = response.GetResponseStream();
+
+            // On close les Streams
+            reader.Close();
+            dataStream.Close();
+            response.Close();
+            }
+            /**********FIN REQUETE POST************************/
+            
+            /******************PARSER JSON GET*******************/
             public static void JsonToObject(string JsonData)
             {
                 //Transformer le Json en un object
@@ -99,7 +129,11 @@ namespace Kinect_firs
             
             }
             
-
+            /************ FIN PARSER GET******************************/
+            
+            
+            
+            
             //Lancement du premier Capteur
             kinectSensor = KinectSensor.GetDefault();
             coordinateMapper = kinectSensor.CoordinateMapper;
@@ -115,13 +149,13 @@ namespace Kinect_firs
                 {
                     bodyFrameReader.FrameArrived += Reader_FrameArrived;
                 }
-                /*Verification d'une exception dans la recherche*/
+                //Verification d'une exception dans la recherche
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
                 }
             }
-            /*En cas de recherche infructueuse > on arrete */
+            //En cas de recherche infructueuse > on arrete 
             else
             {
                 Console.WriteLine("BodyFrameReader is null");
@@ -134,15 +168,28 @@ namespace Kinect_firs
         {
             String zoneHand;
             if (RHand_X < MSpine_X && RHand_Y < MSpine_Y)
+            {
                 zoneHand = "Zone 1";
+                PostRequest(zoneHand);
+            }
             else if (RHand_X > MSpine_X && RHand_Y < MSpine_Y)
+            {  
                 zoneHand = "Zone 2";
+                PostRequest(zoneHand);
+            }
             else if (RHand_X < MSpine_X && RHand_Y > MSpine_Y)
+            {  
                 zoneHand = "Zone 3";
+                PostRequest(zoneHand);
+            }
             else if (RHand_X > MSpine_X && RHand_Y > MSpine_Y)
+            {  
                 zoneHand = "Zone 4";
+                PostRequest(zoneHand);
+            }
             else
                 zoneHand = "Hand not found";
+                
 
             return zoneHand;
         }
