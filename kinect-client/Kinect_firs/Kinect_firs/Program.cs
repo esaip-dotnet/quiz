@@ -73,8 +73,37 @@ namespace Kinect_firs
             /////////////////       GESTION GET            ///////////////// 
             /**************************************************************/
             
+                        
             
-            
+            //Lancement du premier Capteur
+            kinectSensor = KinectSensor.GetDefault();
+            coordinateMapper = kinectSensor.CoordinateMapper;
+            //Ouverture du premier capteur*
+            kinectSensor.Open();
+
+            //Lancement de la recherche d'un corps
+            bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
+            if (bodyFrameReader != null)
+            {
+                //Tentative d'acces
+                try
+                {
+                    bodyFrameReader.FrameArrived += Reader_FrameArrived;
+                }
+                //Verification d'une exception dans la recherche
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+            //En cas de recherche infructueuse > on arrete 
+            else
+            {
+                Console.WriteLine("BodyFrameReader is null");
+            }
+            Console.ReadLine();
+        }
+                    
             
              /**************************************************************/
             /////////////////       GESTION POST            ///////////////// 
@@ -154,38 +183,9 @@ namespace Kinect_firs
             }
             
              /**************************************************************/
-            /////////////////       GESTION GET            ///////////////// 
+            /////////////////       GESTION PARSER            ///////////////// 
             /**************************************************************/
-             
-            
-            //Lancement du premier Capteur
-            kinectSensor = KinectSensor.GetDefault();
-            coordinateMapper = kinectSensor.CoordinateMapper;
-            //Ouverture du premier capteur*
-            kinectSensor.Open();
-
-            //Lancement de la recherche d'un corps
-            bodyFrameReader = kinectSensor.BodyFrameSource.OpenReader();
-            if (bodyFrameReader != null)
-            {
-                //Tentative d'acces
-                try
-                {
-                    bodyFrameReader.FrameArrived += Reader_FrameArrived;
-                }
-                //Verification d'une exception dans la recherche
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                }
-            }
-            //En cas de recherche infructueuse > on arrete 
-            else
-            {
-                Console.WriteLine("BodyFrameReader is null");
-            }
-            Console.ReadLine();
-        }
+    
 
         // Verifier la zone de la main droite
         static String checkZoneRH()
