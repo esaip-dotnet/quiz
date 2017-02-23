@@ -1,13 +1,15 @@
 # api-node.js
+
 This is the Node API version of the voting application
 
 ## Contract
+
 The API exposes four operations under the localhost/api/quiz url, those are:
 
-- **/quiz (GET) : returns all quiz;
-- **/quiz/{id} (GET) : returns a specified quiz by the invoqued id ;
-- **/quiz/json (POST) : creates a new quiz.
-- **/quiz/{id}/quiz (PATCH) :modify a quiz.
+- \*\*/quiz (GET) : returns all quiz;
+- \*\*/quiz/{id} (GET) : returns a specified quiz by the invoqued id ;
+- \*\*/quiz/json (POST) : creates a new quiz.
+- \*\*/quiz/{id}/quiz (PATCH) :modify a quiz.
 
 ## Content
 The JSON basic form is the following :
@@ -15,8 +17,8 @@ The JSON basic form is the following :
 >                description: "Ce quiz ...",
 >                title: "Le grand quiz des pays",
 >                questions: [
->                    { 
->                        title:"Quel est ce drapeaux ?"
+>                    {
+>                        title:"Quel est ce drapeau ?"
 >                    }
 >                    
 >                ],
@@ -40,9 +42,10 @@ The JSON basic form is the following :
 >                ]
 
 # Launch the node "serveur.js"
+
 Firstly, mongodb server (mongod.exe) needs to be running.
-You need to set the following environment variables. 
-==> SERVERNAME 
+You need to set the following environment variables.
+==> SERVERNAME
 ==> PORTMONGODB
 ==> BDD (the mongodb base name)
 
