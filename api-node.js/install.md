@@ -57,4 +57,98 @@ Le message "Ca marche sur ma machine !" s'affiche sur la page.
 
 ## Installer sur Docker
 
+### Prérequis
+
+Avoir une installation Docker fonctionnel.
+
+### Le fichier package.json
+
+Créer un fichier "package.json". Ce fichier décrit votre application et ces dépendances.
+
+Exemple:
+
+>{
+>  "name": "quiz",
+>  "version": "0.0.1",
+>  "description": " Application quiz",
+>  "main": "serveur.js",
+>  "author": "",
+>  "license": "MIT",
+>  "repository": {
+>    "type": "git"
+>  },
+>  "dependencies": {
+>    "express": "^4.14.1"
+>  }
+>}
+
+### Le fichier serveur.js
+
+Ensuite il faut créer le fichier "serveur.js" comme vu précédemment.
+
+### Le fichier "Dockerfile"
+
+> FROM esaipnet/api-node.js-base:1.0
+
+> ADD package.json /tmp/package.json
+> RUN cd /tmp && npm install
+> RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+
+> WORKDIR /opt/app
+> ADD . /opt/app
+
+> EXPOSE 8080
+> CMD ["node", "serveur.js"]
+
+#### Explications
+
+> FROM esaipnet/api-node.js-base:1.0
+
+La commande FROM permet de définir depuis quel image Docker on veut build l'application.
+
+> ADD package.json /tmp/package.json
+> RUN cd /tmp && npm install
+> RUN mkdir -p /opt/app && cp -a /tmp/node_modules /opt/app/
+
+Ce code permet d'ajouter les dépendances (qui sont dans package.json) 
+sans pour autant les réinstaller à chaque fois que l'on rebuild le container Docker.
+
+Les modules sont mis en cache et ne sont pas rebuild dès qu'on change le code source de notre appli.
+
+> WORKDIR /opt/app
+> ADD . /opt/app
+
+L'instruction WORKDIR permet de dire ou se trouve l'application.
+
+> EXPOSE 8080
+
+C'est le port sur lequel notre application (serveur http) est à l'écoute.
+
+> CMD ["node", "serveur.js"]
+
+Pour lancer l'application Node.js.
+
+### Build l'image Docker
+
+Il faut se placer dans le repertoire contenant le fichier "DockerFile" et lancer la commande:
+
+> $ docker build -t \<your username>/node-web-app .
+
+### Lancer l'image Docker
+
+> $ docker run -p 49160:8080 -d \<your username>/node-web-app
+
+Le flag -p indique de rédiriger le port public 49162 vers le port privé 8080 dans le container.
+
+### Tester
+
+Aller dans un navigateur et entrer l'url:
+
+> localhost:49160
+
+### Source
+
+- https://nodejs.org/en/docs/guides/nodejs-docker-webapp/
+- http://bitjudo.com/blog/2014/03/13/building-efficient-dockerfiles-node-dot-js/
+
 
