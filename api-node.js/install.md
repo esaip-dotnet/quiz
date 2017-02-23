@@ -12,7 +12,7 @@ Exemple: version Windows Installer (.msi) 64-bit: node-v6.10.0-x64.msi
 
 Puis lancer l'installation.
 
-## Tester Node.js 
+### Tester Node.js 
 
 Pour tester Node.js, créer simplement un fichier test.js et écrire dedans:
 
@@ -22,15 +22,15 @@ Ensuite, avec le programme "Node.js command prompt", lancer la commande
 
 > node test.js
 
-## Créer un simple serveur web (http) 
+### Créer un simple serveur web (http) 
 
-### Prérequis
+#### Prérequis
 
 Il faut installer le package "express" qui fournit des outils de base pour aller plus vite dans la création d'application Node.js.
 
 > npm install express
 
-### Créer le serveur 
+#### Créer le serveur 
 
 Créer un fichier "serveur.js"
 
@@ -46,4 +46,15 @@ Créer un fichier "serveur.js"
 >       res.status(200);
 >       res.send("Ca marche sur ma machine !");
 >   });
+
+####
+
+Pour tester le serveur, il suffit d'entrer dans un navigateur:
+
+> http://localhost:8080
+
+Le message "Ca marche sur ma machine !" s'affiche sur la page.
+
+## Installer sur Docker
+
 
