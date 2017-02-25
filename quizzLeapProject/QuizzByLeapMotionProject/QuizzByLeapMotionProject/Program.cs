@@ -209,10 +209,8 @@ namespace VoteByLeapMotionProject
             Vector position = hand.PalmPosition;
             float timeVisible = hand.TimeVisible;
 
-            // On entre dans le if, uniquement si c'est le lancement de l'application
-            if(firstStart == true)
+            if (firstStart == true)
             {
-                // Permet d'empècher l'application de sauvegarder une position même si l'utilisateur ne place pas sa main
                 if (position.x != 0 && position.y != 0 && position.z != 0)
                 {
                     if (firstStartNumRep == 1)
@@ -227,14 +225,19 @@ namespace VoteByLeapMotionProject
                     {
                         System.Threading.Thread.Sleep(2000);
 
-                        // Calcul des distances entre la zone que nous voulons créer et la zone précédente
                         float distRep1Rep2 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
 
-                        // Enregistre la zone de réponse 2
-                        centreRep2 = new float[] { position.x, position.y, position.z };
-                        positionsSauvegardees[1] = true;
-                        SafeWriteLine("Position 2 sauvegardée");
-                        
+                        // On vérifie que la zone a créer est à une distance suffisante de l'autre
+                        if (distRep1Rep2 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else
+                        {
+                            centreRep2 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[1] = true;
+                            SafeWriteLine("Position 2 sauvegardée");
+                        }
                     }
                     if (firstStartNumRep == 3)
                     {
@@ -243,10 +246,21 @@ namespace VoteByLeapMotionProject
                         float distRep1Rep3 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
                         float distRep2Rep3 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
 
-                        // Enregistre la zone de réponse 3
-                        centreRep3 = new float[] { position.x, position.y, position.z };
-                        positionsSauvegardees[2] = true;
-                        SafeWriteLine("Position 3 sauvegardée");
+                        // On vérifie que la zone a créer est à une distance suffisante des 2 autres
+                        if (distRep1Rep3 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else if (distRep2Rep3 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 2");
+                        }
+                        else
+                        {
+                            centreRep3 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[2] = true;
+                            SafeWriteLine("Position 3 sauvegardée");
+                        }
                     }
                     if (firstStartNumRep == 4)
                     {
@@ -256,15 +270,29 @@ namespace VoteByLeapMotionProject
                         float distRep2Rep4 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
                         float distRep3Rep4 = calculDistance(position.x, position.z, centreRep3[0], centreRep3[2]);
 
-
-                        centreRep4 = new float[] { position.x, position.y, position.z };
-                        positionsSauvegardees[3] = true;
-                        SafeWriteLine("Position 4 sauvegardée");
-
+                        // On vérifie que la zone a créer est à une distance suffisante des 3 autres
+                        if (distRep1Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 1");
+                        }
+                        else if (distRep2Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 2");
+                        }
+                        else if (distRep3Rep4 < 2 * rayonZone)
+                        {
+                            SafeWriteLine("Ecartez-vous de la zone 3");
+                        }
+                        else
+                        {
+                            centreRep4 = new float[] { position.x, position.y, position.z };
+                            positionsSauvegardees[3] = true;
+                            SafeWriteLine("Position 4 sauvegardée");
+                        }
                     }
                 }
             }
-            // On vérifie que toutes les positions de réponses ont bien été sauvegardées
+
             else if (positionsSauvegardees[0] && positionsSauvegardees[1] && positionsSauvegardees[2] && positionsSauvegardees[3])
             {
                 if (position.x != 0 && position.y != 0 && position.z != 0)
@@ -277,12 +305,12 @@ namespace VoteByLeapMotionProject
                     // On vérifie si l'utilisateur est dans l'une des 4 zones
                     for (int i = 0; i < 4; i++)
                     {
-                        if(distRep[i] < rayonZone)
+                        if (distRep[i] < rayonZone)
                         {
-                            SafeWriteLine("Vous choississez la réponse " + (i+1));
+                            SafeWriteLine("Vous choississez la réponse " + (i + 1));
 
                             // On vérifie si la réponse est bonne
-                            if (itTabReponses[iCompteurQuestion] != (i+1))
+                            if (itTabReponses[iCompteurQuestion] != (i + 1))
                             {
                                 System.Threading.Thread.Sleep(1000);
                                 SafeWriteLine("Mauvaise réponse");
