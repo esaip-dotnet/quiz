@@ -29,8 +29,21 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
-            BaseDao.UrlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
-            BaseDao.DatabaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
+            String urlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
+            String databaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
+
+            if (urlMongo == null)
+            {
+                urlMongo = "localhost:27017";
+            }
+
+            if (databaseMongo == null)
+            {
+                databaseMongo = "quiz";
+            }
+
+            BaseDao.UrlMongo = urlMongo;
+            BaseDao.DatabaseMongo = databaseMongo;
         }
 
         public IConfigurationRoot Configuration { get; }
