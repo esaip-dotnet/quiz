@@ -9,12 +9,13 @@ using System;
 using System.Threading;
 using Leap;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace VoteByLeapMotionProject
 {
     class SampleListener : Listener
     {
-        const int rayonZone = 150;
+        const int rayonZone = Int32.Parse(ConfigurationManager.AppSettings["Rayon"]);
 
         private Object thisLock = new Object();
 
