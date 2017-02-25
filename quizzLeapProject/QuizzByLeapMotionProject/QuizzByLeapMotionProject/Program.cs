@@ -14,6 +14,8 @@ namespace VoteByLeapMotionProject
 {
     class SampleListener : Listener
     {
+        const int rayonZone = 150;
+
         private Object thisLock = new Object();
 
         private static int idQuiz = 1;
@@ -25,6 +27,18 @@ namespace VoteByLeapMotionProject
         private static String[] reponses3 = new String[] { "Oui", "Non", "Alerte discrimination", "Oui si c'est de la bière" };
         private static String[] reponses4 = new String[] { "Oui", "Non", "Arrêtez les réponses stupides", "C'est dans les vieux pots qu'on fait la meilleure confiture" };
         private static int[] itTabReponses = new int[] {2,4,3,3};
+
+        private static float[] centreRep1;
+        private static float[] centreRep2;
+        private static float[] centreRep3;
+        private static float[] centreRep4;
+
+        private static Boolean firstStart = true;
+
+        private static int firstStartNumRep = 0;
+
+        private static Boolean[] positionsSauvegardees = { false, false, false, false };
+
         private Quiz quiz;
 
         /// <summary>
@@ -32,7 +46,12 @@ namespace VoteByLeapMotionProject
         /// </summary>
         public void initSampleListener()
         {
-            AffichageQuestion(1);
+            SelectionPosition();
+
+            if (positionsSauvegardees[0] && positionsSauvegardees[1] && positionsSauvegardees[2] && positionsSauvegardees[3])
+            {
+                AffichageQuestion(1);
+            }
         }
         private void SafeWriteLine(String line)
         {
@@ -169,6 +188,12 @@ namespace VoteByLeapMotionProject
             }
         }
 
+        public float calculDistance(float positionX1, float positionZ1, float positionX2, float positionZ2)
+        {
+            float distance = (float)(Math.Sqrt(((positionX1 - positionX2) * (positionX1 - positionX2)) + ((positionZ1 - positionZ2) * (positionZ1 - positionZ2))));
+
+            return distance;
+        }
 
         /// <summary>
         /// Evènement lorsque le capteur de la leap détecte une main. 
@@ -180,74 +205,99 @@ namespace VoteByLeapMotionProject
         public override void OnFrame(Controller controller)
         {
             Frame frame = controller.Frame();
-
             Hand hand = frame.Hands.Rightmost;
             Vector position = hand.PalmPosition;
-            float timeVisible = hand.TimeVisible; 
-            if (position.x != 0 && position.y != 0 && position.z !=0)
-            {
-                if (position.x < 0 && position.z < 0)
-                {
-                    SafeWriteLine("Vous choississez la réponse 1");
-                    if (itTabReponses[iCompteurQuestion-1] != 1)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SwitchQuestion();
-                    }
+            float timeVisible = hand.TimeVisible;
 
-                }
-                else if (position.x < 0 && position.z > 0)
+            // On entre dans le if, uniquement si c'est le lancement de l'application
+            if(firstStart == true)
+            {
+                // Permet d'empècher l'application de sauvegarder une position même si l'utilisateur ne place pas sa main
+                if (position.x != 0 && position.y != 0 && position.z != 0)
                 {
-                    SafeWriteLine("Vous choississez la réponse 3");
-                    if (itTabReponses[iCompteurQuestion-1] != 3)
+                    if (firstStartNumRep == 1)
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
+
+                        centreRep1 = new float[] { position.x, position.y, position.z };
+                        positionsSauvegardees[0] = true;
+                        SafeWriteLine("Position 1 sauvegardée");
                     }
-                    else
+                    if (firstStartNumRep == 2)
                     {
                         System.Threading.Thread.Sleep(2000);
-                        SwitchQuestion();
+
+                        // Calcul des distances entre la zone que nous voulons créer et la zone précédente
+                        float distRep1Rep2 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+
+                        // Enregistre la zone de réponse 2
+                        centreRep2 = new float[] { position.x, position.y, position.z };
+                        positionsSauvegardees[1] = true;
+                        SafeWriteLine("Position 2 sauvegardée");
+                        
+                    }
+                    if (firstStartNumRep == 3)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+                        float distRep1Rep3 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+                        float distRep2Rep3 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
+
+                        // Enregistre la zone de réponse 3
+                        centreRep3 = new float[] { position.x, position.y, position.z };
+                        positionsSauvegardees[2] = true;
+                        SafeWriteLine("Position 3 sauvegardée");
+                    }
+                    if (firstStartNumRep == 4)
+                    {
+                        System.Threading.Thread.Sleep(2000);
+
+                        float distRep1Rep4 = calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]);
+                        float distRep2Rep4 = calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]);
+                        float distRep3Rep4 = calculDistance(position.x, position.z, centreRep3[0], centreRep3[2]);
+
+
+                        centreRep4 = new float[] { position.x, position.y, position.z };
+                        positionsSauvegardees[3] = true;
+                        SafeWriteLine("Position 4 sauvegardée");
+
                     }
                 }
-                else if (position.x > 0 && position.z < 0)
+            }
+            // On vérifie que toutes les positions de réponses ont bien été sauvegardées
+            else if (positionsSauvegardees[0] && positionsSauvegardees[1] && positionsSauvegardees[2] && positionsSauvegardees[3])
+            {
+                if (position.x != 0 && position.y != 0 && position.z != 0)
                 {
-                    SafeWriteLine("Vous choississez la réponse 2");
-                    if (itTabReponses[iCompteurQuestion-1] != 2)
+                    float[] distRep = {calculDistance(position.x, position.z, centreRep1[0], centreRep1[2]), 
+                                          calculDistance(position.x, position.z, centreRep2[0], centreRep2[2]),
+                                          calculDistance(position.x, position.z, centreRep3[0], centreRep3[2]),
+                                          calculDistance(position.x, position.z, centreRep4[0], centreRep4[2])};
+
+                    // On vérifie si l'utilisateur est dans l'une des 4 zones
+                    for (int i = 0; i < 4; i++)
                     {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                        SwitchQuestion();
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SwitchQuestion();
-                    }
-                }
-                else if (position.x > 0 && position.z > 0)
-                {
-                    SafeWriteLine("Vous choississez la réponse 4");
-                    if (itTabReponses[iCompteurQuestion-1] != 4)
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SafeWriteLine("Mauvaise réponse");
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                        SwitchQuestion();
+                        if(distRep[i] < rayonZone)
+                        {
+                            SafeWriteLine("Vous choississez la réponse " + (i+1));
+
+                            // On vérifie si la réponse est bonne
+                            if (itTabReponses[iCompteurQuestion] != (i+1))
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                SafeWriteLine("Mauvaise réponse");
+                            }
+                            else
+                            {
+                                System.Threading.Thread.Sleep(1000);
+                                SafeWriteLine("Bien joué !");
+                                SwitchQuestion();
+                            }
+                        }
                     }
                 }
             }
             System.Threading.Thread.Sleep(3000);
-
-
         }
 
         /***********************************/
