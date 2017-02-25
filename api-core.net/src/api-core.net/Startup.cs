@@ -29,17 +29,19 @@ namespace api_core.net
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
 
+            // Get Environment Variables from docker container
             String urlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
             String databaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
 
+            // If no Environment Variables, then use default values for dev flavour
             if (urlMongo == null)
             {
-                urlMongo = "localhost:27017";
+                urlMongo = Configuration["Mongo:Url"];
             }
 
             if (databaseMongo == null)
             {
-                databaseMongo = "quiz";
+                databaseMongo = Configuration["Mongo:Database"];
             }
 
             BaseDao.UrlMongo = urlMongo;
