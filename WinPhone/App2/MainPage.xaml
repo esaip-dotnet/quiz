@@ -20,7 +20,7 @@
             <RadioButton x:Name="reponse2" Content="Réponse 2"/>
             <RadioButton x:Name="reponse3" Content="Réponse 3"/>
             <RadioButton x:Name="reponse4" Content="Réponse 4"/>
-            <Image x:Name="image" Height="84" Margin="0,0,292,0"/>
+            <TextBox x:Name="txt1" Margin="0" TextWrapping="Wrap" Text="country" VerticalAlignment="Stretch"/>
         </StackPanel>
     </Grid>
 </Page>
