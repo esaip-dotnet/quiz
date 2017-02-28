@@ -1,6 +1,6 @@
 FROM esaipnet/api-core.net-base:1.0
 
-ENV API_URL_PORT localhost:81
+ENV API_URL_PORT api-net:81
 ENV DB_NAME quiz
 
 ADD /src /app
