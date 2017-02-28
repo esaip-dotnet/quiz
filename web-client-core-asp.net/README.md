@@ -32,6 +32,9 @@ RUN ["dotnet", "restore"]
 EXPOSE 80
 ENTRYPOINT ["dotnet", "run"]
 ```
+
+## Schéma du projet
+![schema](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/schema.jpg "Schema du projet")
   
 ## Installation
 L'application WebClient s'exécute en même temps que les API. Pour cela, il faut exécuter le docker-compose qui est
