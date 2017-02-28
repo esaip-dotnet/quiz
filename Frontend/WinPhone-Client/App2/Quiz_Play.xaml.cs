@@ -26,6 +26,7 @@ namespace ESAIP_Quiz
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            HardwareButtons.BackPressed += HardwareButtons_BackPressed;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -56,12 +57,12 @@ namespace ESAIP_Quiz
                         request.Method = "PUT";
                         request.ContentType = "text/json";
 
-                        //Traitement de la requête 
+                        //Traitement de la requête
                         using (var stream = await request.GetRequestStreamAsync())
                         {
-                            //Conversion du fichier json 
+                            //Conversion du fichier json
                             var datas = Encoding.UTF8.GetBytes(putData);
-                            //Ecriture 
+                            //Ecriture
                             await stream.WriteAsync(datas, 0, datas.Length);
                         }
                     }
@@ -71,6 +72,14 @@ namespace ESAIP_Quiz
                     return;
                 }
             }
+        }
+
+        private void HardwareButtons_BackPressed(object sender, BackPressedEventArgs e)
+        {
+            // permet un retour a la page d'accueil
+            e.Handled = true;
+            if (Frame.CanGoBack)
+                Frame.GoBack();
         }
     }
 }
