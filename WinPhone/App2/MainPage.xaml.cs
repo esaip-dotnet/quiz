@@ -75,6 +75,11 @@ namespace ESAIP_Quiz
             // TODO: préparer la page pour affichage ici.
         }
 
+        /// <summary>
+        /// Lorsque le bouton est sélectionner on envoi des données json sur l'api
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Valider_Click(object sender, RoutedEventArgs e)
         {     
             var httpClient = new System.Net.Http.HttpClient();
