@@ -23,5 +23,7 @@ namespace WebClientCore.Models
         //Avec la propriété json : picture
         [JsonProperty("picture")]
         public string Picture { get; set; }
+
+        public Answer(string Title, bool Correct, string Picture) { this.Title = Title; this.Correct = Correct; this.Picture = Picture; }
     }
 }

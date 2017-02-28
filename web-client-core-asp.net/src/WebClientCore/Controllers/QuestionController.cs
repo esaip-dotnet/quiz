@@ -33,6 +33,16 @@ namespace WebClientCore.Controllers
         [Route("Question/Validate")]
         public IActionResult Validate(Question question)
         {
+            Answer answer1 = new Answer("Reponse n°1", false, "");
+            Answer answer2 = new Answer("Reponse n°2", false, "");
+            Answer answer3 = new Answer("Reponse n°3", true, "");
+            Answer answer4 = new Answer("Reponse n°4", false, "");
+            List<Answer> list = new List<Answer>();
+            list.Add(answer1);
+            list.Add(answer2);
+            list.Add(answer3);
+            list.Add(answer4);
+            question.Answers = list;
             //Créer une variable de type Patch pour l'envoi sur l'api
             Patch patch = new Patch("add", "/questions", question);
             //Etat permettant de savoir si l'ajout de la question a fonctionné
@@ -63,7 +73,7 @@ namespace WebClientCore.Controllers
             var client = new HttpClient();
             //Attendre la réponse de l'api
             //Si la réponse est 204 c'est que le question à bien été ajoutée par la méthode patch
-            var response = HttpClientEx.PatchJsonAsync(client, "http://coreosjpg.cloudapp.net:80" + quizUri, patch).GetAwaiter().GetResult(); ;
+            var response = HttpClientEx.PatchJsonAsync(client, "http://localhost:81" + quizUri, patch).GetAwaiter().GetResult(); ;
             if (response.StatusCode == HttpStatusCode.NoContent) {
                 return true;
             }
