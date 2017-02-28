@@ -19,3 +19,14 @@ services:
         image: "mongo:3.0.3"
         ports:
         - "27017:27017"
+
+haproxy:
+    image: haproxy
+    links:
+    - api-net
+    - api-node
+    ports:
+    - "81:80"
+    - "82:80"
+    expose:
+    - "80"
