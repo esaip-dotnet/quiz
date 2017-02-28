@@ -210,9 +210,21 @@ MongoClient.connect(url, function (err, db) {
             var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
             var idToFind      = req.params.id;                        // Identifiant dans l'URL
             var objToFind     = { _id: new MongoObjectID(idToFind) };
-            db.collection("quiz").findOne(objToFind, function(error, result) {
-                // A Faire
-            });
+            
+            //Trouver le quiz
+            db.collection("quiz").findById(objToFind, function(error, quiz) {
+                
+                // Modifier ses attributs
+                quiz.summary = req.body.summary;
+                
+                // Sauvegarder les changements
+                quiz.save(function(err){
+                    res.send(err);
+                    
+                    res.json({message: "Quiz updated"})
+                })
+                
+            }); 
             
         });
         
