@@ -8,12 +8,12 @@ L'utilisateur peut ajouter au quiz des questions constituées de 4 réponses.
 L'application est constituée de 2 fenêtres, une pour créer le quiz et une pour ajouter des questions à celui-ci.
 
 La première fenêtre est un formulaire simple, il faut juste remplir les informations nécessaire:
-![creation_quiz](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/home.png "Création du quiz")
+![home](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/home.png "Création du quiz")
 
 Pour la seconde, il faut aussi remplir les informations de la question, puis remplir chaques réponses.
 Une fois cela fait, l'utilisateur à plusieurs choix, soit ajouter une nouvelle question au quiz, 
 soit stopper l'ajout de question :
-![ajout_question](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/question.png "Ajout de question")
+![question](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/question.png "Ajout de question")
 
 ## Dockerfile
 Le DockerFile permet l'exécution de l'application dans un conteneur.
