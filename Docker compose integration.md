@@ -51,3 +51,11 @@ La ligne
 permet de rediriger le port 82 du conteneur Docker vers le port 80 de la machine hôte (HOST:CONTAINER).
 
 Ainsi, lorsque l'utilisateur lancera une requete http tel que "http://0.0.0.0:82" sur le port, c'est l'api-node.js qui sera utiliser pour répondre.
+
+![Docker-compose](http://blog.inovia-conseil.fr/wp-content/uploads/2015/03/archi-poste-dev.png "Docker-compose")
+
+## Sources
+
+- https://www.docker.com/products/docker-compose#/get-started
+- http://blog.ippon.fr/2015/03/26/orchestration-de-containers-docker-docker-compose-et-crane/
+- https://docs.microsoft.com/fr-fr/azure/virtual-machines/virtual-machines-linux-docker-compose-quickstart
