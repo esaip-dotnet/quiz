@@ -1,16 +1,33 @@
 ﻿# WebClient core asp.net
 
 ## Introduction
-Cette partie du projet "Quiz", permet depuis une interface web :
-  - L'ajout d'un quiz.
-  - L'ajout d'une question à ce quiz.
+Le WebClient permet aux utilisateurs de ce projet, de créer un quiz.
+L'utilisateur peut ajouter au quiz des questions constituées de 4 réponses.
   
-## Améliorations
-Différentes améliorations sont à apporter :
-  - Créer un menu permettant de choisir entre : création d'un quiz et participer.
-  - Interface de jeu
-  - L'ajout de plusieurs questions à un quiz, ainsi que plusieurs réponses à une question.
+## Utilisation
+L'application est constituée de 2 fenêtres, une pour créer le quiz et une pour ajouter des questions à celui-ci.
+
+La première fenêtre est un formulaire simple, il faut juste remplir les informations nécessaire:
+![alt text](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/home.png "Création du quiz")
+
+Une fois cela fait, l'utilisateur à plusieurs choix, soit ajouter une nouvelle question au quiz, 
+soit stopper l'ajout de question :
+![alt text](https://github.com/TonyJallais/quiz/tree/master/web-client-core-asp.net/img/question.png "Ajout de question")
+
+## Dockerfile
+Le DockerFile permet l'exécution de l'application dans un conteneur.
+Il est constitué de 2 variables d'environnement :
+```
+FROM esaipnet/api-core.net-base:1.0
+
+ENV API_URL_PORT api-net:81
+ENV DB_NAME quiz
+
+ADD /src /app
+WORKDIR /app/WebClientCore
+RUN ["dotnet", "restore"]
+EXPOSE 80
+ENTRYPOINT ["dotnet", "run"]
+```
   
 ## Installation
-Pour pouvoir implémenter le webclient sur Azure, il faut éxecuter le WebClientCore.sln, cela ouvrira Microsoft Visual Studio.
-Ensuite dans la zone de droite "Explorateur de solution", il faut faire un clique droit sur "src > WebClientCore", puis "Publier".
