@@ -27,9 +27,13 @@ namespace api_core.net
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-
+            /*   Configuration pour utilisation de docket et de variable d'environnement
             BaseDao.UrlMongo = Environment.GetEnvironmentVariable("MONGO_URL_PORT");
             BaseDao.DatabaseMongo = Environment.GetEnvironmentVariable("MONGO_DATABASE");
+            */
+            // Configuration utilisation MongoDB en local, paramètres présents dans appsettings.json
+            BaseDao.UrlMongo = Configuration["MongoDB:Url"];
+            BaseDao.PortMongo = Configuration["MongoDB:Port"];
         }
 
         public IConfigurationRoot Configuration { get; }
