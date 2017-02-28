@@ -6,6 +6,44 @@
 <!--Formulaire pour l'ajout d'une question-->
 <form asp-controller="Question" asp-action="Validate" method="post">
     Title:  <input asp-for="Title" /> <br />
-
-    <button type="submit">Validate</button>
+    Picture: <input asp-for="Picture" type="file"/> <br/>
+    <div style="width:50%;height:150px;border:1px solid black;float:left;">
+        Réponse 1
+        <br/>
+        Title:  <input type="text" name="Reponse1Title"/> 
+        <br />
+        Correct:  <input type="radio" name="Reponse1Correct"/>
+        <br />
+        Picture: <input type="file" name="Reponse4Picture" />
+    </div>
+    <div style="width:50%;height:150px;border:1px solid black;margin-left:50%";">
+        Réponse 2
+        <br/>
+        Title:  <input type="text" name="Reponse2Title" /> 
+        <br />
+        Correct:  <input type="radio" name="Reponse2Correct" /> 
+        <br />
+        Picture: <input type="file" name="Reponse2Picture" />
+    </div>
+    <div style="width:50%;height:150px;border:1px solid black;float:left;">
+        Réponse 3
+        <br/>
+        Title:  <input type="text" name="Reponse3Title" />
+        <br />
+        Correct:  <input type="radio" name="Reponse3Correct" />
+        <br />
+        Picture: <input type="file" name="Reponse3Picture" />
+    </div>
+    <div style="width:50%;height:150px;border:1px solid black;margin-left:50%";>
+        Réponse 4
+        <br/>
+        Title:  <input type="text" name="Reponse4Title" />
+        <br />
+        Correct:  <input type="radio" name="Reponse4Correct" />
+        <br />
+        Picture: <input type="file" name="Reponse4Picture" />
+    </div>
+    <button type="submit">Question suivante</button>
+    <br/>
+    <button type="submit">Terminer le quiz</button>
 </form>
