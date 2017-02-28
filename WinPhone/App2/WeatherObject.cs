@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ESAIP_Quiz
 {
@@ -48,6 +44,13 @@ namespace ESAIP_Quiz
         public string country { get; set; }
         public int sunrise { get; set; }
         public int sunset { get; set; }
+    }
+    public class Reponse
+    {
+        
+        public string summary { get; set; }
+        public string description { get; set; }
+        public string title { get; set; }
     }
 
     public class WeatherObject
