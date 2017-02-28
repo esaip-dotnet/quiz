@@ -7,11 +7,15 @@ services:
         image: "jtony/web-client-core-asp:1.0"
     api-net:
         build: api-core.net
+        depends_on:
+        - db-mongo
         ports:
         - "81:80"
         image: "jtony/api-core.net:1.0"
     api-node:
         build: api-node.js
+        depends_on:
+        - db-mongo
         ports:
         - "82:80"
         image: "jtony/api-node.js:1.0"
