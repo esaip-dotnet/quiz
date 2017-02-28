@@ -231,5 +231,19 @@ MongoClient.connect(url, function (err, db) {
                 
             });              
         });
+        
+        // Methode permettant de supprimer un quiz
+        app.delete('/quiz/:id', function(req, res) {
+            var MongoObjectID = require("mongodb").ObjectID;          // Il nous faut ObjectID
+            var idToFind      = req.params.id;                        // Identifiant dans l'URL
+            var objToFind     = { _id: new MongoObjectID(idToFind) };
+            db.collection("quiz").deleteOne(objToFind, function(error, result) {
+                if (error) throw error;
+  
+                res.contentType('application/json');
+                res.status(200);
+                res.json("Quiz supprimé");
+            });
+        });
     }
 });
