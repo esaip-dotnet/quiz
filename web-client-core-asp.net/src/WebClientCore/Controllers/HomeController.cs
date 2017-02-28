@@ -59,9 +59,10 @@ namespace WebClientCore.Controllers
             var client = new HttpClient();
             //Attendre la réponse de l'api
             //Si la réponse est 201 c'est que le quiz a bien été créé
-            String apiUrlPort = Environment.GetEnvironmentVariable("API_URL_PORT");
+            /*String apiUrlPort = Environment.GetEnvironmentVariable("API_URL_PORT");
             String dbName = Environment.GetEnvironmentVariable("DB_NAME");
-            var response = HttpClientEx.PostJsonAsync(client, "http://" + apiUrlPort + "/" + dbName, quiz).GetAwaiter().GetResult();
+            var response = HttpClientEx.PostJsonAsync(client, "http://" + apiUrlPort + "/" + dbName, quiz).GetAwaiter().GetResult();*/
+            var response = HttpClientEx.PostJsonAsync(client, "http://localhost:81/quiz/", quiz).GetAwaiter().GetResult();
             //Vérifier si le code est 201
             if (response.StatusCode == HttpStatusCode.Created) {
                 //Si oui retourner l'uri du quiz
