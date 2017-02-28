@@ -52,10 +52,13 @@ namespace ESAIP_Quiz
         {
             try
             {
+                // Remplacer url par celle de l'API 
                 Uri geturi = new Uri("http://samples.openweathermap.org/data/2.5/weather?q=London,uk&appid=63b4550a02896e55ab571f88e01add13"); //replace your url  
                 System.Net.Http.HttpClient client = new System.Net.Http.HttpClient();
                 System.Net.Http.HttpResponseMessage responseGet = await client.GetAsync(geturi);
                 string response = await responseGet.Content.ReadAsStringAsync();
+                // En Fonction du json a récuper les paramètres de l'objet ne seront pas les mêmes 
+                // Dans ce cas il faut modifier lefichier WeatherObject 
                 var weatherdata = JsonConvert.DeserializeObject<WeatherObject>(response);
                 if (weatherdata != null)
                 {
@@ -67,16 +70,16 @@ namespace ESAIP_Quiz
             }
             catch (Exception ex)
             {
-
+                var dialog = new Windows.UI.Popups.MessageDialog(ex.Message);
+                await dialog.ShowAsync();
             }
         }
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             // TODO: préparer la page pour affichage ici.
         }
-
         /// <summary>
-        /// Lorsque le bouton est sélectionner on envoi des données json sur l'api
+        /// Lorsque le bouton est sélectionner on envoie des données json sur l'api
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -85,8 +88,9 @@ namespace ESAIP_Quiz
             var httpClient = new System.Net.Http.HttpClient();
             try
             {
+                // Remplacer par l'url de l'api, où se trouve la liste des quiz
                 string resourceAddress = "http://localhost:80/quiz";
-                Wind p = new Wind { speed = 200, deg = 20 };
+                // Mettre en forme la reponse souhaité
                 Reponse r=new Reponse{summary="Drapeau de f1",description="C'est une description",title="C'est un titre"};
                 string postBody = JsonConvert.SerializeObject(r);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

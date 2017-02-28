@@ -2,6 +2,11 @@
 
 namespace ESAIP_Quiz
 {
+
+    /// <summary>
+    /// Ces classes correspondent à la traduction du fichier json en C#
+    /// A modifier en fonction du contenu du fichier json à lire 
+    /// </summary>
     public class Coord
     {
         public double lon { get; set; }
@@ -47,12 +52,10 @@ namespace ESAIP_Quiz
     }
     public class Reponse
     {
-        
         public string summary { get; set; }
         public string description { get; set; }
         public string title { get; set; }
     }
-
     public class WeatherObject
     {
         public Coord coord { get; set; }

@@ -17,6 +17,7 @@ namespace api_core.net
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()
+                .UseUrls("http://localhost:80")
                 .Build();
 
             host.Run();
