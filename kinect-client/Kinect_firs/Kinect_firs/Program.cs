@@ -57,6 +57,7 @@ namespace Kinect_firs
                 Console.WriteLine("BodyFrameReader is null");
             }
             Console.ReadLine();
+            //UserControl1.;
         }
 		
 		// Verifier la zone de la main droite
