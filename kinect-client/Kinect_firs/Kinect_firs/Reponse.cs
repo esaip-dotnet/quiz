@@ -8,5 +8,7 @@ namespace Kinect_firs
 {
     class Reponse
     {
+        public string Title { get; set; }
+        public bool Correct { get; set; }
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net;
 
 /*Importation des Librairies Kinect / Microsoft*/
 using Microsoft.Kinect;
 using System.Threading;
+using System.Net.Http;
 
 namespace Kinect_firs
 {
@@ -57,7 +59,7 @@ namespace Kinect_firs
                 Console.WriteLine("BodyFrameReader is null");
             }
             Console.ReadLine();
-            //UserControl1.;
+            RunAsync().Wait();
         }
 		
 		// Verifier la zone de la main droite
@@ -159,5 +161,6 @@ namespace Kinect_firs
                 Console.WriteLine("Data NOT Received");
             }
         }
+
     }
 }

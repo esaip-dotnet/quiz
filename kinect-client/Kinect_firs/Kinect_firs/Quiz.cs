@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Kinect_firs
 {
-    class Class1
+    public class Quiz
     {
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public string Summary { get; set; }
+        public List<Question> Questions { get; set; }
     }
 }

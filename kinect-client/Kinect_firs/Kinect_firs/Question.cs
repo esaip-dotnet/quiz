@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Kinect_firs
 {
-    class Class1
+    class Question
     {
+        public string Title { get; set; }
+        public List<Reponse> Answers { get; set; }
     }
 }
