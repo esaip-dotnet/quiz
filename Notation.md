@@ -69,3 +69,35 @@ Premiers points sur les pull requests (la seconde pull request cumulera) :
 - Remi : 8/20
 
 Note de groupe pour la deuxième partie du cours (donc 40% de la moitié de la note) : 14/20
+
+Points supplémentaires sur la seconde vague de pull request :
+- Julien : 6/20 + 3/20 => 9/20
+- François : 10/20 + 0/20 (pas reçu de seconde pull request !) => 10/20 (Compte Github "Elanne")
+- Jonathan : 6/20 + 8/20 => 14/20
+- Alexandre Lorre : 7/20 + 9/20 => 16/20
+- Alexandre Hacquard : 8/20 + 2/20 => 10/20
+- Aristide : 5/20 + 4/20 => 9/20
+- Allan : 6/20 + 6/20 => 12/20
+- Jean : 15/20 + 5/20 => 20/20 (chore suite premier commit déjà notée)
+- Bastien : 8/20 + 6/20 => 14/20
+- Florian : 14/20 + 2/20 => 16/20
+- Ludovic : 11/20 + 5/20 => 16/20
+- Lena : 8/20 + 5/20 => 13/20
+- Tony : 4/20 + 15/20 => 19/20
+- Remi : 8/20 + 3/20 => 11/20
+
+Note finale (moyenne entre notes du cours + points bonus en cours et notes sur les pull request) :
+- Julien : 
+- François : 
+- Jonathan : 
+- Alexandre Lorre : 
+- Alexandre Hacquard : 
+- Aristide : 
+- Allan : 
+- Jean : 
+- Bastien : 
+- Florian : 
+- Ludovic : 
+- Lena : 
+- Tony : 
+- Remi : 
