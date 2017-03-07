@@ -87,17 +87,23 @@ Points supplémentaires sur la seconde vague de pull request :
 - Remi : 8/20 + 3/20 => 11/20
 
 Note finale (moyenne entre notes du cours + points bonus en cours et notes sur les pull request) :
-- Julien : 
-- François : 
-- Jonathan : 
-- Alexandre Lorre : 
-- Alexandre Hacquard : 
-- Aristide : 
-- Allan : 
-- Jean : 
-- Bastien : 
-- Florian : 
-- Ludovic : 
-- Lena : 
-- Tony : 
-- Remi : 
+- Julien : 11,8 / 20
+- François : 12,5 / 20
+- Jonathan : 14,3 / 20
+- Alexandre Lorre : 16,2 / 20
+- Alexandre Hacquard : 12,2 / 20
+- Aristide : 12,2 / 20
+- Allan : 13,8 / 20
+- Jean : 19,2 / 20 (et les félicitations du jury composé de moi-même...)
+- Bastien : 15,1 / 20
+- Florian : 17,2 / 20
+- Ludovic : 16,1 / 20
+- Lena : 13,5 / 20
+- Tony : 17,7 / 20
+- Remi : 15,2 / 20
+
+Soit une moyenne pour le groupe de 14,8 / 20, ce qui est mérité au vu des nombreuses très bonnes contributions au projet !
+
+Je rajoute le fichier Excel avec le calcul dans la racine.
+
+Bonne continuation en stage à tous !
