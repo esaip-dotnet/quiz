@@ -36,10 +36,8 @@ namespace api_core.net.Daos
         public IEnumerable<BaseQuiz> GetAllQuiz()
         {
             // On récupère tous les quiz 
-            var projection = Builders<Quiz>.Projection.Exclude("questions");
-            // Pour chacun des quiz on le "transforme" en BaseQuiz, c'est-à-dire, sans les questions
             IEnumerable<Quiz> list = baseDao.db.GetCollection<Quiz>("Quiz").Find(_ => true).ToList();
-
+            // Pour chacun des quiz on le "transforme" en BaseQuiz, c'est-à-dire, sans les questions
             IEnumerable<BaseQuiz> baseList = from quiz in list
                                              select new BaseQuiz
                                              {
